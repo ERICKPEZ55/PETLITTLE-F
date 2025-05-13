@@ -1,0 +1,85 @@
+      
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: #6EACDA;
+    font-family: 'montserrat' ;
+    
+}
+.container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    background: #FFFAF3;
+    padding: 20px;
+    border-radius: 10px;
+
+}
+.login-box {
+    max-width: 300px;
+    text-align: center;
+}
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Bowlby One SC';
+}
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: solid #ccc;
+    border-radius: 5px;
+}
+button {
+    width: 50%;
+    padding: 10px;
+    background-color: #272A57;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+.image-container {
+    right: 100px;
+    top: 50%;
+    padding: 10px;
+    background: url('img/borde.png') center;
+    border-radius: 50%;
+}
+
+ .image-container img {
+    width: 400px;
+    height: 400px;
+    border-radius: 100%;
+   
+}
+@media screen and (max-width: 630px) {
+    .container {
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .image-container img {
+        width: 68%;
+        max-width: 300px;
+        height: auto;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .logo{
+        margin-top: -20%;
+    }
+}
+

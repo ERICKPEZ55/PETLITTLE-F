@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetLittle</title>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <img src="img/home.png" alt="Inicio" />
+      <img src="img/calendario.png" alt="Calendario" />
+      <img src="img/usuario.png" alt="Usuarios" />
+      <img src="img/campana.png" alt="Notificaciones" />
+      <button class="btn-salir" onclick="cerrarSesion()">
+        <img src="img/cerrarS.png" alt="Salir" />
+      </button>
+      <script>
+        function cerrarSesion() {
+          
+          window.location.href = 'index.html';
+        }
+      </script>      
+    </aside>
+
+    <main class="dashboard">
+      <section class="cards">
+        <div class="card" id="card-usuarios">Usuarios registrados<br></div>
+        <div class="card" id="card-citas-dia">Citas agendadas en el día<br></div>
+        <div class="card" id="card-citas-canceladas">Citas canceladas<br></div>
+      </section>
+
+      <section class="graficos">
+        <div class="grafico">
+          <h3 style="text-align:center; margin-bottom: 10px;">Gráfica de citas en el mes</h3>
+          <canvas id="graficoCitas"></canvas>
+        </div>
+        <div class="calendario">
+          <header>
+            <h3>Calendario</h3>
+            <div class="selector-fecha">
+              <select id="mes"></select>
+              <select id="anio"></select>
+            </div>
+          </header>
+          <div class="dias" id="calendario"></div>
+          <div class="citas" id="citas-dia"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Gráfico circular
+    const ctx = document.getElementById("graficoCitas").getContext("2d");
+    new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["Citas agendadas", "Citas sí asistidas", "Citas canceladas"],
+        datasets: [{
+          data: [50, 40, 10],
+          backgroundColor: ["#3ec7a7", "#f25c8a", "#8466e6"]
+        }]
+      },
+      options: { responsive: true }
+    });
+
+    // Calendario funcional
+    const calendario = document.getElementById("calendario");
+    const citasDia = document.getElementById("citas-dia");
+    const selectMes = document.getElementById("mes");
+    const selectAnio = document.getElementById("anio");
+
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    for (let i = 0; i < 12; i++) {
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = meses[i];
+      selectMes.appendChild(opt);
+    }
+    const anioActual = new Date().getFullYear();
+    for (let i = anioActual - 5; i <= anioActual + 5; i++) {
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = i;
+      selectAnio.appendChild(opt);
+    }
+
+    const citas = [
+      { fecha: "2025-04-11", hora: "9:00AM", tipo: "Vacunación", nombre: "Laura Gonzalez" },
+      { fecha: "2025-04-11", hora: "10:30AM", tipo: "Desparasitación", nombre: "Andrés Ramirez" },
+      { fecha: "2025-04-12", hora: "2:00PM", tipo: "Consulta general", nombre: "Camila Lopez" },
+    ];
+
+    function renderCalendario(mes, anio) {
+      calendario.innerHTML = "";
+      const primerDia = new Date(anio, mes, 1);
+      const ultimoDia = new Date(anio, mes + 1, 0);
+
+      const nombresDias = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
+      nombresDias.forEach(d => {
+        const div = document.createElement("div");
+        div.textContent = d;
+        div.className = "nombre-dia";
+        calendario.appendChild(div);
+      });
+
+      for (let i = 0; i < primerDia.getDay(); i++) {
+        const div = document.createElement("div");
+        div.className = "dia";
+        calendario.appendChild(div);
+      }
+
+      for (let i = 1; i <= ultimoDia.getDate(); i++) {
+        const fechaActual = new Date(anio, mes, i);
+        const div = document.createElement("div");
+        div.className = "dia";
+        div.textContent = i;
+        if (esHoy(fechaActual)) div.classList.add("hoy");
+        div.addEventListener("click", () => mostrarCitas(fechaActual));
+        calendario.appendChild(div);
+      }
+    }
+
+    function esHoy(fecha) {
+      const hoy = new Date();
+      return fecha.getDate() === hoy.getDate() && fecha.getMonth() === hoy.getMonth() && fecha.getFullYear() === hoy.getFullYear();
+    }
+
+    function mostrarCitas(fecha) {
+      const f = fecha.toISOString().split("T")[0];
+      citasDia.innerHTML = "";
+      const filtradas = citas.filter(c => c.fecha === f);
+      if (filtradas.length === 0) {
+        citasDia.innerHTML = "<div>No hay citas para este día</div>";
+        return;
+      }
+      filtradas.forEach(cita => {
+        const div = document.createElement("div");
+        div.textContent = `${cita.hora} - ${cita.tipo} - ${cita.nombre}`;
+        citasDia.appendChild(div);
+      });
+    }
+
+    const mesInicial = new Date().getMonth();
+    const anioInicial = new Date().getFullYear();
+    selectMes.value = mesInicial;
+    selectAnio.value = anioInicial;
+    renderCalendario(mesInicial, anioInicial);
+    mostrarCitas(new Date());
+
+    selectMes.addEventListener("change", () => renderCalendario(+selectMes.value, +selectAnio.value));
+    selectAnio.addEventListener("change", () => renderCalendario(+selectMes.value, +selectAnio.value));
+  </script>
+</body>
+</html>
