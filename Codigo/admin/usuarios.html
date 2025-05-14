@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" href="styles2.css">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="img/logo negativo.png" alt="">
+        </div>
+        <input type="text" placeholder="🔍 Buscar" id="buscar">
+        <div class="notificaciones">
+            🔔 <span id="notiCount">0</span>
+        </div>
+        <div class="usuario">
+            <img src="img/Ellipse 3.png" alt="Admin">
+            <span>Jorge Rodríguez</span>
+        </div>
+    </header>
+
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Usuario</th>
+                    <th>Teléfono</th>
+                    <th>Contraseña</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody id="tablaUsuarios">
+                <!-- Usuarios generados aquí -->
+            </tbody>
+        </table>
+
+        <button id="btnAgregar">+ Agregar usuario</button>
+    </main>
+
+    <!-- Modal de Agregar Usuario -->
+    <div id="modalAgregar" class="modal">
+        <div class="modal-content">
+            <h2>Agregar Usuario</h2>
+            <input type="text" id="nuevoNombre" placeholder="Nombre completo">
+            <input type="text" id="nuevoTelefono" placeholder="Teléfono">
+            <button id="guardarUsuario">Agregar</button>
+            <button id="cerrarAgregar">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Edición -->
+    <div id="modalEditar" class="modal">
+        <div class="modal-content">
+            <h2>Editar Usuario</h2>
+            <input type="text" id="editNombre">
+            <input type="text" id="editTelefono">
+            <button id="guardarCambios">Guardar</button>
+            <button id="cerrarModal">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

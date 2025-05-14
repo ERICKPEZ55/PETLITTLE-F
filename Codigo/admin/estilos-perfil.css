@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f9;
+}
+
+.encabezado {
+  background-color: #69a9d3;
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  color: black;
+}
+
+.encabezado .logo {
+  height: 50px;
+  margin-right: 20px;
+}
+
+.encabezado h1 {
+  font-size: 35px;
+  margin: 10px 240px;
+  
+}
+
+.contenedor-perfil {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.perfil-box {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.foto-admin img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  margin-right: 100px;
+}
+
+.datos-admin {
+  max-width: 400px;
+  text-align: left;
+}
+
+.datos-admin h2 {
+  color: black;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.datos-admin p {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  color: black;
+}
+
+.datos-admin strong {
+  color: black;
+}
