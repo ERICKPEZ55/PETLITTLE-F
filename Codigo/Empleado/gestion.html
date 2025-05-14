@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Mascotas</title>
+    <link rel="stylesheet" href="gestion.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="img/Logo negro.png" alt="Logo" class="logo">
+        </div>
+        <h1 class="titulo-header">Gestión de Mascotas</h1>
+    </header>
+
+    <div class="container">
+        <button class="boton-nueva-mascota" id="btnNuevaMascota">+ Nueva Mascota</button>
+        <input type="text" class="buscador" placeholder="Buscar por nombre o dueño..." onkeyup="filtrarMascotas()">
+        <div class="mascotas-grid" id="mascotas"></div>
+    </div>
+
+    <div id="modalRegistro" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Registrar Nueva Mascota</h2>
+            <form id="formularioRegistro">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="raza">Raza:</label>
+                <input type="text" id="raza" name="raza">
+
+                <label for="genero">Género:</label>
+                <select id="genero" name="genero">
+                    <option value="Macho">Macho</option>
+                    <option value="Hembra">Hembra</option>
+                    <option value="Desconocido">Desconocido</option>
+                </select>
+
+                <label for="dueño">Dueño:</label>
+                <input type="text" id="dueño" name="dueño" required>
+
+                <div>
+                    <label>Seleccionar Imagen:</label>
+                    <div>
+                        <label for="imagenURL">Desde URL:</label>
+                        <input type="text" id="imagenURL" name="imagenURL" placeholder="Ingresa la URL de la imagen">
+                    </div>
+                    <div class="file-upload-wrapper">
+                        <label for="imagenArchivo" class="file-upload-button">Elegir Archivo</label>
+                        <input type="file" id="imagenArchivo" name="imagenArchivo" accept="image/*" class="file-upload-input">
+                        <span id="file-upload-filename"></span>
+                    </div>
+                </div>
+
+                <button type="submit">Registrar</button>
+            
+            </form>
+            
+        </div>
+        
+    </div>
+    <div style="text-align: center;">
+        <button class="navigation back-button" onclick="history.back()">← Volver</button>
+
+    </div>
+    
+    <script>
+        const mascotasIniciales = [
+            { nombre: "Max", raza: "Labrador", dueño: "Pedro Gómez", imagen: "https://www.bonza.dog/wp-content/uploads/Labrador-Dog-Health-Issues-Comprehensive-Guide-to-Common-Problems.webp", genero: "Macho" },
+            { nombre: "Luna", raza: "Persa", dueño: "Marta Pérez", imagen: "https://animalpets.co/wp-content/uploads/2024/11/Diseno-sin-titulo-25.png", genero: "Hembra" },
+            { nombre: "Toby", raza: "Golden Retriever", dueño: "Ana López", imagen: "https://adiestramientoenpositivo.org/wp-content/uploads/2022/12/Beige-Neutral-Mood-Board-Photo-Collage-1024x576.jpg", genero: "Macho" },
+            { nombre: "Bella", raza: "Siames", dueño: "Carlos Ruiz", imagen: "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Siamese-Cat_0.jpg?itok=vCdZhdUx", genero: "Hembra" },
+            { nombre: "Rocky", raza: "Bulldog", dueño: "Sofía Vargas", imagen: "https://bulldogfrancesmedellin.com/wp-content/uploads/2023/06/5-min-5.png", genero: "Macho" },
+            { nombre: "Milo", raza: "Beagle", dueño: "Javier Díaz", imagen: "https://www.akc.org/wp-content/uploads/2017/11/Beagle-Puppy.jpg", genero: "Macho" },
+            { nombre: "Nala", raza: "Maine Coon", dueño: "Valentina Soto", imagen: "https://www.purina.es/sites/default/files/2021-02/CAT%20HERO_0012_Maine_coon.jpg", genero: "Hembra" },
+            { nombre: "Simba", raza: "Doberman", dueño: "Andrés Castro", imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPliXYJl-kYUQW-79LzanwwFu8TM96HUavJQ&s", genero: "Macho" },
+            { nombre: "Lola", raza: "Pug", dueño: "Daniela Flores", imagen: "https://www.kokogenetics.com/_nuxt/img/302.b9d8ed9.webp", genero: "Hembra" },
+            { nombre: "Coco", raza: "Chihuahua", dueño: "Martín Silva", imagen: "https://www.purina.es/sites/default/files/2021-02/BREED%20Hero_0034_chihuahua_smooth.jpg", genero: "Macho" },
+            { nombre: "Zeus", raza: "Pastor Alemán", dueño: "Isabella Rojas", imagen: "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-07German-Shepherd-Dog.jpg?itok=SNPGvGFh", genero: "Macho" },
+            { nombre: "Kiara", raza: "Ragdoll", dueño: "Mateo León", imagen: "https://www.purina.es/sites/default/files/2021-02/CAT%20HERO_0019_Ragdoll.jpg", genero: "Hembra" },
+            { nombre: "Thor", raza: "Boxer", dueño: "Camila Pérez", imagen: "https://media.istockphoto.com/id/173894961/es/foto/boxeador-colocaci%C3%B3n.jpg?s=612x612&w=0&k=20&c=v4wltsEkzNFJVB0mJuxpx8iRomQmwjzp95Bv21AKhaM=", genero: "Macho" },
+            { nombre: "Olivia", raza: "Scottish Fold", dueño: "Sebastián Gómez", imagen: "https://www.purina.es/sites/default/files/2021-02/CAT%20HERO_0021_Scottish_fold.jpg", genero: "Hembra" },
+            { nombre: "Buddy", raza: "Cocker Spaniel", dueño: "Lucía Vargas", imagen: "https://www.purina.es/sites/default/files/2021-02/BREED%20Hero_0124_spaniel_cocker.jpg", genero: "Macho" },
+            { nombre: "Daisy", raza: "Bichón Maltés", dueño: "Nicolás Díaz", imagen: "https://blog.dogfydiet.com/wp-content/uploads/2023/06/Caracter-del-Bichon-maltes.jpg", genero: "Hembra" },
+            { nombre: "Duke", raza: "Rottweiler", dueño: "Emilia Soto", imagen: "https://www.purina.es/sites/default/files/2021-02/BREED%20Hero_0109_rottweiler.jpg", genero: "Macho" },
+            { nombre: "Penny", raza: "Sphynx", dueño: "Gabriel Castro", imagen: "https://www.purina.es/sites/default/files/2021-02/CAT%20HERO_0026_Sphynx.jpg", genero: "Hembra" },
+        ];
+
+        function filtrarMascotas() {
+            const input = document.querySelector('.buscador').value.toLowerCase();
+            const cards = document.querySelectorAll('.mascota-card');
+
+            cards.forEach(card => {
+                const nombre = card.querySelector('h3').innerText.toLowerCase();
+                const dueño = card.querySelector('.dueño').innerText.toLowerCase();
+                card.style.display = (nombre.includes(input) || dueño.includes(input)) ? "flex" : "none";
+            });
+        }
+
+        const modal = document.getElementById("modalRegistro");
+        const btnNuevaMascota = document.getElementById("btnNuevaMascota");
+        const spanCerrar = document.querySelector(".close-button");
+        const formularioRegistro = document.getElementById("formularioRegistro");
+        const mascotasGrid = document.getElementById("mascotas");
+        const imagenURLInput = document.getElementById("imagenURL");
+        const imagenArchivoInput = document.getElementById("imagenArchivo");
+        const fileUploadFilename = document.getElementById("file-upload-filename");
+
+        btnNuevaMascota.onclick = () => modal.style.display = "block";
+        spanCerrar.onclick = () => modal.style.display = "none";
+        window.onclick = event => { if (event.target == modal) modal.style.display = "none"; };
+
+        formularioRegistro.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const raza = document.getElementById('raza').value;
+            const genero = document.getElementById('genero').value;
+            const dueño = document.getElementById('dueño').value;
+            let imagenSrc = '';
+
+            if (imagenURLInput.value) {
+                imagenSrc = imagenURLInput.value;
+            } else if (imagenArchivoInput.files && imagenArchivoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagenSrc = e.target.result;
+                    agregarMascota(nombre, raza, genero, dueño, imagenSrc);
+                    formularioRegistro.reset();
+                    modal.style.display = "none";
+                }
+                reader.readAsDataURL(imagenArchivoInput.files[0]);
+                return;
+            } else {
+                imagenSrc = 'https://placekitten.com/200/200';
+            }
+
+            agregarMascota(nombre, raza, genero, dueño, imagenSrc);
+            formularioRegistro.reset();
+            modal.style.display = "none";
+        });
+
+        function agregarMascota(nombre, raza, genero, dueño, imagen) {
+            const nuevaCard = document.createElement('div');
+            nuevaCard.classList.add('mascota-card');
+            nuevaCard.innerHTML = `
+                <img src="${imagen}" alt="${nombre}">
+                <div class="info-container">
+                    <h3>${nombre}</h3>
+                    <p class="raza"><i class="fas fa-paw"></i> Raza: ${raza}</p>
+                    <p class="genero"><i class="fas fa-venus-mars"></i> Género: ${genero}</p>
+                    <p class="dueño"><i class="fas fa-user"></i> Dueño: ${dueño}</p>
+                </div>
+                <div class="acciones">
+                    <button class="btn-ver-perfil">Ver Perfil</button>
+                </div>
+            `;
+            nuevaCard.querySelector('.btn-ver-perfil').addEventListener('click', () => {
+                const mascotaData = { nombre, raza, genero, dueño, imagen };
+                localStorage.setItem('mascotaSeleccionada', JSON.stringify(mascotaData));
+                window.location.href = 'perfil.html';
+            });
+            mascotasGrid.appendChild(nuevaCard);
+        }
+
+        mascotasIniciales.forEach(mascota => {
+            agregarMascota(mascota.nombre, mascota.raza, mascota.genero, mascota.dueño, mascota.imagen);
+        });
+
+        imagenArchivoInput.addEventListener('change', function() {
+            fileUploadFilename.textContent = this.files && this.files[0] ? this.files[0].name : '';
+        });
+    </script>
+    
+    
+</body>
+</html>
