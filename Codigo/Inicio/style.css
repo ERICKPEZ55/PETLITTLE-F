@@ -157,14 +157,8 @@ nav ul li a {
 
 }
 
-@media (max-width: 768px) {
-  .hero {
-    margin-top: -40px; 
-  }
-  header {
-    height: 140px; 
-  }
-}
+
+
 
 .circulo {
   margin-top: -270px;
@@ -498,6 +492,7 @@ footer img {
   .hero {
     height: auto;
     padding: 40px 20px;
+
   }
 
   .texto {

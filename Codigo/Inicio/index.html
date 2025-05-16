@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>PetLittle</title>
-    <link rel="icon" type="image/png" href="img/favicon.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -14,8 +14,8 @@
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
-          </div>
-        <img src="img/logonav.png" alt="imagen del logo" class="logo">
+        </div>
+        <img src="img/logonav.png" alt="imagen del logo" class="logo" />
         <nav>
             <ul>
                 <li><a href="#especialidades">Especialidades</a></li>
@@ -25,22 +25,17 @@
             </ul>
         </nav>
     </header>
+
     <main>
         <section class="hero">
-            <img src="img/1sin fondo.png" alt="Imagen 1" class="left-image">
-            <img src="img/circulo.png" alt="Imagen Circular" class="circulo">
+            <img src="img/1sin fondo.png" alt="Imagen 1" class="left-image" />
+            <img src="img/circulo.png" alt="Imagen Circular" class="circulo" />
             <div class="texto">
-                <p>CONTROL TOTAL,<br>
-                    SALUD <br>
-                    GARANTIZADA. <br>
-                    PETLITTLE EN TU <br>
-                    VETERINARIA
-                </p>
+                <p>CONTROL TOTAL,<br>SALUD <br>GARANTIZADA. <br>PETLITTLE EN TU <br>VETERINARIA</p>
             </div>
-            <img src="img/2 sin fondo2.png" alt="Imagen 2" class="right-image">
+            <img src="img/2 sin fondo2.png" alt="Imagen 2" class="right-image" />
             <a href="login.php" class="register-button">Iniciar Sesion</a>
             <a href="registro.php" class="register-button2">Registrate</a>
-
         </section>
     </main>
 
@@ -143,30 +138,28 @@
         <a href="registro.php" class="button">Agenda tu Consulta</a>
     </div>
 
-    <div class="contact-section" id="contactanos">
+        <div class="contact-section" id="contactanos">
         <h2>CONTÁCTANOS</h2>
         <div class="contact-container">
             <div class="contact-text">
                 <p>
-                    Puedes ponerte en contacto con nosotros a través del correo electrónico o el formulario de contacto en nuestro sitio web. 
-                    Sea cual sea la opción que elijas, nuestro equipo estará encantado de ayudarte en todo lo que necesites. Ya sea para programar una cita, solicitar información sobre nuestros servicios o cualquier otra cosa relacionada con la salud de tu mascota, no dudes en contactarnos.
-                    Esperamos saber de ti pronto y poder brindarte la mejor atención posible.
+                    Puedes ponerte en contacto con nosotros a través del correo electrónico...
                 </p>
             </div>
             <div class="contact-form">
-                <form onsubmit="return validarFormulario()">
+                <form id="form-contacto">
                     <div class="form-group">
-                        <input type="text" id="nombre" placeholder="Nombre" required>
-                        <input type="text" id="apellido" placeholder="Apellido" required>
+                        <input type="text" id="nombre" placeholder="Nombre" required />
+                        <input type="text" id="apellido" placeholder="Apellido" required />
                     </div>
-                    <input type="tel" id="celular" placeholder="Celular" required>
+                    <input type="tel" id="celular" placeholder="Celular" required />
                     <span id="error-celular" class="error-message"></span>
-                    <input type="email" id="email" placeholder="Email" required>
+                    <input type="email" id="email" placeholder="Email" required />
                     <textarea placeholder="Mensaje" rows="4" required></textarea>
                     <label>
-                        <input type="checkbox" required> He leído y acepto la política de privacidad y cookies
+                        <input type="checkbox" required /> He leído y acepto la política de privacidad y cookies
                     </label>
-                    <br><br>
+                    <br /><br />
                     <button type="submit">Enviar</button>
                 </form>
             </div>
@@ -174,53 +167,10 @@
     </div>
 
     <footer>
-        <img src="img/Logo blanco.png" alt="Logo">
+        <img src="img/Logo blanco.png" alt="Logo" />
         <p>©Todos los derechos reservados PetLittle</p>
         <p>petlittle@gmail.com</p>
     </footer>
-
-    <script>
-        function validarFormulario() {
-            const nombre = document.getElementById("nombre").value.trim();
-            const apellido = document.getElementById("apellido").value.trim();
-            const celular = document.getElementById("celular").value.trim();
-            const email = document.getElementById("email").value.trim();
-
-            
-            document.getElementById("error-celular").textContent = "";
-
-            const soloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-            const soloNumeros = /^[0-9]{10}$/;
-
-            let valido = true;
-
-            if (!soloLetras.test(nombre)) {
-                alert("El nombre solo debe contener letras.");
-                valido = false;
-            }
-
-            if (!soloLetras.test(apellido)) {
-                alert("El apellido solo debe contener letras.");
-                valido = false;
-            }
-
-            if (!soloNumeros.test(celular)) {
-                document.getElementById("error-celular").textContent = "El número debe tener exactamente 10 dígitos numéricos.";
-                valido = false;
-            }
-
-            if (!email.includes("@") || !/[a-zA-Z]/.test(email) || (email.match(/\d/g) || []).length > 6 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                alert("Por favor ingresa un correo válido con al menos una letra, el símbolo '@' y no más de 6 números.");
-                valido = false;
-            }
-
-            if (valido) {
-                alert("Formulario enviado exitosamente.");
-            }
-
-            return valido;
-        }
-    </script>
-
+    <script src="Codigo/Inicio/main.js"></script>
 </body>
 </html>
