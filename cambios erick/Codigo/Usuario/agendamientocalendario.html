@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agendamiento - PetLittle</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fefbf9;
+      color: #272A57;
+    }
+
+    header {
+      background-color: #6EACDA;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 2px solid #ccc;
+      height: 90px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 1.0rem;
+      color: #fff;
+    }
+
+    .user-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+
+    .user-section img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .left-panel, .right-panel {
+      flex: 1;
+      min-width: 300px;
+      padding: 40px;
+    }
+
+    .left-panel {
+      background-color: #272A57;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .left-panel h2 {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .specialty-list {
+      background: white;
+      border-radius: 20px;
+      padding: 50px;
+      color: #272A57;
+      width: 90%;
+      max-width: 340px;
+    }
+
+    .specialty-item {
+      display: flex;
+      align-items: center;
+      margin: 12px 0;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 10px;
+      padding: 10px;
+      transition: background 0.2s;
+    }
+
+    .specialty-item:hover {
+      background-color: #f0f0f0;
+    }
+
+    .specialty-item.selected {
+      background-color: #6EACDA;
+      color: white;
+    }
+
+    .specialty-item img {
+      width: 24px;
+      margin-right: 10px;
+    }
+
+    .right-panel {
+      background-color: #fefbf9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .right-panel h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .calendariotitulo{
+      color: wheat;
+    }
+    .calendar-container {
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 12px;
+      color: black;
+      font-weight: bold;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .calendar-header {
+      background: #272A57;
+      color: #272A57;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      font-weight: bold;
+    }
+
+    .calendar-header select {
+      background: white;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      padding: 5px;
+      margin-left: 5px;
+    }
+
+    .calendar-days, .calendar-dates {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+    }
+
+    .calendar-days div {
+      font-weight: bold;
+    }
+
+    .calendar-dates div {
+      margin: 10px 0;
+      padding: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .calendar-dates div:hover {
+      background: #272A57;
+      color: white;
+    }
+
+    .calendar-dates .selected {
+      background: white;
+      color: #272A57;
+      font-weight: bold;
+      border: 2px solid #272A57;
+    }
+
+    .calendar-dates .no-service {
+      background-color: #272A57;
+      color: white;
+      cursor: not-allowed;
+    }
+
+    button#agendar {
+      margin-top: 25px;
+      background: #272A57;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 24px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    button#agendar:hover {
+      background: #1b1d3f;
+    }
+
+    .hidden-file {
+      display: none;
+    }
+
+    .modal-success {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #74B2E2;
+      color: white;
+      font-size: 22px;
+      font-family: sans-serif;
+      padding: 30px 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 9999;
+      text-align: center;
+      display: none;
+    }
+
+    .modal-success .close-btn {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 20px;
+      cursor: pointer;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left-panel, .right-panel {
+        padding: 20px;
+      }
+
+      .specialty-list {
+        width: 100%;
+      }
+
+      .calendar-container {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="img/logoazulclaro.png" alt="PetLittle" /></a>
+    </div>
+    <div class="title">AGENDAMIENTO</div>
+    <div class="user-section">
+      <label for="fileInput">
+        <img id="profilePic" src="img/avatarusuario.png" alt="Perfil" />
+      </label>
+      <input type="file" id="fileInput" class="hidden-file" accept="image/*" />
+      <div>
+        <div>Laura Gonzalez</div>
+        <div style="font-size: 0.8em;">Cliente</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="left-panel">
+      <h2>Seleccione la Especialidad</h2>
+      <div class="specialty-list">
+        <div class="specialty-item"><img src="img/icocardiologia.png" /> Cardiología</div>
+        <div class="specialty-item"><img src="img/iconutricion.png" /> Nutrición</div>
+        <div class="specialty-item"><img src="img/icodermatologia.png" /> Dermatología</div>
+        <div class="specialty-item"><img src="img/icoodontologia.png" /> Odontología</div>
+        <div class="specialty-item"><img src="img/iconeurologia.png" /> Neurología</div>
+        <div class="specialty-item"><img src="img/icoendocri.png" /> Endocrinología</div>
+        <div class="specialty-item"><img src="img/icomedicinageneral.png" /> Medicina General</div>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <h2>Seleccione la fecha</h2>
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <div class="calendariotitulo">Calendario</div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <select id="hourSelect"></select>
+            <select id="month"></select>
+            <select id="year"></select>
+          </div>
+        </div>
+        <div class="calendar-days">
+          <div>D</div><div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div>
+        </div>
+        <div class="calendar-dates" id="calendarDates"></div>
+      </div>
+      <button id="agendar">Agendar</button>
+    </div>
+  </div>
+
+  <div id="successModal" class="modal-success">
+    <span class="close-btn" onclick="closeModal()">×</span>
+    <p></p>
+  </div>
+
+  <script>
+    const profilePic = document.getElementById('profilePic');
+    const fileInput = document.getElementById('fileInput');
+
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        profilePic.src = URL.createObjectURL(file);
+      }
+    });
+
+    const monthSelect = document.getElementById('month');
+    const yearSelect = document.getElementById('year');
+    const hourSelect = document.getElementById('hourSelect');
+    const calendarDates = document.getElementById('calendarDates');
+    let selectedDate = null;
+    let selectedSpecialty = null;
+
+    const diasSinServicio = [];
+
+function calcularFestivosColombia(year) {
+  const festivos = [];
+
+  // Festivos fijos
+  const fijos = [
+    `${year}-01-01`, // Año Nuevo
+    `${year}-05-01`, // Día del Trabajo
+    `${year}-07-20`, // Independencia
+    `${year}-08-07`, // Batalla de Boyacá
+    `${year}-12-08`, // Inmaculada Concepción
+    `${year}-12-25`  // Navidad
+  ];
+
+  festivos.push(...fijos);
+
+  // Función para calcular el lunes siguiente
+  const siguienteLunes = (fecha) => {
+    const d = new Date(fecha);
+    const day = d.getDay();
+    const diff = day === 0 ? 1 : 8 - day;
+    d.setDate(d.getDate() + diff);
+    return d.toISOString().split('T')[0];
+  };
+
+  // Festivos móviles (con traslado al lunes)
+  const movibles = [
+    `${year}-01-06`, // Reyes
+    `${year}-03-19`, // San José
+    `${year}-06-29`, // San Pedro y San Pablo
+    `${year}-08-15`, // Asunción
+    `${year}-10-12`, // Día de la Raza
+    `${year}-11-01`, // Todos los Santos
+    `${year}-11-11`  // Independencia de Cartagena
+  ];
+
+  movibles.forEach(f => festivos.push(siguienteLunes(f)));
+
+  return festivos;
+}
+
+
+for (let year = 2025; year <= 2030; year++) {
+
+  diasSinServicio.push(...calcularFestivosColombia(year));
+
+  for (let month = 0; month < 12; month++) {
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(year, month, day);
+      const dayOfWeek = date.getDay(); // 0 = domingo, 6 = sábado
+      if (dayOfWeek === 0 || dayOfWeek === 6) {
+        const iso = date.toISOString().split('T')[0];
+        diasSinServicio.push(iso);
+      }
+    }
+  }
+}
+
+    const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                    "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+    const today = new Date();
+
+    for (let i = 0; i < 12; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = months[i];
+      if (i === today.getMonth()) option.selected = true;
+      monthSelect.appendChild(option);
+    }
+
+    const startYear = today.getFullYear();
+    const endYear = startYear + 5;
+
+    for (let i = startYear; i <= endYear; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = i;
+      if (i === today.getFullYear()) option.selected = true;
+      yearSelect.appendChild(option);
+    }
+
+    for (let h = 8; h <= 18; h++) {
+      const hourStr = h.toString().padStart(2, '0');
+      let option1 = document.createElement('option');
+      option1.value = `${hourStr}:00`;
+      option1.textContent = `${hourStr}:00`;
+      hourSelect.appendChild(option1);
+      if (h !== 18) {
+        let option2 = document.createElement('option');
+        option2.value = `${hourStr}:30`;
+        option2.textContent = `${hourStr}:30`;
+        hourSelect.appendChild(option2);
+      }
+    }
+
+    function renderCalendar(month, year) {
+      calendarDates.innerHTML = '';
+      const firstDay = new Date(year, month, 1).getDay();
+      const lastDate = new Date(year, month + 1, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement('div');
+        calendarDates.appendChild(empty);
+      }
+
+      for (let day = 1; day <= lastDate; day++) {
+        const dateEl = document.createElement('div');
+        dateEl.textContent = day;
+
+        const fullDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+        if (diasSinServicio.includes(fullDateStr)) {
+          dateEl.classList.add('no-service');
+        } else {
+          dateEl.addEventListener('click', () => {
+            document.querySelectorAll('.calendar-dates div').forEach(d => d.classList.remove('selected'));
+            dateEl.classList.add('selected');
+            selectedDate = new Date(year, month, day);
+          });
+        }
+
+        calendarDates.appendChild(dateEl);
+      }
+    }
+
+    monthSelect.addEventListener('change', () => renderCalendar(+monthSelect.value, +yearSelect.value));
+    yearSelect.addEventListener('change', () => renderCalendar(+monthSelect.value, +yearSelect.value));
+
+    document.getElementById('agendar').addEventListener('click', () => {
+      if (!selectedSpecialty) {
+        alert('Por favor seleccione una especialidad.');
+      } else if (!selectedDate) {
+        alert('Por favor seleccione una fecha.');
+      } else {
+        const dia = selectedDate.getDate().toString().padStart(2, '0');
+        const mes = (selectedDate.getMonth() + 1).toString().padStart(2, '0');
+        const anio = selectedDate.getFullYear();
+        const hora = hourSelect.value;
+        const mensaje = `Su cita de ${selectedSpecialty} se agendó para el día ${dia}/${mes}/${anio} a las ${hora}`;
+        const modal = document.getElementById('successModal');
+        modal.querySelector('p').innerHTML = mensaje;
+        modal.style.display = 'block';
+      }
+    });
+
+    function closeModal() {
+      document.getElementById('successModal').style.display = 'none';
+    }
+
+    const specialtyItems = document.querySelectorAll('.specialty-item');
+    specialtyItems.forEach(item => {
+      item.addEventListener('click', () => {
+        specialtyItems.forEach(i => i.classList.remove('selected'));
+        item.classList.add('selected');
+        selectedSpecialty = item.textContent.trim();
+      });
+    });
+
+    renderCalendar(today.getMonth(), today.getFullYear());
+  </script>
+</body>
+</html>
+
+
+

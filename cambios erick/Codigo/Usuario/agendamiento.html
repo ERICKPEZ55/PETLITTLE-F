@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Usuario</title>
+     <link rel="icon" type="image/png" href="../img/favicon.png" />
+    <link rel="stylesheet" href="agendamiento.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+   
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="../img/Logo negro.png" alt="Logo" class="logo">
+        </div>
+        <h1 class="titulo-header">Agendamiento</h1>
+    </header>
+
+    <div class="contenedor">
+        <!-- PERFIL SOBRE EL LATERAL -->
+        <div class="perfil-sobre-menu">
+            <img src="../img/admin.png" alt="Empleado" class="foto-perfil">
+            <div class="info-perfil">
+                <p class="nombre">Laura Gonzales</p>
+                <p class="rol">Plan básico de salud</p>
+            </div>
+        </div>
+
+        <aside class="menu-lateral">
+            <nav class="menu">
+                <a href="../Inicio/index.html">Inicio</a>
+                <a href="mascotascliente.html">Mis mascotas</a>
+                <a href="tablas-citas.html">Cancelar citas</a>
+                <a href="#">historia clinica</a>
+                <a href="index.html" class="cerrar-sesion">Cerrar Sesión</a>
+            </nav>
+        </aside>
+
+        <main class="contenido">
+            <img src="../img/img 1.png" alt="doctor cargadno perros" class="img1">
+            <h2>Bienvenido</h2>
+            <p>Aqui encuentras todas las opciones del plan de salud disponible para tu mascota </p>
+
+            <div class="opciones">
+                <div class="opcion">
+                    <img src="../img/imga1.png" alt="calendario" class="calendarioimg">
+                    <h3>Agendar citas</h3>
+                    <button onclick="window.location.href='agendamientocalendario.html'">Ingresar</button>
+
+                </div>
+                <div class="opcion">
+                    <img src="../img/imga2.png" alt="calendario" class="calendarioimg">
+                    <h3>Citas agendadas</h3>
+                    <button onclick="window.location.href='tablas-citas.html'">Ingresar</button>
+                </div>
+                <div class="opcion">
+                    <img src="../img/imga3.png" alt="calendario" class="calendarioimg">
+                    <h3>Ordenes pendientes</h3>
+                    <button onclick="window.location.href=''">Ingresar</button>
+                </div>
+                <div class="opcion">
+                    <img src="../img/imga4.png" alt="calendario" class="calendarioimg">
+                    <h3>Laboratorio clinico</h3>
+                    <button>Ingresar</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
