@@ -20,7 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($resultado->num_rows === 1) {
         $usuario = $resultado->fetch_assoc();
 
-        // Comparar contraseña usando password_verify
+        // Comparar contraseña
+        $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT);
+
         if (password_verify($contraseña, $usuario['contraseña'])) {
             $_SESSION['usuario'] = $usuario['correo'];
 

@@ -6,7 +6,7 @@ $clave = "123456";
 $bd = "prueba";
 
 
-$conexion = mysqli_connect($servidor, $usuario, " ", $bd);
+$conexion = mysqli_connect($servidor, $usuario, "", $bd);
 
 
 if (!$conexion) {
