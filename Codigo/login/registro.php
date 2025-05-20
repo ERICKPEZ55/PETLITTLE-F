@@ -20,6 +20,7 @@ if (isset($_POST['enviar'])) {
     $telefono = mysqli_real_escape_string($conexion, $_POST['telefono']);
     $contraseña = mysqli_real_escape_string($conexion, $_POST['contraseña']);
 
+    // Validaciones
     if (!preg_match("/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/", $nombre)) {
         die("Error: El nombre solo puede contener letras y espacios.");
     }
@@ -28,9 +29,11 @@ if (isset($_POST['enviar'])) {
         die("Error: El teléfono debe contener exactamente 10 dígitos.");
     }
 
-   
+    $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT);
+
+    // Insertar datos con la contraseña encriptada
     $insertar = "INSERT INTO datos (nombre, correo, telefono, contraseña) 
-                 VALUES ('$nombre', '$correo', '$telefono', '$contraseña')";
+                 VALUES ('$nombre', '$correo', '$telefono', '$contraseña_hash')";
 
     if (mysqli_query($conexion, $insertar)) {
         echo "<script>alert('Registro exitoso'); window.location.href='login.php';</script>";
@@ -39,6 +42,7 @@ if (isset($_POST['enviar'])) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -59,6 +63,10 @@ if (isset($_POST['enviar'])) {
             <form id="registerForm" method="post">
                 <label for="username">Nombre:</label>
                 <input name="nombre" type="text" id="username" placeholder="Nombre" required
+                       pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras y espacios.">
+                
+                <label for="lastname">Apellido:</label>
+                <input name="apellido" type="text" id="lastname" placeholder="Apellido" required
                        pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras y espacios.">
 
                 <label for="email">Correo:</label>
@@ -83,6 +91,7 @@ if (isset($_POST['enviar'])) {
     <script type="text/javascript">
     document.getElementById('registerForm').addEventListener('submit', function (e) {
         const user = document.getElementById('username').value.trim();
+        const lastname = document.getElementById('lastname').value.trim();
         const email = document.getElementById('email').value.trim();
         const number = document.getElementById('number').value.trim();
         const pass = document.getElementById('password').value.trim();
@@ -90,13 +99,18 @@ if (isset($_POST['enviar'])) {
         const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
         const phoneRegex = /^\d{10}$/;
 
-        if (user === '' || email === '' || number === '' || pass === '') {
+        if (user === '' || lastname == '' || email === '' || number === '' || pass === '') {
             alert('Faltan datos por rellenar');
             e.preventDefault();
             return;
         }
 
         if (!nameRegex.test(user)) {
+            alert('El nombre solo debe contener letras y espacios');
+            e.preventDefault();
+            return;
+        }
+        if (!nameRegex.test(lastname)) {
             alert('El nombre solo debe contener letras y espacios');
             e.preventDefault();
             return;

@@ -1,20 +1,16 @@
 <?php
 session_start();
 
-// Verifica si se envió el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Conexión a la base de datos
     $conexion = new mysqli("localhost", "root", "", "prueba");
 
     if ($conexion->connect_error) {
         die("Conexión fallida: " . $conexion->connect_error);
     }
 
-    // Obtener datos del formulario
     $correo = $_POST['correo'];
     $contraseña = $_POST['contraseña'];
 
-    // Consulta para obtener el usuario
     $sql = "SELECT * FROM datos WHERE correo = ?";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("s", $correo);
@@ -24,17 +20,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($resultado->num_rows === 1) {
         $usuario = $resultado->fetch_assoc();
 
-        if ($contraseña === $usuario['contraseña']) {
+        // Comparar contraseña usando password_verify
+        if (password_verify($contraseña, $usuario['contraseña'])) {
             $_SESSION['usuario'] = $usuario['correo'];
-    
-            // Redirección según el tipo de usuario (correo)
-            if ($usuario['correo'] === 'juan.24@gmail.com') { //usuario
+
+            // Redirección por tipo de usuario
+            if ($usuario['correo'] === 'juan.24@gmail.com') {
                 header("Location: agendamiento.html");
-            } elseif ($usuario['correo'] === 'andres@gmail.com') {//empleado
+            } elseif ($usuario['correo'] === 'andres@gmail.com') {
                 header("Location: empleado.html");
-            } elseif ($usuario['correo'] === "sofia@gmail.com"){//admin
+            } elseif ($usuario['correo'] === "sofia@gmail.com") {
                 header("Location: vista.html");
-            } else { // Cualquier otro correo no especificado
+            } else {
                 header("Location: agendamiento.html");
             }
             exit();
@@ -44,11 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $error = "Correo no registrado.";
     }
-    
+
     $stmt->close();
     $conexion->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
