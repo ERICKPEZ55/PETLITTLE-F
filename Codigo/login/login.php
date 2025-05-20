@@ -24,7 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($resultado->num_rows === 1) {
         $usuario = $resultado->fetch_assoc();
 
-        // Comparar contraseñas directamente (sin hash)
         if ($contraseña === $usuario['contraseña']) {
             $_SESSION['usuario'] = $usuario['correo'];
     
@@ -108,7 +107,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         sessionStorage.setItem("contraseña", document.getElementById("password").value);
     };
 
-    // Opcional: limpiar los campos si recargas
     window.addEventListener("beforeunload", function () {
         sessionStorage.removeItem("correo");
         sessionStorage.removeItem("contraseña");
