@@ -22,6 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT);
 
+        // Insertar datos con la contraseña encriptada
+        $insertar = "INSERT INTO datos (correo, contraseña) 
+                    VALUES ('$correo', '$contraseña_hash')";
+
         if (password_verify($contraseña, $usuario['contraseña'])) {
             $_SESSION['usuario'] = $usuario['correo'];
 
