@@ -1,57 +1,60 @@
 <?php
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $conexion = new mysqli("localhost", "root", "", "prueba");
-
-    if ($conexion->connect_error) {
-        die("Conexión fallida: " . $conexion->connect_error);
+class Autenticador {
+    private $conexion;
+    public function __construct() {
+        $this->conexion = new mysqli("localhost", "root", "", "prueba");
+        if ($this->conexion->connect_error) {
+            die("Conexión fallida: " . $this->conexion->connect_error);
+        }
     }
+    public function login($correo, $contraseña) {
+        $sql = "SELECT * FROM datos WHERE correo = ?";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("s", $correo);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
 
+        if ($resultado->num_rows === 1) {
+            $usuario = $resultado->fetch_assoc();
+
+            // encriptacion
+            $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT);
+
+            if (password_verify($contraseña, $usuario['contraseña'])) {
+                $_SESSION['usuario'] = $usuario['correo'];
+
+                if ($usuario['correo'] === 'juan.24@gmail.com') {
+                    header("Location: agendamiento.html");
+                } elseif ($usuario['correo'] === 'andres@gmail.com') {
+                    header("Location: empleado.html");
+                } elseif ($usuario['correo'] === "sofia@gmail.com") {
+                    header("Location: vista.html");
+                } else {
+                    header("Location: agendamiento.html");
+                }
+                exit();
+            } else {
+                return "Contraseña incorrecta.";
+            }
+        } else {
+            return "Correo no registrado.";
+        }
+        $stmt->close();
+    }
+    public function __destruct() {
+        $this->conexion->close();
+    }
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST['correo'];
     $contraseña = $_POST['contraseña'];
 
-    $sql = "SELECT * FROM datos WHERE correo = ?";
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("s", $correo);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-
-    if ($resultado->num_rows === 1) {
-        $usuario = $resultado->fetch_assoc();
-
-        $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT);
-
-        // Insertar datos con la contraseña encriptada
-        $insertar = "INSERT INTO datos (correo, contraseña) 
-                    VALUES ('$correo', '$contraseña_hash')";
-
-        if (password_verify($contraseña, $usuario['contraseña'])) {
-            $_SESSION['usuario'] = $usuario['correo'];
-
-            // Redirección por tipo de usuario
-            if ($usuario['correo'] === 'juan.24@gmail.com') {
-                header("Location: agendamiento.html");
-            } elseif ($usuario['correo'] === 'andres@gmail.com') {
-                header("Location: empleado.html");
-            } elseif ($usuario['correo'] === "sofia@gmail.com") {
-                header("Location: vista.html");
-            } else {
-                header("Location: agendamiento.html");
-            }
-            exit();
-        } else {
-            $error = "Contraseña incorrecta.";
-        }
-    } else {
-        $error = "Correo no registrado.";
-    }
-
-    $stmt->close();
-    $conexion->close();
+    $auth = new Autenticador();
+    $error = $auth->login($correo, $contraseña);
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -93,28 +96,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-    <script>
-    window.onload = function () {
-        // Si existe sesión anterior, autocompleta
-        if (sessionStorage.getItem("correo")) {
-            document.getElementById("email").value = sessionStorage.getItem("correo");
-        }
-        if (sessionStorage.getItem("contraseña")) {
-            document.getElementById("password").value = sessionStorage.getItem("contraseña");
-        }
-    };
+<script>
+class LoginSessionManager {
+    constructor(formId, emailId, passwordId) {
+        this.form = document.getElementById(formId);
+        this.emailInput = document.getElementById(emailId);
+        this.passwordInput = document.getElementById(passwordId);
 
-    document.getElementById("loginForm").onsubmit = function () {
-        // Guardar temporalmente en sessionStorage (se borra al cerrar o recargar)
-        sessionStorage.setItem("correo", document.getElementById("email").value);
-        sessionStorage.setItem("contraseña", document.getElementById("password").value);
-    };
+        this.autocompletar();
+        this.configurarEventos();
+    }
 
-    window.addEventListener("beforeunload", function () {
+    autocompletar() {
+        const correo = sessionStorage.getItem("correo");
+        const contraseña = sessionStorage.getItem("contraseña");
+
+        if (correo) this.emailInput.value = correo;
+        if (contraseña) this.passwordInput.value = contraseña;
+    }
+
+    guardarEnSession() {
+        sessionStorage.setItem("correo", this.emailInput.value);
+        sessionStorage.setItem("contraseña", this.passwordInput.value);
+    }
+
+    limpiarSession() {
         sessionStorage.removeItem("correo");
         sessionStorage.removeItem("contraseña");
-    });
-</script>
+    }
 
+    configurarEventos() {
+        this.form.addEventListener("submit", () => this.guardarEnSession());
+        window.addEventListener("beforeunload", () => this.limpiarSession());
+    }
+}
+
+// Inicia todo cuando la página cargue
+window.addEventListener("DOMContentLoaded", function () {
+    new LoginSessionManager("loginForm", "email", "password");
+});
+</script>
 </body>
 </html>
