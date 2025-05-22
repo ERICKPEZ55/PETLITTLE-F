@@ -156,10 +156,29 @@
                     <span id="error-celular" class="error-message"></span>
                     <input type="email" id="email" placeholder="Email" required />
                     <textarea placeholder="Mensaje" rows="4" required></textarea>
-                    <label>
-                        <input type="checkbox" required /> He leído y acepto la política de privacidad y cookies
+                    <label id="descargar-politica">
+                        <input type="checkbox" required />
+                        <a href="#" id="enlace-politica">He leído y acepto la política de privacidad y cookies</a>
                     </label>
-                    <br /><br />
+                    
+                    <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const enlacePolitica = document.getElementById('enlace-politica');
+                    
+                        enlacePolitica.addEventListener('click', function(event) {
+                            event.preventDefault();
+                    
+                            const enlaceDescarga = document.createElement('a');
+                            enlaceDescarga.href = '../documentacion/Politica_Privacidad_PetLittle.pdf'; 
+                            enlaceDescarga.download = 'Politica_Privacidad_PetLittle.pdf';
+                            document.body.appendChild(enlaceDescarga);
+                            enlaceDescarga.click();
+                            document.body.removeChild(enlaceDescarga);
+                        });
+                    });
+                    </script>
+                    
+                    
                     <button type="submit">Enviar</button>
                 </form>
             </div>

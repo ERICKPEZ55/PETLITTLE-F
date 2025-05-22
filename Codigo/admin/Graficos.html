@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="..//img/favicon.png" />
+    <title>Gráficos de Administración Veterinaria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Graficos.css">
+</head>
+<body>
+    <div class="app-header">
+        <div class="logo">
+            <img src="../img/logo negativo (1).png" alt="Logo de PetLittle">
+        </div>
+        <button class="back-button" onclick="history.back()">Volver</button>
+    </div>
+    <div class="dashboard-container">
+        <h1>Panel de Administración</h1>
+        <div class="dashboard-grid">
+            <div class="dashboard-item" id="citas-mes">
+                <h2>Número de Citas por Mes</h2>
+                <canvas id="citasPorMesChart"></canvas>
+            </div>
+            <div class="dashboard-item" id="estado-citas">
+                <h2>Estado de las Citas</h2>
+                <canvas id="estadoCitasChart"></canvas>
+            </div>
+            <div class="dashboard-item dashboard-item-full" id="tipos-citas">
+                <h2>Tipos de Citas</h2>
+                <canvas id="tiposCitasChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Datos de ejemplo (reemplaza con tus datos reales)
+        const datosCitasPorMes = {
+            labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Número de Citas',
+                data: [30, 45, 38, 55, 42, 50],
+                backgroundColor: '#64B5F6', // Un azul más llamativo
+                borderColor: '#64B5F6',
+                borderWidth: 1
+            }]
+        };
+
+        const datosEstadoCitas = {
+            labels: ['Completadas', 'Pendientes', 'Canceladas'],
+            datasets: [{
+                data: [60, 30, 10],
+                backgroundColor: ['#4FC3F7', '#FFF176', '#F44336'], // Colores más diferenciados
+                hoverOffset: 4
+            }]
+        };
+
+        const datosTiposCitas = {
+            labels: ['Cardiología', 'Nutrición', 'Dermatología', 'Odontología', 'Neurología', 'Endocrinología'],
+            datasets: [{
+                label: 'Número de Citas',
+                data: [25, 35, 30, 20, 15, 40],
+                backgroundColor: ['#A5D6A7', '#FFD54F', '#EF9A9A', '#9FA8DA', '#CE93D8', '#81D4FA'], // Colores variados
+                borderWidth: 1
+            }]
+        };
+
+        // Renderizar las gráficas
+        const ctxCitasPorMes = document.getElementById('citasPorMesChart').getContext('2d');
+        new Chart(ctxCitasPorMes, {
+            type: 'bar',
+            data: datosCitasPorMes,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const ctxEstadoCitas = document.getElementById('estadoCitasChart').getContext('2d');
+        new Chart(ctxEstadoCitas, {
+            type: 'pie',
+            data: datosEstadoCitas
+        });
+
+        const ctxTiposCitas = document.getElementById('tiposCitasChart').getContext('2d');
+        new Chart(ctxTiposCitas, {
+            type: 'bar',
+            data: datosTiposCitas,
+            options: {
+                indexAxis: 'y', // Gráfico de barras horizontal
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

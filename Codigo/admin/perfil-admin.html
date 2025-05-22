@@ -3,114 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Perfil del Administrador</title>
+  <title>Panel de Administrador</title>
+  <link rel="icon" type="image/png" href="..//img/favicon.png" />
   <link rel="stylesheet" href="estilos-perfil.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="encabezado">
-    <img src="img/logo negativo (1).png" alt="PetLittle" class="logo">
-    <h1>Perfil del Administrador</h1>
-  </header>
-
-  <main class="contenedor-perfil">
-    <div class="perfil-box">
-      <div class="foto-admin">
-        <img src="img/Ellipse 3.png" alt="Foto Administrador" />
-      </div>
-      <div class="datos-admin">
-        <h2 id="nombre">Juan Pérez</h2>
-        <p><strong>Cargo:</strong> <span id="cargo">Administrador General</span></p>
-        <p><strong>Correo:</strong> <span id="correo">admin@petlittle.com</span></p>
-        <p><strong>Último acceso:</strong> <span id="acceso">14 de mayo de 2025</span></p>
-
-        <div class="botones">
-          <button onclick="habilitarEdicion()">Editar Datos</button>
-          <button id="btn-guardar" onclick="guardarCambios()" style="display: none;">Guardar Cambios</button>
-          <button id="btn-restablecer" onclick="restablecerPerfil()" style="display: none;">Restablecer Perfil</button>
-        </div>
-      </div>
+  <header class="header">
+    <div class="logo-container">
+        <img src="../img/logo negativo (1).png" alt="Logo" class="logo">
     </div>
+    <h1 class="titulo-header">Panel de Administrador</h1>
+</header>
+
+<div class="contenedor">
+    
+    <div class="perfil-sobre-menu">
+        <img src="../img/Foto empleado.png" alt="Empleado" class="foto-perfil">
+        <p class="nombre"></p>
+        <p class="rol">Asistente Veterinario</p>
+    </div>
+
+    <aside class="menu-lateral">
+        <nav class="menu">
+            <a href="#">Inicio</a>
+            <a href="#">Notificaciones</a>
+            <a href="../Inicio/index.html" class="cerrar-sesion">Cerrar Sesión</a>
+        </nav>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="contenido">
+      <h2>Bienvenido</h2>
+      <p>Accede a las herramientas de gestión para organizar mejor la atención de los pacientes.</p>
+
+      <div class="opciones">
+          <div class="opcion">
+              <h3>Gestión de Clientes</h3>
+              <button onclick="window.location.href='usuarios.html'">Ingresar</button>
+          </div>
+          <div class="opcion">
+              <h3>Gráficas</h3>
+              <button onclick="window.location.href='Graficos.html'">Ingresar</button>
+          </div>
+          <div class="opcion">
+              <h3>Agenda</h3>
+              <button onclick="window.location.href='vista.html'">Ingresar</button>
+          </div>
+          <div class="opcion">
+              <h3>Trabajadores</h3>
+              <button onclick="window.location.href='Trabajadores.html'">Ingresar</button>
+          </div>
+      </div>
   </main>
-
-  <script>
-    let editando = false;
-
-    function cargarPerfil() {
-      const datos = JSON.parse(localStorage.getItem("perfilAdmin"));
-      if (datos) {
-        document.getElementById("nombre").textContent = datos.nombre;
-        document.getElementById("cargo").textContent = datos.cargo;
-        document.getElementById("correo").textContent = datos.correo;
-        document.getElementById("acceso").textContent = datos.acceso;
-      }
-    }
-
-    function habilitarEdicion() {
-      if (editando) return;
-
-      document.getElementById("btn-guardar").style.display = "inline-block";
-      document.getElementById("btn-restablecer").style.display = "inline-block";
-
-      const nombre = document.getElementById("nombre");
-      const cargo = document.getElementById("cargo");
-      const correo = document.getElementById("correo");
-      const acceso = document.getElementById("acceso");
-
-      nombre.innerHTML = `<input type="text" id="edit-nombre" value="${nombre.textContent}">`;
-      cargo.innerHTML = `<input type="text" id="edit-cargo" value="${cargo.textContent}">`;
-      correo.innerHTML = `<input type="email" id="edit-correo" value="${correo.textContent}">`;
-      acceso.innerHTML = `<input type="text" id="edit-acceso" value="${acceso.textContent}">`;
-
-      editando = true;
-    }
-
-    function guardarCambios() {
-      if (!editando) return;
-
-      const nombre = document.getElementById("edit-nombre").value.trim();
-      const cargo = document.getElementById("edit-cargo").value.trim();
-      const correo = document.getElementById("edit-correo").value.trim();
-      const acceso = document.getElementById("edit-acceso").value.trim();
-
-      if (!nombre || !cargo || !correo || !acceso) {
-        alert("Por favor, completa todos los campos.");
-        return;
-      }
-
-      if (!validarCorreo(correo)) {
-        alert("El correo electrónico no es válido.");
-        return;
-      }
-
-      document.getElementById("nombre").textContent = nombre;
-      document.getElementById("cargo").textContent = cargo;
-      document.getElementById("correo").textContent = correo;
-      document.getElementById("acceso").textContent = acceso;
-
-      const datos = { nombre, cargo, correo, acceso };
-      localStorage.setItem("perfilAdmin", JSON.stringify(datos));
-
-      editando = false;
-
-      document.getElementById("btn-guardar").style.display = "none";
-      document.getElementById("btn-restablecer").style.display = "none";
-    }
-
-    function restablecerPerfil() {
-      localStorage.removeItem("perfilAdmin");
-      editando = false;
-      cargarPerfil();
-
-      document.getElementById("btn-guardar").style.display = "none";
-      document.getElementById("btn-restablecer").style.display = "none";
-    }
-
-    function validarCorreo(correo) {
-      const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-      return regex.test(correo);
-    }
-
-    window.onload = cargarPerfil;
-  </script>
+  </div>
 </body>
 </html>

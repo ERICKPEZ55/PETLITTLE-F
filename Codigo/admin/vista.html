@@ -1,159 +1,133 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PetLittle</title>
-  <link rel="icon" type="image/png" href="img/favicon.png">
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <title>Agendamiento Administrador</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vista.css">
+  <style>
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-weight: bold;
+      color: #1b1b4d;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <aside class="sidebar">
-      <img src="img/home.png" alt="Inicio" />
-      <img src="img/calendario.png" alt="Calendario" />
-      <img src="img/usuario.png" alt="Usuarios" />
-      <img src="img/campana.png" alt="Notificaciones" />
-      <button class="btn-salir" onclick="cerrarSesion()">
-        <img src="img/cerrarS.png" alt="Salir" />
-      </button>
-      <script>
-        function cerrarSesion() {
-          
-          window.location.href = 'index.html';
-        }
-      </script>      
-    </aside>
 
-    <main class="dashboard">
-      <section class="cards">
-        <div class="card" id="card-usuarios">Usuarios registrados<br></div>
-        <div class="card" id="card-citas-dia">Citas agendadas en el día<br></div>
-        <div class="card" id="card-citas-canceladas">Citas canceladas<br></div>
-      </section>
+  <div class="header">
+    <h1>Agenda Administrador</h1>
+    <div class="admin-info">
+      <img src="../img/Ellipse 3.png" alt="Foto del administrador">
+      <span>Administrador</span>
+    </div>
+  </div>
 
-      <section class="graficos">
-        <div class="grafico">
-          <h3 style="text-align:center; margin-bottom: 10px;">Gráfica de citas en el mes</h3>
-          <canvas id="graficoCitas"></canvas>
-        </div>
-        <div class="calendario">
-          <header>
-            <h3>Calendario</h3>
-            <div class="selector-fecha">
-              <select id="mes"></select>
-              <select id="anio"></select>
-            </div>
-          </header>
-          <div class="dias" id="calendario"></div>
-          <div class="citas" id="citas-dia"></div>
-        </div>
-      </section>
-    </main>
+  <div class="panel">
+    <div class="panel-card">
+      <div class="panel-title">Usuarios registrados</div>
+      <p style="text-align:center;">325 usuarios</p>
+    </div>
+
+    <div class="panel-card">
+      <div class="panel-title">Citas agendadas en el día</div>
+      <p style="text-align:center;">12 citas</p>
+    </div>
+
+    <div class="panel-card">
+      <div class="panel-title">Citas canceladas</div>
+      <p style="text-align:center;">3 canceladas</p>
+    </div>
+  </div>
+
+  <div class="panel" style="justify-content: center;">
+    <div class="panel-card">
+      <div class="panel-title">Acciones rápidas</div>
+      <div class="action-buttons">
+        <button>Clientes</button>
+        <button>Gráfica</button>
+        <button>Agenda</button>
+        <button>Configuración</button>
+      </div>
+    </div>
+
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <select id="month"></select>
+        <select id="year"></select>
+      </div>
+
+      <div class="calendar-days">
+        <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+      </div>
+
+      <div id="calendar" class="calendar-grid"></div>
+
+      <div class="calendar-legend" id="calendar-legend">Seleccione un día para ver detalles</div>
+    </div>
   </div>
 
   <script>
-    // Gráfico circular
-    const ctx = document.getElementById("graficoCitas").getContext("2d");
-    new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: ["Citas agendadas", "Citas sí asistidas", "Citas canceladas"],
-        datasets: [{
-          data: [50, 40, 10],
-          backgroundColor: ["#3ec7a7", "#f25c8a", "#8466e6"]
-        }]
-      },
-      options: { responsive: true }
-    });
+    const calendar = document.getElementById("calendar");
+    const monthSelect = document.getElementById("month");
+    const yearSelect = document.getElementById("year");
+    const legend = document.getElementById("calendar-legend");
 
-    // Calendario funcional
-    const calendario = document.getElementById("calendario");
-    const citasDia = document.getElementById("citas-dia");
-    const selectMes = document.getElementById("mes");
-    const selectAnio = document.getElementById("anio");
+    const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
-    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    for (let i = 0; i < 12; i++) {
-      const opt = document.createElement("option");
-      opt.value = i;
-      opt.textContent = meses[i];
-      selectMes.appendChild(opt);
-    }
-    const anioActual = new Date().getFullYear();
-    for (let i = anioActual - 5; i <= anioActual + 5; i++) {
-      const opt = document.createElement("option");
-      opt.value = i;
-      opt.textContent = i;
-      selectAnio.appendChild(opt);
+    for (let i = 0; i < months.length; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.text = months[i];
+      monthSelect.appendChild(option);
     }
 
-    const citas = [
-      { fecha: "2025-04-11", hora: "9:00AM", tipo: "Vacunación", nombre: "Laura Gonzalez" },
-      { fecha: "2025-04-11", hora: "10:30AM", tipo: "Desparasitación", nombre: "Andrés Ramirez" },
-      { fecha: "2025-04-12", hora: "2:00PM", tipo: "Consulta general", nombre: "Camila Lopez" },
-    ];
+    const currentYear = new Date().getFullYear();
+    for (let i = currentYear - 5; i <= currentYear + 5; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.text = i;
+      yearSelect.appendChild(option);
+    }
 
-    function renderCalendario(mes, anio) {
-      calendario.innerHTML = "";
-      const primerDia = new Date(anio, mes, 1);
-      const ultimoDia = new Date(anio, mes + 1, 0);
+    function renderCalendar(month, year) {
+      calendar.innerHTML = "";
+      const firstDay = new Date(year, month).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-      const nombresDias = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
-      nombresDias.forEach(d => {
-        const div = document.createElement("div");
-        div.textContent = d;
-        div.className = "nombre-dia";
-        calendario.appendChild(div);
-      });
-
-      for (let i = 0; i < primerDia.getDay(); i++) {
-        const div = document.createElement("div");
-        div.className = "dia";
-        calendario.appendChild(div);
+      for (let i = 0; i < firstDay; i++) {
+        calendar.innerHTML += '<div class="calendar-cell"></div>';
       }
 
-      for (let i = 1; i <= ultimoDia.getDate(); i++) {
-        const fechaActual = new Date(anio, mes, i);
-        const div = document.createElement("div");
-        div.className = "dia";
-        div.textContent = i;
-        if (esHoy(fechaActual)) div.classList.add("hoy");
-        div.addEventListener("click", () => mostrarCitas(fechaActual));
-        calendario.appendChild(div);
+      const today = new Date();
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const cell = document.createElement("div");
+        cell.className = "calendar-cell";
+        if (
+          day === today.getDate() &&
+          month === today.getMonth() &&
+          year === today.getFullYear()
+        ) {
+          cell.classList.add("today");
+        }
+        cell.textContent = day;
+        cell.onclick = () => legend.textContent = `Citas para el ${day}/${month + 1}/${year}: Ninguna registrada.`;
+        calendar.appendChild(cell);
       }
     }
 
-    function esHoy(fecha) {
-      const hoy = new Date();
-      return fecha.getDate() === hoy.getDate() && fecha.getMonth() === hoy.getMonth() && fecha.getFullYear() === hoy.getFullYear();
-    }
+    monthSelect.value = new Date().getMonth();
+    yearSelect.value = new Date().getFullYear();
 
-    function mostrarCitas(fecha) {
-      const f = fecha.toISOString().split("T")[0];
-      citasDia.innerHTML = "";
-      const filtradas = citas.filter(c => c.fecha === f);
-      if (filtradas.length === 0) {
-        citasDia.innerHTML = "<div>No hay citas para este día</div>";
-        return;
-      }
-      filtradas.forEach(cita => {
-        const div = document.createElement("div");
-        div.textContent = `${cita.hora} - ${cita.tipo} - ${cita.nombre}`;
-        citasDia.appendChild(div);
-      });
-    }
+    monthSelect.onchange = () => renderCalendar(parseInt(monthSelect.value), parseInt(yearSelect.value));
+    yearSelect.onchange = () => renderCalendar(parseInt(monthSelect.value), parseInt(yearSelect.value));
 
-    const mesInicial = new Date().getMonth();
-    const anioInicial = new Date().getFullYear();
-    selectMes.value = mesInicial;
-    selectAnio.value = anioInicial;
-    renderCalendario(mesInicial, anioInicial);
-    mostrarCitas(new Date());
-
-    selectMes.addEventListener("change", () => renderCalendario(+selectMes.value, +selectAnio.value));
-    selectAnio.addEventListener("change", () => renderCalendario(+selectMes.value, +selectAnio.value));
+    renderCalendar(new Date().getMonth(), new Date().getFullYear());
   </script>
+
 </body>
 </html>

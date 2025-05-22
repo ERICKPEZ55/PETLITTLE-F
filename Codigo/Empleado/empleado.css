@@ -79,7 +79,7 @@ body {
 
 .menu-lateral {
     width: 230px;
-    height: 320px;
+    height: 220px;
     background-color: #6EACDA;
     padding: 30px;
     border-radius: 30px;
@@ -95,7 +95,8 @@ body {
     padding: 12px;
     font-size: 16px;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 35px;
+    text-align: center;
 }
 
 .menu a:hover, .cerrar-sesion {
@@ -106,7 +107,7 @@ body {
 .contenido {
     flex-grow: 1;
     padding: 50px;
-    background: green;
+    background: #FFFAF3;
 }
 
 .opciones {

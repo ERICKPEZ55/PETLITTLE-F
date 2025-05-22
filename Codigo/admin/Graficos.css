@@ -1,0 +1,188 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background-color: #272A57;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.app-header {
+    background-color: #6EACDA;
+    color: #FFFAF3;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-header .logo img {
+    height: 40px;
+    width: 160px;
+    vertical-align: middle;
+}
+.back-button {
+    background-color: #1976D2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:hover {
+    background-color: #1565C0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.back-button:active {
+    background-color: #0D47A1;
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.dashboard-container {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #E0F7FA;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #2C3E50;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.dashboard-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dashboard-item h2 {
+    color: #2C3E50;
+    font-size: 1.2em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.dashboard-item canvas {
+    width: 100%;
+    height: 200px;
+    border-radius: 6px;
+}
+
+.dashboard-item-full {
+    grid-column: 1 / -1;
+}
+
+/* Media queries para responsividad */
+
+/* Para pantallas medianas (tablets y laptops pequeñas) */
+@media (max-width: 992px) {
+    .dashboard-container {
+        margin: 15px auto;
+        padding: 15px;
+    }
+    h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+    .dashboard-item h2 {
+        font-size: 1.1em;
+    }
+    .dashboard-item canvas {
+        height: 180px; /* Ajustar altura de canvas */
+    }
+}
+
+/* Para pantallas pequeñas (teléfonos) */
+@media (max-width: 768px) {
+    .app-header {
+        flex-direction: column; /* Apilar logo y botón */
+        padding: 10px 15px;
+        align-items: flex-start; /* Alinear a la izquierda cuando apilado */
+    }
+    .app-header .logo {
+        margin-bottom: 10px; /* Espacio entre logo y botón apilados */
+    }
+    .back-button {
+        width: 100%; /* Botón ocupa todo el ancho */
+        text-align: center;
+        padding: 12px 0; /* Ajustar padding para botón de ancho completo */
+    }
+    .dashboard-container {
+        margin: 10px auto;
+        padding: 10px;
+        border-radius: 5px; /* Bordes menos redondeados en móvil */
+    }
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Una sola columna para los gráficos */
+        gap: 15px;
+    }
+    .dashboard-item {
+        padding: 15px;
+    }
+    .dashboard-item h2 {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+    .dashboard-item canvas {
+        height: 150px; /* Altura más pequeña para canvas en móvil */
+    }
+    .dashboard-item-full {
+        grid-column: auto; /* Asegurar que ocupe una columna */
+    }
+}
+
+/* Para pantallas muy pequeñas (teléfonos antiguos o vistas muy estrechas) */
+@media (max-width: 480px) {
+    .app-header {
+        padding: 8px 10px;
+    }
+    .app-header .logo img {
+        height: 35px;
+        width: auto;
+    }
+    .dashboard-container {
+        margin: 5px auto;
+        padding: 5px;
+    }
+    h1 {
+        font-size: 1.5em;
+    }
+    .dashboard-item {
+        padding: 10px;
+    }
+    .dashboard-item h2 {
+        font-size: 0.9em;
+    }
+    .dashboard-item canvas {
+        height: 120px;
+    }
+}
