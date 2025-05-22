@@ -44,6 +44,7 @@ CREATE TABLE `citas` (
 CREATE TABLE `datos` (
   `id_usuario` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(100) NOT NULL,
   `contraseña` varchar(15) NOT NULL
