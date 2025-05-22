@@ -1,28 +1,60 @@
 <?php
+class ConexionBD {
+    private $host = "localhost";
+    private $usuario = "root";
+    private $clave = "123456";
+    private $bd = "prueba";
+    public $conexion;
+
+    public function __construct() {
+        $this->conexion = new mysqli($this->host, $this->usuario, $this->clave, $this->bd);
+        if ($this->conexion->connect_error) {
+            die("Conexión fallida: " . $this->conexion->connect_error);
+        }
+    }
+
+    public function cerrar() {
+        $this->conexion->close();
+    }
+}
+
+class RecuperarContrasena {
+    private $conexion;
+
+    public function __construct($conexion) {
+        $this->conexion = $conexion;
+    }
+
+    public function actualizar($correo, $nueva, $confirmacion) {
+        if ($nueva !== $confirmacion) {
+            return "Las contraseñas no coinciden.";
+        }
+
+        // Encriptar contraseña antes de guardar
+        $nuevaHash = password_hash($nueva, PASSWORD_DEFAULT);
+
+        $sql = "UPDATE datos SET contraseña=? WHERE correo=?";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("ss", $nuevaHash, $correo);
+
+        if ($stmt->execute()) {
+            return "Contraseña actualizada correctamente. Ya puedes iniciar sesión.";
+        } else {
+            return "Error al actualizar: " . $stmt->error;
+        }
+    }
+}
+
+$mensaje = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST['correo'];
     $nueva = $_POST['nueva_contraseña'];
     $confirmacion = $_POST['confirmar_contraseña'];
 
-    if ($nueva !== $confirmacion) {
-        $mensaje = "Las contraseñas no coinciden.";
-    } else {
-        $conexion = new mysqli("localhost", "root", "123456", "prueba");
-
-        if ($conexion->connect_error) {
-            die("Conexión fallida: " . $conexion->connect_error);
-        }
-
-        $sql = "UPDATE datos SET contraseña='$nueva' WHERE correo='$correo'";
-
-        if ($conexion->query($sql) === TRUE) {
-            $mensaje = "Contraseña actualizada correctamente. Ya puedes iniciar sesión.";
-        } else {
-            $mensaje = "Error al actualizar: " . $conexion->error;
-        }
-
-        $conexion->close();
-    }
+    $db = new ConexionBD();
+    $recuperar = new RecuperarContrasena($db->conexion);
+    $mensaje = $recuperar->actualizar($correo, $nueva, $confirmacion);
+    $db->cerrar();
 }
 ?>
 
@@ -98,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 <div class="card">
-    <h2>Recuperar Contraseña</h2>
+    <h2>Cambiar Contraseña</h2>
     <p>Ingresa tu correo y una nueva contraseña</p>
     <form method="POST" action="">
         <input type="email" name="correo" placeholder="Tu correo" required>
