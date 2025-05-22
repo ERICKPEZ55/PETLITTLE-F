@@ -1,67 +1,57 @@
 <?php
-
-class Conexion {
-    private $host = "localhost";
-    private $usuario = "root";
-    private $clave = "123456";
-    private $bd = "prueba";
-    public $conexion;
+class RegistroUsuario {
+    private $conexion;
 
     public function __construct() {
-        $this->conexion = new mysqli($this->host, $this->usuario, "", $this->bd);
+        $this->conexion = new mysqli("localhost", "root", "123456", "prueba");
         if ($this->conexion->connect_error) {
             die("Error al conectar a la base de datos: " . $this->conexion->connect_error);
         }
     }
-}
-
-class RegistroUsuario {
-    private $conexion;
-
-    public function __construct($conexion) {
-        $this->conexion = $conexion;
-    }
 
     public function registrar($nombre, $apellido, $correo, $telefono, $contraseña) {
-        $nombre = mysqli_real_escape_string($this->conexion, $nombre);
-        $apellido = mysqli_real_escape_string($this->conexion, $apellido);
-        $correo = mysqli_real_escape_string($this->conexion, $correo);
-        $telefono = mysqli_real_escape_string($this->conexion, $telefono);
-        $contraseña = mysqli_real_escape_string($this->conexion, $contraseña);
-
-        // Validaciones
+        // Validaciones del lado del servidor
         if (!preg_match("/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/", $nombre)) {
             die("Error: El nombre solo puede contener letras y espacios.");
-        }
-
-        if (!preg_match("/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/", $apellido)) {
-            die("Error: El apellido solo puede contener letras y espacios.");
         }
 
         if (!preg_match("/^\d{10}$/", $telefono)) {
             die("Error: El teléfono debe contener exactamente 10 dígitos.");
         }
 
+        // Encriptar contraseña
         $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO datos (nombre, correo, telefono, contraseña) 
-                VALUES ('$nombre $apellido', '$correo', '$telefono', '$contraseña_hash')";
+        // Insertar en la base de datos
+        $stmt = $this->conexion->prepare("INSERT INTO datos (nombre, apellido, correo, telefono, contraseña) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $nombre, $apellido, $correo, $telefono, $contraseña_hash);
 
-        if (mysqli_query($this->conexion, $sql)) {
+        if ($stmt->execute()) {
             echo "<script>alert('Registro exitoso'); window.location.href='login.php';</script>";
         } else {
-            echo "Error al registrar: " . mysqli_error($this->conexion);
+            echo "Error al registrar: " . $stmt->error;
         }
+
+        $stmt->close();
+    }
+
+    public function __destruct() {
+        $this->conexion->close();
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
-    $db = new Conexion();
-    $registro = new RegistroUsuario($db->conexion);
-
-    $registro->registrar($_POST['nombre'], $_POST['apellido'], $_POST['correo'], $_POST['telefono'], $_POST['contraseña']);
+if (isset($_POST['enviar'])) {
+    $registro = new RegistroUsuario();
+    $registro->registrar(
+        $_POST['nombre'],
+        $_POST['apellido'],
+        $_POST['correo'],
+        $_POST['telefono'],
+        $_POST['contraseña']
+    );
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -71,49 +61,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
     <title>Registrarse - PetLittle</title>
     <link rel="stylesheet" href="stylesregistro.css">
     <link rel="icon" type="image/png" href="img/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap"
+rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <div class="login-box">
-        <h1 class="logo">PetLittle</h1>
-        <p>Bienvenido. Por favor, ingrese sus datos para completar el registro.</p>
+    <div class="container">
+        <div class="login-box">
+            <h1 class="logo">PetLittle</h1>
+            <p>Bienvenido. Por favor, ingrese sus datos para completar
+el registro.</p>
+            <form id="registerForm" method="post">
+                <label for="username">Nombre:</label>
+                <input name="nombre" type="text" id="username"
+placeholder="Nombre" required
+                       pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo
+letras y espacios.">
 
-        <?php if (isset($mensaje)) : ?>
-            <p style="color:red; font-weight:bold;"><?php echo $mensaje; ?></p>
-        <?php endif; ?>
+                <label for="lastname">Apellido:</label>
+                <input name="apellido" type="text" id="lastname"
+placeholder="Apellido" required
+                       pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo
+letras y espacios.">
 
-        <form id="registerForm" method="post">
-            <label for="username">Nombre:</label>
-            <input name="nombre" type="text" id="username" placeholder="Nombre" required
-                   pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras y espacios.">
+                <label for="email">Correo:</label>
+                <input name="correo" type="email" id="email"
+placeholder="Correo" required>
 
-            <label for="lastname">Apellido:</label>
-            <input name="apellido" type="text" id="lastname" placeholder="Apellido" required
-                   pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras y espacios.">
+                <label for="number">Teléfono:</label>
+                <input name="telefono" type="tel" id="number"
+placeholder="Teléfono" required
+                       pattern="\d{10}" maxlength="10" title="Debe
+contener exactamente 10 dígitos.">
 
-            <label for="email">Correo:</label>
-            <input name="correo" type="email" id="email" placeholder="Correo" required>
+                <label for="password">Contraseña:</label>
+                <input name="contraseña" type="password" id="password"
+placeholder="Contraseña" required>
 
-            <label for="number">Teléfono:</label>
-            <input name="telefono" type="tel" id="number" placeholder="Teléfono" required
-                   pattern="\d{10}" maxlength="10" title="Debe contener exactamente 10 dígitos.">
-
-            <label for="password">Contraseña:</label>
-            <input name="contraseña" type="password" id="password" placeholder="Contraseña" required>
-
-            <button type="submit" name="enviar">Registrarme</button>
-        </form>
-        <p class="register-link"><a href="login.php">Iniciar Sesión</a></p>
+                <button type="submit" name="enviar">Registrarme</button>
+            </form>
+            <p class="register-link"><a href="login.php">Iniciar Sesión</a></p>
+        </div>
+        <div class="image-container">
+            <img src="img/imagen.register.jpeg" alt="Perro y gato">
+        </div>
     </div>
-    <div class="image-container">
-        <img src="img/imagen.register.jpeg" alt="Perro y gato">
-    </div>
-</div>
 
-<script type="text/javascript">
-    document.getElementById('registerForm').addEventListener('submit', function (e) {
+    <script type="text/javascript">
+    document.getElementById('registerForm').addEventListener('submit',
+function (e) {
         const user = document.getElementById('username').value.trim();
         const lastname = document.getElementById('lastname').value.trim();
         const email = document.getElementById('email').value.trim();
@@ -123,7 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
         const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
         const phoneRegex = /^\d{10}$/;
 
-        if (user === '' || lastname === '' || email === '' || number === '' || pass === '') {
+        if (user === '' || lastname == '' || email === '' || number
+=== '' || pass === '') {
             alert('Faltan datos por rellenar');
             e.preventDefault();
             return;
@@ -134,9 +132,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
             e.preventDefault();
             return;
         }
-
         if (!nameRegex.test(lastname)) {
-            alert('El apellido solo debe contener letras y espacios');
+            alert('El nombre solo debe contener letras y espacios');
             e.preventDefault();
             return;
         }
@@ -147,6 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
             return;
         }
     });
-</script>
+    </script>
 </body>
 </html>
+
