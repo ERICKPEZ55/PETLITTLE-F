@@ -6,7 +6,7 @@ $clave = "123456";
 $bd = "prueba";
 
 
-$conexion = mysqli_connect($servidor, $usuario, "", $bd);
+$conexion = mysqli_connect($servidor, $usuario, "123456", $bd);
 
 
 if (!$conexion) {
@@ -32,11 +32,13 @@ if (isset($_POST['enviar'])) {
     $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT);
 
     // Insertar datos con la contraseña encriptada
-    $insertar = "INSERT INTO datos (nombre, correo, telefono, contraseña) 
-                 VALUES ('$nombre', '$correo', '$telefono', '$contraseña_hash')";
+    $insertar = "INSERT INTO datos (nombre, correo, telefono, contraseña)
+                 VALUES ('$nombre', '$correo', '$telefono',
+'$contraseña_hash')";
 
     if (mysqli_query($conexion, $insertar)) {
-        echo "<script>alert('Registro exitoso'); window.location.href='login.php';</script>";
+        echo "<script>alert('Registro exitoso');
+window.location.href='login.php';</script>";
     } else {
         echo "Error al registrar: " . mysqli_error($conexion);
     }
@@ -52,32 +54,43 @@ if (isset($_POST['enviar'])) {
     <title>Registrarse - PetLittle</title>
     <link rel="stylesheet" href="stylesregistro.css">
     <link rel="icon" type="image/png" href="img/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap"
+rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="login-box">
             <h1 class="logo">PetLittle</h1>
-            <p>Bienvenido. Por favor, ingrese sus datos para completar el registro.</p>
+            <p>Bienvenido. Por favor, ingrese sus datos para completar
+el registro.</p>
             <form id="registerForm" method="post">
                 <label for="username">Nombre:</label>
-                <input name="nombre" type="text" id="username" placeholder="Nombre" required
-                       pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras y espacios.">
-                
+                <input name="nombre" type="text" id="username"
+placeholder="Nombre" required
+                       pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo
+letras y espacios.">
+
                 <label for="lastname">Apellido:</label>
-                <input name="apellido" type="text" id="lastname" placeholder="Apellido" required
-                       pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras y espacios.">
+                <input name="apellido" type="text" id="lastname"
+placeholder="Apellido" required
+                       pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo
+letras y espacios.">
 
                 <label for="email">Correo:</label>
-                <input name="correo" type="email" id="email" placeholder="Correo" required>
+                <input name="correo" type="email" id="email"
+placeholder="Correo" required>
 
                 <label for="number">Teléfono:</label>
-                <input name="telefono" type="tel" id="number" placeholder="Teléfono" required
-                       pattern="\d{10}" maxlength="10" title="Debe contener exactamente 10 dígitos.">
+                <input name="telefono" type="tel" id="number"
+placeholder="Teléfono" required
+                       pattern="\d{10}" maxlength="10" title="Debe
+contener exactamente 10 dígitos.">
 
                 <label for="password">Contraseña:</label>
-                <input name="contraseña" type="password" id="password" placeholder="Contraseña" required>
+                <input name="contraseña" type="password" id="password"
+placeholder="Contraseña" required>
 
                 <button type="submit" name="enviar">Registrarme</button>
             </form>
@@ -89,7 +102,8 @@ if (isset($_POST['enviar'])) {
     </div>
 
     <script type="text/javascript">
-    document.getElementById('registerForm').addEventListener('submit', function (e) {
+    document.getElementById('registerForm').addEventListener('submit',
+function (e) {
         const user = document.getElementById('username').value.trim();
         const lastname = document.getElementById('lastname').value.trim();
         const email = document.getElementById('email').value.trim();
@@ -99,7 +113,8 @@ if (isset($_POST['enviar'])) {
         const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
         const phoneRegex = /^\d{10}$/;
 
-        if (user === '' || lastname == '' || email === '' || number === '' || pass === '') {
+        if (user === '' || lastname == '' || email === '' || number
+=== '' || pass === '') {
             alert('Faltan datos por rellenar');
             e.preventDefault();
             return;
