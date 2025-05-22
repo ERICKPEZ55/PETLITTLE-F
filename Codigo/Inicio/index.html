@@ -113,6 +113,7 @@
             <h2>Esterilización o Castración</h2>
             <p>Ofrecemos servicios profesionales para promover la salud de tu mascota...</p>
         </div>
+        <a href="http://" target="_blank" rel="noopener noreferrer"></a>
     </div>
     <div class="clinic-section" id="clinicas">
         <h1>CLÍNICAS AFILIADAS</h1>
@@ -143,7 +144,7 @@
         <div class="contact-container">
             <div class="contact-text">
                 <p>
-                    Puedes ponerte en contacto con nosotros a través del correo electrónico...
+                    Puedes ponerte en contacto con nosotros a través del correo electrónico o el formulario de contacto en nuestro sitio web.  Sea cual sea la opción que elijas, nuestro equipo estará encantado de ayudarte en todo lo que necesites. Ya sea para programar una cita, solicitar información sobre nuestros servicios o cualquier otra cosa relacionada con la salud de tu mascota, no dudes en contactarnos. Esperamos saber de ti pronto y poder brindarte la mejor atención posible.
                 </p>
             </div>
             <div class="contact-form">
@@ -169,10 +170,10 @@
                             event.preventDefault();
                     
                             const enlaceDescarga = document.createElement('a');
-                            enlaceDescarga.href = '../documentacion/Politica_Privacidad_PetLittle.pdf'; 
+                            enlaceDescarga.href= './Documentos/Politica_Privacidad_PetLittle.pdf'; 
                             enlaceDescarga.download = 'Politica_Privacidad_PetLittle.pdf';
                             document.body.appendChild(enlaceDescarga);
-                            enlaceDescarga.click();
+                             window.open('../Documentos/Politica_Privacidad_PetLittle.pdf', '_blank');
                             document.body.removeChild(enlaceDescarga);
                         });
                     });
