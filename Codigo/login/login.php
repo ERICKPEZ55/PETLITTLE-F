@@ -1,14 +1,17 @@
 <?php
 session_start();
+require_once 'SessionManager.php';
 
 class Autenticador {
     private $conexion;
+
     public function __construct() {
         $this->conexion = new mysqli("localhost", "root", "", "prueba");
         if ($this->conexion->connect_error) {
             die("Conexión fallida: " . $this->conexion->connect_error);
         }
     }
+
     public function login($correo, $contraseña) {
         $sql = "SELECT * FROM datos WHERE correo = ?";
         $stmt = $this->conexion->prepare($sql);
@@ -19,20 +22,21 @@ class Autenticador {
         if ($resultado->num_rows === 1) {
             $usuario = $resultado->fetch_assoc();
 
-            // encriptacion
-            $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT);
+            if ($contraseña === $usuario['contraseña']) {
+                // Inicia sesión usando SessionManager
+                $session = new SessionManager();
+                // Puedes usar 'id' si lo tienes en la tabla, o el correo como ID
+                $session->login($usuario['correo'], $usuario['correo']);
 
-            if (password_verify($contraseña, $usuario['contraseña'])) {
-                $_SESSION['usuario'] = $usuario['correo'];
-
+                // Redirección según el correo
                 if ($usuario['correo'] === 'juan.24@gmail.com') {
-                    header("Location: agendamiento.html");
+                    header("Location: agendamiento.php");
                 } elseif ($usuario['correo'] === 'andres@gmail.com') {
                     header("Location: empleado.html");
                 } elseif ($usuario['correo'] === "sofia@gmail.com") {
                     header("Location: vista.html");
                 } else {
-                    header("Location: agendamiento.html");
+                    header("Location: ../Usuario/agendamiento.php");
                 }
                 exit();
             } else {
@@ -43,10 +47,12 @@ class Autenticador {
         }
         $stmt->close();
     }
+
     public function __destruct() {
         $this->conexion->close();
     }
 }
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST['correo'];
     $contraseña = $_POST['contraseña'];
@@ -131,7 +137,6 @@ class LoginSessionManager {
     }
 }
 
-// Inicia todo cuando la página cargue
 window.addEventListener("DOMContentLoaded", function () {
     new LoginSessionManager("loginForm", "email", "password");
 });
