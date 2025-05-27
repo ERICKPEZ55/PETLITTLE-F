@@ -1,6 +1,5 @@
-<?php
 if (!$session->isLoggedIn()) {
-    header("Location: ../views/login/login.php");
+    header("Location: ../login/login.php");
     exit;
 }
 ?>

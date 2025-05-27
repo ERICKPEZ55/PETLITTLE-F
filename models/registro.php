@@ -3,7 +3,7 @@ class RegistroUsuario {
     private $conexion;
 
     public function __construct() {
-        $this->conexion = new mysqli("localhost", "root", "123456", "prueba");
+        $this->conexion = new mysqli("localhost", "root", "", "prueba");
         if ($this->conexion->connect_error) {
             die("Error al conectar a la base de datos: " . $this->conexion->connect_error);
         }
@@ -60,7 +60,7 @@ if (isset($_POST['enviar'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse - PetLittle</title>
     <link rel="stylesheet" href="stylesregistro.css">
-    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/png" href="../assets/css/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
