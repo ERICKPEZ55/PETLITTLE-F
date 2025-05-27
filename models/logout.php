@@ -4,5 +4,5 @@ require_once 'SessionManager.php';
 $session = new SessionManager();
 $session->logout();
 
-header('Location:../Usuario/agendamiento.php');
+header('Location:../views/Usuario/agendamiento.php');
 exit;
