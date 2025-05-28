@@ -1,22 +1,16 @@
-if (!$session->isLoggedIn()) {
-    header("Location: ../login/login.php");
-    exit;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel de Empleado - Veterinaria</title>
-    <link rel="stylesheet" href="agendamiento.css" />
+    <link rel="stylesheet" href="../../assets/css/agendamiento.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
     <header class="header">
         <div class="logo-container">
-            <img src="img/Logo negro.png" alt="Logo" class="logo" />
+            <img src="../../assets/img/Logo negativo.png" alt="Logo" class="logo" />
         </div>
         <h1 class="titulo-header">Agendamiento</h1>
     </header>
@@ -24,9 +18,9 @@ if (!$session->isLoggedIn()) {
     <div class="contenedor">
         <!-- PERFIL SOBRE EL LATERAL -->
         <div class="perfil-sobre-menu">
-            <img src="img/admin.png" alt="Empleado" class="foto-perfil" />
+            <img src="../../assets/img/admin.png" alt="Empleado" class="foto-perfil" />
             <div class="info-perfil">
-                <p class="nombre"><?php echo htmlspecialchars($session->getUserName()); ?></p>
+                
                 <p class="rol">Plan básico de salud</p>
             </div>
         </div>
@@ -38,33 +32,33 @@ if (!$session->isLoggedIn()) {
                 <a href="tablas-citas.html">Cancelar citas</a>
                 <a href="#">Historia clínica</a>
                 <a href="#">Notificaciones</a>
-                <a href="../login/logout.php" class="cerrar-sesion">Cerrar Sesión</a>
+                <a href=""../../models/logout.php" class="cerrar-sesion"" class="cerrar-sesion">Cerrar Sesión</a>
             </nav>
         </aside>
 
         <main class="contenido">
-            <img src="img/img 1.png" alt="doctor cargando perros" class="img1" />
+            <img src="../../assets/img/img 1.png" alt="doctor cargando perros" class="img1" />
             <h2>Bienvenido</h2>
             <p>Aquí encuentras todas las opciones del plan de salud disponible para tu mascota.</p>
 
             <div class="opciones">
                 <div class="opcion">
-                    <img src="img/imga1.png" alt="calendario" class="calendarioimg" />
+                    <img src="../../assets/img/calendarioblanco.png" alt="calendario" class="calendarioimg" />
                     <h3>Agendar citas</h3>
                     <button onclick="window.location.href='agendamientocalendario.html'">Ingresar</button>
                 </div>
                 <div class="opcion">
-                    <img src="img/imga2.png" alt="calendario" class="calendarioimg" />
+                    <img src="../../assets/img/calendariocitasagendadas.png" alt="calendario" class="calendarioimg" />
                     <h3>Citas agendadas</h3>
-                    <button onclick="window.location.href='tablas-citas.html'">Ingresar</button>
+                    <button onclick="window.location.href='../Gestion_citas/tablas-citas.html'">Ingresar</button>
                 </div>
                 <div class="opcion">
-                    <img src="img/imga3.png" alt="calendario" class="calendarioimg" />
+                    <img src="../../assets/img/ordenespendienteslogo.png" alt="calendario" class="calendarioimg" />
                     <h3>Órdenes pendientes</h3>
                     <button onclick="window.location.href=''">Ingresar</button>
                 </div>
                 <div class="opcion">
-                    <img src="img/imga4.png" alt="calendario" class="calendarioimg" />
+                    <img src="../../assets/img/laboratorioclinicologo.png" alt="calendario" class="calendarioimg" />
                     <h3>Laboratorio clínico</h3>
                     <button>Ingresar</button>
                 </div>

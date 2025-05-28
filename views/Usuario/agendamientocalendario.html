@@ -4,268 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Agendamiento - PetLittle</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <link rel="stylesheet" href="../../assets/css/stylesagendamientocalendario.css">
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fefbf9;
-      color: #272A57;
-    }
-
-    header {
-      background-color: #6EACDA;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      border-bottom: 2px solid #ccc;
-      height: 90px;
-    }
-
-    .logo img {
-      height: 40px;
-    }
-
-    .title {
-      font-weight: bold;
-      font-size: 1.0rem;
-      color: #fff;
-    }
-
-    .user-section {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #fff;
-    }
-
-    .user-section img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      cursor: pointer;
-    }
-
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .left-panel, .right-panel {
-      flex: 1;
-      min-width: 300px;
-      padding: 40px;
-    }
-
-    .left-panel {
-      background-color: #272A57;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .left-panel h2 {
-      margin-bottom: 30px;
-      text-align: center;
-    }
-
-    .specialty-list {
-      background: white;
-      border-radius: 20px;
-      padding: 50px;
-      color: #272A57;
-      width: 90%;
-      max-width: 340px;
-    }
-
-    .specialty-item {
-      display: flex;
-      align-items: center;
-      margin: 12px 0;
-      font-weight: 500;
-      cursor: pointer;
-      border-radius: 10px;
-      padding: 10px;
-      transition: background 0.2s;
-    }
-
-    .specialty-item:hover {
-      background-color: #f0f0f0;
-    }
-
-    .specialty-item.selected {
-      background-color: #6EACDA;
-      color: white;
-    }
-
-    .specialty-item img {
-      width: 24px;
-      margin-right: 10px;
-    }
-
-    .right-panel {
-      background-color: #fefbf9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .right-panel h2 {
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .calendariotitulo{
-      color: wheat;
-    }
-    .calendar-container {
-      background: #ffffff;
-      padding: 10px;
-      border-radius: 12px;
-      color: black;
-      font-weight: bold;
-      width: 100%;
-      max-width: 500px;
-    }
-
-    .calendar-header {
-      background: #272A57;
-      color: #272A57;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 15px;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-      font-weight: bold;
-    }
-
-    .calendar-header select {
-      background: white;
-      color: black;
-      border: none;
-      border-radius: 5px;
-      padding: 5px;
-      margin-left: 5px;
-    }
-
-    .calendar-days, .calendar-dates {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      text-align: center;
-    }
-
-    .calendar-days div {
-      font-weight: bold;
-    }
-
-    .calendar-dates div {
-      margin: 10px 0;
-      padding: 8px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .calendar-dates div:hover {
-      background: #272A57;
-      color: white;
-    }
-
-    .calendar-dates .selected {
-      background: white;
-      color: #272A57;
-      font-weight: bold;
-      border: 2px solid #272A57;
-    }
-
-    .calendar-dates .no-service {
-      background-color: #272A57;
-      color: white;
-      cursor: not-allowed;
-    }
-
-    button#agendar {
-      margin-top: 25px;
-      background: #272A57;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 12px 24px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s;
-    }
-
-    button#agendar:hover {
-      background: #1b1d3f;
-    }
-
-    .hidden-file {
-      display: none;
-    }
-
-    .modal-success {
-      position: fixed;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #74B2E2;
-      color: white;
-      font-size: 22px;
-      font-family: sans-serif;
-      padding: 30px 40px;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      z-index: 9999;
-      text-align: center;
-      display: none;
-    }
-
-    .modal-success .close-btn {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      font-size: 20px;
-      cursor: pointer;
-      color: white;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-
-      .left-panel, .right-panel {
-        padding: 20px;
-      }
-
-      .specialty-list {
-        width: 100%;
-      }
-
-      .calendar-container {
-        width: 100%;
-      }
-    }
-  </style>
 </head>
 <body>
 
   <header>
     <div class="logo">
-      <a href="index.html"><img src="img/logoazulclaro.png" alt="PetLittle" /></a>
+      <a href="../index.html"><img src="../../assets/img/logo negativo.png" alt="PetLittle" /></a>
     </div>
     <div class="title">AGENDAMIENTO</div>
     <div class="user-section">
       <label for="fileInput">
-        <img id="profilePic" src="img/avatarusuario.png" alt="Perfil" />
+        <img id="profilePic" src="../../assets/img/avatarusuario.png" alt="Perfil" />
       </label>
       <input type="file" id="fileInput" class="hidden-file" accept="image/*" />
       <div>
@@ -279,13 +30,13 @@
     <div class="left-panel">
       <h2>Seleccione la Especialidad</h2>
       <div class="specialty-list">
-        <div class="specialty-item"><img src="img/icocardiologia.png" /> Cardiología</div>
-        <div class="specialty-item"><img src="img/iconutricion.png" /> Nutrición</div>
-        <div class="specialty-item"><img src="img/icodermatologia.png" /> Dermatología</div>
-        <div class="specialty-item"><img src="img/icoodontologia.png" /> Odontología</div>
-        <div class="specialty-item"><img src="img/iconeurologia.png" /> Neurología</div>
-        <div class="specialty-item"><img src="img/icoendocri.png" /> Endocrinología</div>
-        <div class="specialty-item"><img src="img/icomedicinageneral.png" /> Medicina General</div>
+        <div class="specialty-item"><img src="../../assets/img/icocardiologia.png" /> Cardiología</div>
+        <div class="specialty-item"><img src="../../assets/img/iconutricion.png" /> Nutrición</div>
+        <div class="specialty-item"><img src="../../assets/img/icodermatologia.png" /> Dermatología</div>
+        <div class="specialty-item"><img src="../../assets/img/icoodontologia.png" /> Odontología</div>
+        <div class="specialty-item"><img src="../../assets/img/iconeurologia.png" /> Neurología</div>
+        <div class="specialty-item"><img src="../../assets/img/icoendocri.png" /> Endocrinología</div>
+        <div class="specialty-item"><img src="../../assets/img/icomedicinageneral.png" /> Medicina General</div>
       </div>
     </div>
 
