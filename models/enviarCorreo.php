@@ -1,0 +1,42 @@
+<?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+$email = $_POST['email'];
+$link = $_POST['link'];
+
+$mail = new PHPMailer(true);
+
+try {
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'petlittle.soporte@gmail.com';
+    $mail->Password = 'covk nirl qowi eunt'; 
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+
+    // Aquí agregamos la codificación correcta
+    $mail->CharSet = 'UTF-8';
+    $mail->Encoding = 'base64';
+
+    $mail->setFrom('petlittle.soporte@gmail.com', 'PetLittle');
+    $mail->addAddress($email);
+
+    $mail->isHTML(true);
+    $mail->Subject = 'Recupera tu contraseña en PetLittle';
+    $template = file_get_contents('../views/login/email_template.html'); 
+    $body = str_replace('{{link}}', $link, $template); 
+    $mail->Body = $body;
+
+
+    $mail->send();
+    echo "Correo enviado correctamente.";
+} catch (Exception $e) {
+    echo "Error al enviar correo: {$mail->ErrorInfo}";
+}
+?>

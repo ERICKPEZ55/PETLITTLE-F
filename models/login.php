@@ -1,77 +1,29 @@
 <?php
 session_start();
-require_once 'SessionManager.php';
 
-class Autenticador {
-    private $conexion;
 
-    public function __construct() {
-        $this->conexion = new mysqli("localhost", "root", "", "prueba");
-        if ($this->conexion->connect_error) {
-            die("Conexión fallida: " . $this->conexion->connect_error);
-        }
-    }
-
-    public function login($correo, $contraseña) {
-        $sql = "SELECT * FROM datos WHERE correo = ?";
-        $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("s", $correo);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-
-        if ($resultado->num_rows === 1) {
-            $usuario = $resultado->fetch_assoc();
-
-            if ($contraseña === $usuario['contraseña']) {
-                // Inicia sesión usando SessionManager
-                $session = new SessionManager();
-                // Puedes usar 'id' si lo tienes en la tabla, o el correo como ID
-                $session->login($usuario['correo'], $usuario['correo']);
-
-                // Redirección según el correo
-                if ($usuario['correo'] === 'juan.24@gmail.com') {
-                    header("Location: agendamiento.php");
-                } elseif ($usuario['correo'] === 'andres@gmail.com') {
-                    header("Location: empleado.html");
-                } elseif ($usuario['correo'] === "sofia@gmail.com") {
-                    header("Location: vista.html");
-                } else {
-                    header("Location: ../Usuario/agendamiento.php");
-                }
-                exit();
-            } else {
-                return "Contraseña incorrecta.";
-            }
-        } else {
-            return "Correo no registrado.";
-        }
-        $stmt->close();
-    }
-
-    public function __destruct() {
-        $this->conexion->close();
-    }
+$error = '';
+if (isset($_SESSION['error_login'])) {
+    $error = $_SESSION['error_login'];
+    unset($_SESSION['error_login']);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $correo = $_POST['correo'];
-    $contraseña = $_POST['contraseña'];
-
-    $auth = new Autenticador();
-    $error = $auth->login($correo, $contraseña);
+$registro_exitoso = false;
+if (isset($_SESSION['registro_exitoso'])) {
+    $registro_exitoso = true;
+    unset($_SESSION['registro_exitoso']);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Login - PetLittle</title>
-    <link rel="stylesheet" href="../assets/css/styleslogin.css">
-    <link rel="icon" type="image/png" href="img/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styleslogin.css" />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
@@ -79,26 +31,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h1 class="logo">PetLittle</h1>
             <p>Bienvenido, ingresa tus datos para iniciar sesión.</p>
 
-            <?php if (isset($error)): ?>
-                <p style="color: red; font-weight: bold;"><?php echo $error; ?></p>
+            <?php if ($error): ?>
+                <p style="color: red; font-weight: bold;"><?php echo htmlspecialchars($error); ?></p>
             <?php endif; ?>
 
-            <form id="loginForm" action="login.php" method="post">
+            <form id="loginForm" action="../controllers/authcontrollers.php" method="post">
                 <label for="email">Correo:</label>
-                <input type="email" id="email" name="correo" placeholder="Correo" required> 
+                <input type="email" id="email" name="correo" placeholder="Correo" required />
 
                 <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="contraseña" placeholder="Contraseña" required>
+                <input type="password" id="password" name="contrasena" placeholder="Contraseña" required />
 
-                <p><a href="recuperar.html" style="color: #272A57;">¿Olvidaste tu contraseña?</a></p>
+                <p><a href="../models/recuperar.php" style="color: #272A57;">¿Olvidaste tu contraseña?</a></p>
 
-                <button type="submit">Ingresar</button>
+                <button type="submit" name="login">Ingresar</button>
             </form>
 
-            <p class="register-link">¿No tienes cuenta?<br><a href="registro.php">Crear cuenta</a></p>
+            <p class="register-link">¿No tienes cuenta?<br><a href="../models/registro.php">Crear cuenta</a></p>
         </div>
         <div class="image-container">
-            <img src="img/imagen.login.jpeg" alt="Perro y gato">
+            <img src="../assets/img/imagen.login.jpeg" alt="Perro y gato" />
         </div>
     </div>
 
@@ -115,20 +67,20 @@ class LoginSessionManager {
 
     autocompletar() {
         const correo = sessionStorage.getItem("correo");
-        const contraseña = sessionStorage.getItem("contraseña");
+        const contrasena = sessionStorage.getItem("contrasena");
 
         if (correo) this.emailInput.value = correo;
-        if (contraseña) this.passwordInput.value = contraseña;
+        if (contrasena) this.passwordInput.value = contrasena;
     }
 
     guardarEnSession() {
         sessionStorage.setItem("correo", this.emailInput.value);
-        sessionStorage.setItem("contraseña", this.passwordInput.value);
+        sessionStorage.setItem("contrasena", this.passwordInput.value);
     }
 
     limpiarSession() {
         sessionStorage.removeItem("correo");
-        sessionStorage.removeItem("contraseña");
+        sessionStorage.removeItem("contrasena");
     }
 
     configurarEventos() {
@@ -140,6 +92,10 @@ class LoginSessionManager {
 window.addEventListener("DOMContentLoaded", function () {
     new LoginSessionManager("loginForm", "email", "password");
 });
+
+<?php if ($registro_exitoso): ?>
+    alert('¡Registro exitoso! Por favor inicia sesión.');
+<?php endif; ?>
 </script>
 </body>
 </html>
