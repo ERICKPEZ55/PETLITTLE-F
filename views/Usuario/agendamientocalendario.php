@@ -1,3 +1,7 @@
+<?php
+session_start();
+$nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['nombre'] : 'Invitado';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,13 +9,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="../../assets/css/agendamientoCalendario.css">
   <title>Agendamiento - PetLittle</title>
-
 </head>
 <body>
 
   <header>
     <div class="logo">
-      <a href="index.html"><img src="../../assets/img/logo negativo.png" alt="PetLittle" /></a>
+      <a href="../Usuario/agendamiento.php">
+        <img src="../../assets/img/logo negativo.png" alt="PetLittle" />
+      </a>
     </div>
     <div class="title">AGENDAMIENTO</div>
     <div class="user-section">
@@ -20,24 +25,25 @@
       </label>
       <input type="file" id="fileInput" class="hidden-file" accept="image/*" />
       <div>
-        <div>Laura Gonzalez</div>
-        <div style="font-size: 0.8em;">Cliente</div>
+        <div><?= htmlspecialchars($nombreUsuario) ?></div>
       </div>
     </div>
   </header>
+
+  <!-- El resto de tu HTML queda exactamente igual -->
+
 
   <div class="container">
     <div class="left-panel">
       <h2>Seleccione la Especialidad</h2>
       <div class="specialty-list">
-         <div class="specialty-item"><img src="../../assets/img/icocardiologia.png" /> Cardiología</div>
+        <div class="specialty-item"><img src="../../assets/img/icocardiologia.png" /> Cardiología</div>
         <div class="specialty-item"><img src="../../assets/img/iconutricion.png" /> Nutrición</div>
         <div class="specialty-item"><img src="../../assets/img/icodermatologia.png" /> Dermatología</div>
         <div class="specialty-item"><img src="../../assets/img/icoodontologia.png" /> Odontología</div>
         <div class="specialty-item"><img src="../../assets/img/iconeurologia.png" /> Neurología</div>
         <div class="specialty-item"><img src="../../assets/img/icoendocri.png" /> Endocrinología</div>
         <div class="specialty-item"><img src="../../assets/img/icomedicinageneral.png" /> Medicina General</div>
-        <a href="agendamiento.php">⇦Volver</a>
       </div>
     </div>
 
@@ -58,12 +64,10 @@
         <div class="calendar-dates" id="calendarDates"></div>
 
         <label for="mascotaSelect">Seleccione su mascota:</label>
-          <select id="mascotaSelect">
-            <?= $opcionesMascotas ?>
-          </select>
-
+        <select id="mascotaSelect">
+          <?= $opcionesMascotas ?>
+        </select>
       </div>
-      
 
       <button id="agendar">Agendar</button>
     </div>
@@ -94,66 +98,55 @@
 
     const diasSinServicio = [];
 
-function calcularFestivosColombia(year) {
-  const festivos = [];
+    function calcularFestivosColombia(year) {
+      const festivos = [];
 
-  // Festivos fijos
-  const fijos = [
-    `${year}-01-01`, // Año Nuevo
-    `${year}-05-01`, // Día del Trabajo
-    `${year}-07-20`, // Independencia
-    `${year}-08-07`, // Batalla de Boyacá
-    `${year}-12-08`, // Inmaculada Concepción
-    `${year}-12-25`  // Navidad
-  ];
+      const fijos = [
+        `${year}-01-01`, `${year}-05-01`, `${year}-07-20`,
+        `${year}-08-07`, `${year}-12-08`, `${year}-12-25`
+      ];
 
-  festivos.push(...fijos);
+      festivos.push(...fijos);
 
-  // Función para calcular el lunes siguiente
-  const siguienteLunes = (fecha) => {
-    const d = new Date(fecha);
-    const day = d.getDay();
-    const diff = day === 0 ? 1 : 8 - day;
-    d.setDate(d.getDate() + diff);
-    return d.toISOString().split('T')[0];
-  };
+      const siguienteLunes = (fecha) => {
+        const d = new Date(fecha);
+        const day = d.getDay();
+        const diff = day === 0 ? 1 : 8 - day;
+        d.setDate(d.getDate() + diff);
+        return d.toISOString().split('T')[0];
+      };
 
-  // Festivos móviles (con traslado al lunes)
-  const movibles = [
-    `${year}-01-06`, // Reyes
-    `${year}-03-19`, // San José
-    `${year}-06-29`, // San Pedro y San Pablo
-    `${year}-08-15`, // Asunción
-    `${year}-10-12`, // Día de la Raza
-    `${year}-11-01`, // Todos los Santos
-    `${year}-11-11`  // Independencia de Cartagena
-  ];
+      const movibles = [
+        `${year}-01-06`, `${year}-03-19`, `${year}-06-29`,
+        `${year}-08-15`, `${year}-10-12`, `${year}-11-01`,
+        `${year}-11-11`
+      ];
 
-  movibles.forEach(f => festivos.push(siguienteLunes(f)));
+      movibles.forEach(f => festivos.push(siguienteLunes(f)));
 
-  return festivos;
-}
+      return festivos;
+    }
 
+    for (let year = 2025; year <= 2030; year++) {
+      diasSinServicio.push(...calcularFestivosColombia(year));
 
-for (let year = 2025; year <= 2030; year++) {
-
-  diasSinServicio.push(...calcularFestivosColombia(year));
-
-  for (let month = 0; month < 12; month++) {
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    for (let day = 1; day <= daysInMonth; day++) {
-      const date = new Date(year, month, day);
-      const dayOfWeek = date.getDay(); // 0 = domingo, 6 = sábado
-      if (dayOfWeek === 0 || dayOfWeek === 6) {
-        const iso = date.toISOString().split('T')[0];
-        diasSinServicio.push(iso);
+      for (let month = 0; month < 12; month++) {
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        for (let day = 1; day <= daysInMonth; day++) {
+          const date = new Date(year, month, day);
+          const dayOfWeek = date.getDay();
+          if (dayOfWeek === 0 || dayOfWeek === 6) {
+            const iso = date.toISOString().split('T')[0];
+            diasSinServicio.push(iso);
+          }
+        }
       }
     }
-  }
-}
 
-    const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-                    "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const months = [
+      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
 
     const today = new Date();
 
@@ -178,12 +171,12 @@ for (let year = 2025; year <= 2030; year++) {
 
     for (let h = 8; h <= 18; h++) {
       const hourStr = h.toString().padStart(2, '0');
-      let option1 = document.createElement('option');
+      const option1 = document.createElement('option');
       option1.value = `${hourStr}:00`;
       option1.textContent = `${hourStr}:00`;
       hourSelect.appendChild(option1);
       if (h !== 18) {
-        let option2 = document.createElement('option');
+        const option2 = document.createElement('option');
         option2.value = `${hourStr}:30`;
         option2.textContent = `${hourStr}:30`;
         hourSelect.appendChild(option2);
@@ -224,58 +217,55 @@ for (let year = 2025; year <= 2030; year++) {
     yearSelect.addEventListener('change', () => renderCalendar(+monthSelect.value, +yearSelect.value));
 
     document.getElementById('agendar').addEventListener('click', () => {
-    if (!selectedSpecialty) {
-      alert('Por favor seleccione una especialidad.');
-    } else if (!selectedDate) {
-      alert('Por favor seleccione una fecha.');
-    } else {
-      const dia = selectedDate.getDate().toString().padStart(2, '0');
-      const mes = (selectedDate.getMonth() + 1).toString().padStart(2, '0');
-      const anio = selectedDate.getFullYear();
-      const hora = hourSelect.value;
-      const fechaCompleta = `${anio}-${mes}-${dia} ${hora}`;
-      
-      guardarCita(fechaCompleta); // 👈 Llama a la función aquí
+      if (!selectedSpecialty) {
+        alert('Por favor seleccione una especialidad.');
+      } else if (!selectedDate) {
+        alert('Por favor seleccione una fecha.');
+      } else {
+        const dia = selectedDate.getDate().toString().padStart(2, '0');
+        const mes = (selectedDate.getMonth() + 1).toString().padStart(2, '0');
+        const anio = selectedDate.getFullYear();
+        const hora = hourSelect.value;
+        const fechaCompleta = `${anio}-${mes}-${dia} ${hora}`;
+        guardarCita(fechaCompleta);
+      }
+    });
+
+    async function guardarCita(fechaCompleta) {
+      const idMascota = document.getElementById('mascotaSelect').value;
+
+      if (!idMascota) {
+        alert('Por favor seleccione una mascota.');
+        return;
+      }
+
+      const datos = {
+        especialidad: selectedSpecialty,
+        fecha_hora: fechaCompleta,
+        id_mascota: idMascota
+      };
+
+      const respuesta = await fetch('guardarCita.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos)
+      });
+
+      const resultado = await respuesta.json();
+      if (resultado.success) {
+        const modal = document.getElementById('successModal');
+        const fecha = new Date(fechaCompleta);
+        const dia = fecha.getDate().toString().padStart(2, '0');
+        const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+        const anio = fecha.getFullYear();
+        const hora = fecha.toTimeString().substring(0, 5);
+        const mensaje = `Su cita de ${selectedSpecialty} se agendó para el día ${dia}/${mes}/${anio} a las ${hora}`;
+        modal.querySelector('p').innerHTML = mensaje;
+        modal.style.display = 'block';
+      } else {
+        alert("Error al guardar: " + resultado.error);
+      }
     }
-});
-
-  async function guardarCita(fechaCompleta) {
-  const idMascota = document.getElementById('mascotaSelect').value;
-
-  if (!idMascota) {
-    alert('Por favor seleccione una mascota.');
-    return;
-  }
-
-  const datos = {
-    especialidad: selectedSpecialty,
-    fecha_hora: fechaCompleta,
-    id_mascota: idMascota
-  };
-
-  const respuesta = await fetch('guardarCita.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(datos)
-  });
-
-  const resultado = await respuesta.json();
-  if (resultado.success) {
-    const modal = document.getElementById('successModal');
-    const fecha = new Date(fechaCompleta);
-    const dia = fecha.getDate().toString().padStart(2, '0');
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-    const anio = fecha.getFullYear();
-    const hora = fecha.toTimeString().substring(0, 5);
-    const mensaje = `Su cita de ${selectedSpecialty} se agendó para el día ${dia}/${mes}/${anio} a las ${hora}`;
-    modal.querySelector('p').innerHTML = mensaje;
-    modal.style.display = 'block';
-  } else {
-    alert("Error al guardar: " + resultado.error);
-  }
-}
-
-
 
     function closeModal() {
       document.getElementById('successModal').style.display = 'none';
@@ -294,5 +284,3 @@ for (let year = 2025; year <= 2030; year++) {
   </script>
 </body>
 </html>
-
-

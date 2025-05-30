@@ -1,3 +1,7 @@
+<?php
+session_start();
+$nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['nombre'] : 'Invitado';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,18 +25,15 @@
         <div class="notificaciones" onclick="mostrarNotificaciones()">🔔 <span id="notiCount">0</span></div>
         <div class="usuario-info">
             <img src="../../assets/img/admin.png" alt="Admin" class="adminimg">
-            <span class="textousuario">Lauraz</span>
+            <span class="textousuario"><?= htmlspecialchars($nombreUsuario) ?></span>
         </div>
-        
     </header>
-    
 
     <aside>
         <ul>
             <li><a href="../Usuario/agendamiento.php">Perfil</a></li>
             <li>Tabla agendamientos</li>
             <li>Ordenes pendientes</li>
-            <a href="agendamiento.php">⇦Volver</a>
         </ul>
     </aside>
 
@@ -50,14 +51,13 @@
                 </tr>
             </thead>
             <tbody id="tablaCitas">
-                
+                <!-- Aquí van las filas de citas -->
             </tbody>
         </table>
 
         <button id="btnAgregar">+ boton de ejemplo</button>
     </main>
 
-    
     <div id="modalAgregar" class="modal">
         <div class="modal-content">
             <h2 id="tituloModal">Agendar Cita</h2>

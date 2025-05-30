@@ -36,7 +36,9 @@ CREATE TABLE `datos` (
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(100) NOT NULL,
   `contrasena` varchar(255) NOT NULL,
-  PRIMARY KEY (`id_usuario`)
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `correo_UNIQUE` (`correo`),
+  UNIQUE KEY `telefono_UNIQUE` (`telefono`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Datos de ejemplo para la tabla `datos`
@@ -44,7 +46,7 @@ INSERT INTO `datos` (`id_usuario`, `nombre`, `apellido`, `telefono`, `correo`, `
 (12, 'luis', 'perez', '34468776645', 'luisp@gmail.com', '$2y$10$EjemploHashContraseña1'),
 (13, 'derly', 'villalobos', '3208796548', 'derlyv@gmail.co', '$2y$10$EjemploHashContraseña2'),
 (15, 'Paula', 'Torres', '3123758703', 'mpautorresb.06@gmail.com', '$2y$10$EjemploHashContraseña3'),
-(16, 'Erick', 'Romero', '34468776645', 'erickr4@gmail.com', '$2y$10$EjemploHashContraseña4');
+(16, 'Erick', 'Romero', '3115420367', 'erickr4@gmail.com', '$2y$10$EjemploHashContraseña4');
 
 -- Tabla: `especialidades`
 CREATE TABLE `especialidades` (

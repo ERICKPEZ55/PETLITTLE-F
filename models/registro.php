@@ -32,10 +32,6 @@ if (isset($_SESSION['registro_exitoso'])) {
             <h1 class="logo">PetLittle</h1>
             <p>Bienvenido. Por favor, ingrese sus datos para completar el registro.</p>
 
-            <?php if ($error): ?>
-                <p style="color: red; font-weight: bold;"><?php echo htmlspecialchars($error); ?></p>
-            <?php endif; ?>
-
             <form id="registerForm" action="../controllers/authcontrollers.php" method="post">
                 <label for="username">Nombre:</label>
                 <input
@@ -123,8 +119,13 @@ if (isset($_SESSION['registro_exitoso'])) {
             }
         });
 
-          <?php if ($registro_exitoso): ?>
-            alert('¡Registro exitoso!');
+        <?php if ($error): ?>
+            alert(<?php echo json_encode($error); ?>);
+        <?php endif; ?>
+
+        <?php if ($registro_exitoso): ?>
+            alert("¡Registro exitoso!");
+            window.location.href = "../models/login.php";
         <?php endif; ?>
     </script>
 </body>

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 $error = '';
 if (isset($_SESSION['error_login'])) {
     $error = $_SESSION['error_login'];
@@ -54,48 +53,48 @@ if (isset($_SESSION['registro_exitoso'])) {
         </div>
     </div>
 
-<script>
-class LoginSessionManager {
-    constructor(formId, emailId, passwordId) {
-        this.form = document.getElementById(formId);
-        this.emailInput = document.getElementById(emailId);
-        this.passwordInput = document.getElementById(passwordId);
+    <script>
+    class LoginSessionManager {
+        constructor(formId, emailId, passwordId) {
+            this.form = document.getElementById(formId);
+            this.emailInput = document.getElementById(emailId);
+            this.passwordInput = document.getElementById(passwordId);
 
-        this.autocompletar();
-        this.configurarEventos();
+            this.autocompletar();
+            this.configurarEventos();
+        }
+
+        autocompletar() {
+            const correo = sessionStorage.getItem("correo");
+            const contrasena = sessionStorage.getItem("contrasena");
+
+            if (correo) this.emailInput.value = correo;
+            if (contrasena) this.passwordInput.value = contrasena;
+        }
+
+        guardarEnSession() {
+            sessionStorage.setItem("correo", this.emailInput.value);
+            sessionStorage.setItem("contrasena", this.passwordInput.value);
+        }
+
+        limpiarSession() {
+            sessionStorage.removeItem("correo");
+            sessionStorage.removeItem("contrasena");
+        }
+
+        configurarEventos() {
+            this.form.addEventListener("submit", () => this.guardarEnSession());
+            window.addEventListener("beforeunload", () => this.limpiarSession());
+        }
     }
 
-    autocompletar() {
-        const correo = sessionStorage.getItem("correo");
-        const contrasena = sessionStorage.getItem("contrasena");
+    window.addEventListener("DOMContentLoaded", function () {
+        new LoginSessionManager("loginForm", "email", "password");
 
-        if (correo) this.emailInput.value = correo;
-        if (contrasena) this.passwordInput.value = contrasena;
-    }
-
-    guardarEnSession() {
-        sessionStorage.setItem("correo", this.emailInput.value);
-        sessionStorage.setItem("contrasena", this.passwordInput.value);
-    }
-
-    limpiarSession() {
-        sessionStorage.removeItem("correo");
-        sessionStorage.removeItem("contrasena");
-    }
-
-    configurarEventos() {
-        this.form.addEventListener("submit", () => this.guardarEnSession());
-        window.addEventListener("beforeunload", () => this.limpiarSession());
-    }
-}
-
-window.addEventListener("DOMContentLoaded", function () {
-    new LoginSessionManager("loginForm", "email", "password");
-});
-
-<?php if ($registro_exitoso): ?>
-    alert('¡Registro exitoso! Por favor inicia sesión.');
-<?php endif; ?>
-</script>
+        <?php if ($registro_exitoso): ?>
+            alert('¡Registro exitoso! Por favor inicia sesión.');
+        <?php endif; ?>
+    });
+    </script>
 </body>
 </html>

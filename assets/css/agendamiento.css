@@ -35,6 +35,7 @@ body {
     font-size: 26px;
     font-weight: bold;
     width: 100%;
+
 }
 
 .contenedor {
@@ -46,7 +47,7 @@ body {
 
 .perfil-sobre-menu {
     position: absolute;
-    top: 40px;
+    top: 60px;
     left: 30px;
     display: flex;
     align-items: center; 
@@ -69,13 +70,13 @@ body {
 }
 
 .perfil-sobre-menu .nombre {
-    font-size: 18px;
+    font-size: 35px;
     font-weight: bold;
     margin: 0;
 }
 
 .perfil-sobre-menu .rol {
-    font-size: 14px;
+    font-size: 20px;
     color: #333;
     margin-top: 5px;
 }
@@ -126,34 +127,26 @@ body {
 .opcion {
     background-color: #272A57;
     color: white;
-    width: 350px;
     padding: 20px;
     text-align: center;
     border-radius: 20px;
     transition: 0.3s;
     margin-top: 40px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
 }
 
-.opcion-contenido {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
+/* Centrado y zoom para imagen */
 .calendarioimg {
     width: 60px;
-    margin-right: 20px;
+    transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto 10px auto;
 }
 
-.opcion-texto {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: left;
+.opcion:hover .calendarioimg {
+    transform: scale(1.1);
 }
 
 button {
@@ -164,12 +157,16 @@ button {
     cursor: pointer;
     border-radius: 15px;
     font-size: 14px;
-    width: 100%;
-    margin-top: 20px;
+    width: 100px;
 }
 
 button:hover {
     background-color: rgba(255, 255, 255, 0.8);
+}
+
+.opcion:hover {
+    transform: scale(1.04);
+    background-color: #1e1f45;
 }
 
 html, body {
@@ -196,7 +193,6 @@ html, body {
         padding: 10px;
     }
 
-    
     .perfil-sobre-menu {
         position: static;
         width: 100%;

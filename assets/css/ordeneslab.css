@@ -15,8 +15,8 @@ body {
 header {
     position: fixed;
     width: 100%;
-    height: 60px;
-    background: #6EACDA;
+    height: 70px;
+    background: #272A57;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,22 +24,40 @@ header {
     color: white;
     z-index: 1000;
 }
-.usuario-info {
+.logo {
+    padding: 10px;
     display: flex;
     align-items: center;
-    gap: 8px; 
+}
+
+.logo-img {
+    height: 75px;       
+    width: auto;        
+
+}
+
+.usuario-info img{
+    display: flex;
+    align-items: center;
+    gap: 800px; 
     margin-left: auto; 
-    padding-right: 10px; /
+    padding-right: 10px; 
+    height: 0%;
+
+
 }
-.adminimg {
-    width: 40px;
-    height: 40px;
+.usuarioimg {
+    width: 75px;  /* o el tamaño que quieras */
+    height: 75px;
     padding: 0;
+    object-fit: contain; /* opcional para que no se deforme */
+
 }
+
 
 aside {
     width: 200px;
-    background: #272A57;
+    background: #6EACDA;
     color: white;
     padding-top: 70px;
     height: 100vh;
@@ -68,7 +86,7 @@ main {
 table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
+    background: rgb(255, 255, 255);
 }
 
 th, td {
@@ -83,18 +101,12 @@ th {
 }
 
 button {
-    padding: 10px;
-    margin: 10px;
     background: #6EACDA;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-}
-
-.editar, .borrar {
-    cursor: pointer;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .modal {
@@ -112,7 +124,6 @@ button {
 
 .modal-content {
     position: relative;
-    background: white;
     padding: 20px;
     border-radius: 5px;
     text-align: center;
@@ -147,58 +158,27 @@ button {
         padding: 10px 20px;
         align-items: center;
     }
-
-    .logo,
-    .buscador,
-    .notificaciones,
-    .usuario-info {
-        margin: 5px 0;
-    }
-
-    .buscador input {
-        width: 200px;
-    }
-
     .textousuario {
         font-size: 13px;
     }
 
-    .adminimg {
+    .usuarioimg {
         width: 30px;
         height: 30px;
     }
 }
 button {
-    width: 14%;
-    margin: 5px 0;
 
-}
-
-.buscador {
-    display: flex;
-    align-items: center;
-    background-color: #CFE6F8; /* azul claro */
-    border-radius: 30px;
-    padding: 5px 15px;
-    width: 300px;
-    height: 35px;
-}
-
-.buscador input {
+    padding: 10px 15px; 
+    background: #6EACDA;
+    color: white;
     border: none;
-    background: transparent;
-    outline: none;
-    padding-left: 10px;
-    font-size: 14px;
-    width: 100%;
-    color: #333;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px; 
 }
 
-.icono-lupa {
-    font-size: 18px;
-    color: #555;
-}
 .logonav{
-    width: 200px;
+    width: 20px;
     height: 60px;
 }
