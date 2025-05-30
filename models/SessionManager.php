@@ -2,14 +2,13 @@
 class SessionManager {
     private $timeout;
 
-    public function __construct($timeout = 1800000) {
+    public function __construct($timeout = 1800) { // tiempo en segundos (1800 = 30 minutos)
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
         $this->timeout = $timeout;
 
-        // Verifica si la sesión ya tiene actividad previa
         if (!isset($_SESSION['last_activity'])) {
             $_SESSION['last_activity'] = time();
         }
@@ -24,7 +23,7 @@ class SessionManager {
         $_SESSION['last_activity'] = time();
     }
 
-    // Verifica si el usuario sigue logueado
+    // Verifica si el usuario está logueado
     public function isLoggedIn() {
         return isset($_SESSION['user_id']);
     }
@@ -34,16 +33,20 @@ class SessionManager {
         return $_SESSION['user_name'] ?? null;
     }
 
-    // Cierra sesión limpiando la sesión
+    // Cierra sesión limpiando la sesión (no hace redirección)
     public function logout() {
         if (session_status() !== PHP_SESSION_NONE) {
-            session_unset();
+            // Limpia variables de sesión y destruye la sesión
+            $_SESSION = [];
+            if (ini_get("session.use_cookies")) {
+                $params = session_get_cookie_params();
+                setcookie(session_name(), '', time() - 42000,
+                    $params["path"], $params["domain"],
+                    $params["secure"], $params["httponly"]
+                );
+            }
             session_destroy();
         }
-
-        // Redirige al login (ajusta si lo deseas)
-        header("Location: ../login/login.php");
-        exit;
     }
 
     // Valida si la sesión está inactiva por más del tiempo permitido
@@ -52,6 +55,7 @@ class SessionManager {
             $inactividad = time() - $_SESSION['last_activity'];
             if ($inactividad > $this->timeout) {
                 $this->logout();
+                // No redirige aquí, que lo haga el script que instancia SessionManager
             } else {
                 $_SESSION['last_activity'] = time(); // Renueva actividad
             }

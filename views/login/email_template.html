@@ -1,0 +1,27 @@
+<!-- views/email_template.html -->
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+  <meta charset='UTF-8'>
+  <link rel="stylesheet" href="../assets/css/email_template.css">
+</head>
+<body>
+  <div class='container'>
+    <div class='header'>
+      <h2>Recuperación de contraseña</h2>
+    </div>
+    <div class='content'>
+      <p>Hola,</p>
+      <p>Has solicitado restablecer tu contraseña en <strong>PetLittle</strong>.</p>
+      <p>Por favor, ingresa el siguiente código en la aplicación para crear una nueva contraseña:</p>
+      <span class="code-box">{{codigo}}</span>
+      <p class="note">Este código es válido por 15 minutos.</p>
+      <p>Si no fuiste tú quien solicitó este cambio, te recomendamos no compartir este código con nadie y contacta con nuestro soporte.</p>
+    </div>
+    <div class='footer'>
+      © 2025 PetLittle. Todos los derechos reservados.
+    </div>
+  </div>
+</body>
+</html>
+

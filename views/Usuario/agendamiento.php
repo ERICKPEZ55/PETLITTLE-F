@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../login/login.php");
+    exit;
+}
+
+$usuario = $_SESSION['usuario'];
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,12 +17,13 @@
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
     <title>Panel de Empleado - Veterinaria</title>
     <link rel="stylesheet" href="../../assets/css/agendamiento.css" />
+     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
     <header class="header">
         <div class="logo-container">
-            <img src="../../assets/img/Logo negativo.png" alt="Logo" class="logo" />
+            <img src="../../assets/img/logo negativo.png" alt="Logo" class="logo" />
         </div>
         <h1 class="titulo-header">Agendamiento</h1>
     </header>
@@ -19,9 +31,8 @@
     <div class="contenedor">
         <!-- PERFIL SOBRE EL LATERAL -->
         <div class="perfil-sobre-menu">
-            <img src="../../assets/img/admin.png" alt="Empleado" class="foto-perfil" />
             <div class="info-perfil">
-                
+                <p class="nombre"><?php echo htmlspecialchars($usuario['nombre']); ?></p>
                 <p class="rol">Plan básico de salud</p>
             </div>
         </div>
@@ -29,11 +40,11 @@
         <aside class="menu-lateral">
             <nav class="menu">
                 <a href="#">Inicio</a>
-                <a href="mascotascliente.html">Mis mascotas</a>
-                <a href="tablas-citas.html">Cancelar citas</a>
+                <a href="falta">Mis mascotas</a>
+                <a href="../Gestion de citas/tablas-citas.php">Cancelar citas</a>
                 <a href="#">Historia clínica</a>
                 <a href="#">Notificaciones</a>
-                <a href=""../../models/logout.php" class="cerrar-sesion"" class="cerrar-sesion">Cerrar Sesión</a>
+                <a href="../../models/logout.php" class="cerrar-sesion">Cerrar Sesión</a>
             </nav>
         </aside>
 
@@ -44,22 +55,23 @@
 
             <div class="opciones">
                 <div class="opcion">
-                    <img src="../../assets/img/calendarioblanco.png" alt="calendario" class="calendarioimg" />
+                    <img src="../../assets/img/imga1.png" alt="calendario" class="calendarioimg" />
                     <h3>Agendar citas</h3>
-                    <button onclick="window.location.href='agendamientocalendario.html'">Ingresar</button>
+                    <button onclick="window.location.href='../Usuario/agendamientocalendario.php'">Ingresar</button>
                 </div>
                 <div class="opcion">
-                    <img src="../../assets/img/calendariocitasagendadas.png" alt="calendario" class="calendarioimg" />
+                    <img src="../../assets/img/imga2.png" alt="calendario" class="calendarioimg" />
                     <h3>Citas agendadas</h3>
-                    <button onclick="window.location.href='../Gestion_citas/tablas-citas.html'">Ingresar</button>
+                    <button onclick="window.location.href='../Gestion de citas/tablas-citas.php'">Ingresar</button>
                 </div>
                 <div class="opcion">
-                    <img src="../../assets/img/ordenespendienteslogo.png" alt="calendario" class="calendarioimg" />
+                    <img src="../../assets/img/imga3.png" alt="calendario" class="calendarioimg" />
                     <h3>Órdenes pendientes</h3>
-                    <button onclick="window.location.href=''">Ingresar</button>
+                    <button onclick="window.location.href='ordenes_pendientes.html'">Ingresar</button>
+
                 </div>
                 <div class="opcion">
-                    <img src="../../assets/img/laboratorioclinicologo.png" alt="calendario" class="calendarioimg" />
+                    <img src="../../assets/img/imga4.png" alt="calendario" class="calendarioimg" />
                     <h3>Laboratorio clínico</h3>
                     <button>Ingresar</button>
                 </div>
@@ -67,20 +79,19 @@
         </main>
     </div>
 
-    <!-- Script para cerrar sesión tras inactividad (lado del cliente) -->
+    <!-- Script para cerrar sesión tras inactividad -->
     <script>
         let timeoutInactivity;
 
         function cerrarSesionPorInactividad() {
-            window.location.href = '../login/logout.php'; // 🔐 Redirige al backend para cerrar sesión real
+            window.location.href = '../../models/logout.php';
         }
 
         function reiniciarTemporizador() {
             clearTimeout(timeoutInactivity);
-            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 10000); // ⏱️ CAMBIA AQUÍ TIEMPO CLIENTE (milisegundos)
+            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 100000000000); // 10 segundos
         }
 
-        // Detecta interacción del usuario
         window.onload = reiniciarTemporizador;
         document.onmousemove = reiniciarTemporizador;
         document.onkeydown = reiniciarTemporizador;
