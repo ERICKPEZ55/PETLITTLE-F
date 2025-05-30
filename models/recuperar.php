@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\Exception;
 require '../libs/PHPMailer-master/src/PHPMailer.php';
 require '../libs/PHPMailer-master/src/SMTP.php';
 require '../libs/PHPMailer-master/src/Exception.php';
-require_once('../configuracion/conexion.php'); // Asegúrate de tener esta conexión
+require_once('../configuracion/conexion.php'); 
 
 $mensaje = "";
 

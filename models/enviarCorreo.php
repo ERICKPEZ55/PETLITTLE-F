@@ -2,9 +2,10 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require '../libs/PHPMailer-master/src/PHPMailer.php';
+require '../libs/PHPMailer-master/src/SMTP.php';
+require '../libs/PHPMailer-master/src/Exception.php';
+require_once('../configuracion/conexion.php'); 
 
 $email = $_POST['email'];
 $link = $_POST['link'];

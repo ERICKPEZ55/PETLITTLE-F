@@ -12,49 +12,51 @@ body {
     min-height: 100vh;
 }
 
-header {
+/* --------- HEADER SUPERIOR --------- */
+.header {
     position: fixed;
     width: 100%;
     height: 70px;
-    background: #272A57;
+    background: #6EACDA;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 40px;
-    color: white;
+    padding: 0 40px;
+    color: black;
     z-index: 1000;
 }
-.logo {
-    padding: 10px;
+
+.header-left {
     display: flex;
     align-items: center;
 }
 
-.logo-img {
-    height: 75px;       
-    width: auto;        
-
+.logo-container img {
+    height: 50px;
+    object-fit: contain;
 }
 
-.usuario-info img{
-    display: flex;
-    align-items: center;
-    gap: 800px; 
-    margin-left: auto; 
-    padding-right: 10px; 
-    height: 0%;
-
-
-}
-.usuarioimg {
-    width: 75px;  /* o el tamaño que quieras */
-    height: 75px;
-    padding: 0;
-    object-fit: contain; /* opcional para que no se deforme */
-
+.titulo-header h1 {
+    font-size: 20px;
+    color: black;
+    margin: 0;
 }
 
+.btn-volver {
+    color: white;
+    text-decoration: none;
+    background: #6EACDA;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
 
+.btn-volver:hover {
+    background: #5594c0;
+}
+
+/* --------- ASIDE --------- */
 aside {
     width: 200px;
     background: #6EACDA;
@@ -77,16 +79,94 @@ aside li {
     cursor: pointer;
 }
 
+/* --------- MAIN CONTENT --------- */
 main {
     flex-grow: 1;
-    padding: 80px 20px 20px 220px; 
-    width: 100%;
+    padding: 100px 20px 20px 20px; /* sin padding-left excesivo */
+    margin-left: 20px; /* deja espacio para el aside */
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    width: calc(100% - 200px);
 }
 
+/* --------- SECCIÓN CARD --------- */
+.section-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    margin-right: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.section-card h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+/* --------- FORMULARIO DE ORDEN --------- */
+.lab-order-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* --------- BOTÓN PRINCIPAL --------- */
+.btn-primary-action {
+    background: #272A57;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s ease;
+}
+
+.btn-primary-action:hover {
+    background: #1a1d3a;
+}
+
+/* --------- ICONOS --------- */
+.icon-spacing {
+    margin-right: 6px;
+}
+
+/* --------- TABLA --------- */
 table {
     width: 100%;
     border-collapse: collapse;
-    background: rgb(255, 255, 255);
+    background: white;
 }
 
 th, td {
@@ -96,19 +176,71 @@ th, td {
 }
 
 th {
-    background: #6EACDA;
+    background: #272A57;
     color: white;
 }
 
-button {
-    background: #6EACDA;
+/* --------- BOTONES --------- */
+button,
+.btn-volver {
+    padding: 10px 15px; 
+    background: #272A57;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 14px; 
 }
 
+button:hover {
+    background: #5594c0;
+}
+
+/* --------- ESTADOS BADGE --------- */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    display: inline-block;
+    color: white;
+}
+
+.status-badge.disponible {
+    background-color: #28a745;
+}
+
+.status-badge.procesamiento {
+    background-color: #ffc107;
+    color: black;
+}
+
+.status-badge.pendiente {
+    background-color: #17a2b8;
+}
+
+.status-badge.cancelada {
+    background-color: #dc3545;
+}
+
+/* --------- USUARIO --------- */
+.usuario-info img {
+    display: flex;
+    align-items: center;
+    gap: 800px; 
+    margin-left: auto; 
+    padding-right: 10px; 
+    height: 0%;
+}
+
+.usuarioimg {
+    width: 75px;
+    height: 75px;
+    padding: 0;
+    object-fit: contain;
+}
+
+/* --------- MODAL --------- */
 .modal {
     display: none;
     position: fixed;
@@ -130,55 +262,91 @@ button {
     z-index: 2001; 
 }
 
-/* Responsive */
+/* --------- RESPONSIVE --------- */
 @media screen and (max-width: 768px) {
     body {
         flex-direction: column;
+    }
+
+    .header {
+        height: auto;
+        padding: 15px 20px;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .header-left {
+        align-items: center;
+        gap: 10px;
+    }
+
+    .titulo-header h1 {
+        font-size: 18px;
+    }
+
+    .btn-volver {
+        font-size: 13px;
+        padding: 8px 12px;
     }
 
     aside {
         width: 100%;
         height: auto;
         position: relative;
-        padding-top: 10px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+    }
+
+    aside ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 0;
+    }
+
+    aside li {
+        padding: 10px 15px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 5px;
     }
 
     main {
-        padding: 100px 10px 20px 10px;
+        padding: 80px 10px 20px 10px;
+        margin-left: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section-card {
+        max-width: 100%;
+        padding: 15px;
     }
 
     table, th, td {
-        font-size: 14px;
+        font-size: 13px;
+        word-break: break-word;
     }
 
-   
-    header {
-        flex-direction: column;
-        height: auto;
-        padding: 10px 20px;
-        align-items: center;
-    }
-    .textousuario {
-        font-size: 13px;
+    .usuario-info {
+        justify-content: center;
+        padding: 10px 0;
     }
 
     .usuarioimg {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
     }
-}
-button {
 
-    padding: 10px 15px; 
-    background: #6EACDA;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px; 
-}
+    .textousuario {
+        font-size: 13px;
+        text-align: center;
+    }
 
-.logonav{
-    width: 20px;
-    height: 60px;
+    .btn-primary-action {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
 }

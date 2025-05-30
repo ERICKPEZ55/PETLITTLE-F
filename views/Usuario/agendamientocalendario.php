@@ -44,6 +44,7 @@ $nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['n
         <div class="specialty-item"><img src="../../assets/img/iconeurologia.png" /> Neurología</div>
         <div class="specialty-item"><img src="../../assets/img/icoendocri.png" /> Endocrinología</div>
         <div class="specialty-item"><img src="../../assets/img/icomedicinageneral.png" /> Medicina General</div>
+        <a href="../Usuario/agendamiento.php">← Volver</a>
       </div>
     </div>
 
