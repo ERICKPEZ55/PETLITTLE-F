@@ -1,5 +1,5 @@
 <?php
-session_start();  // Iniciar sesión al principio del script
+session_start();
 
 require_once(__DIR__ . '/../models/usuarios.php');
 require_once(__DIR__ . '/../configuracion/conexion.php');
@@ -18,7 +18,6 @@ if (isset($_POST['registrar'])) {
     ];
 
     try {
-        // Verificar si el correo o teléfono ya existen
         if ($usuario->existeCorreo($data['correo'])) {
             $_SESSION['error_registro'] = "El correo ya está registrado.";
             header('Location: ../models/registro.php');
@@ -31,10 +30,9 @@ if (isset($_POST['registrar'])) {
             exit;
         }
 
-        // Intentar registrar
         if ($usuario->registrar($data)) {
             $_SESSION['registro_exitoso'] = true;
-            header('Location: ../models/login.php'); // Ruta al login con alert JS
+            header('Location: ../models/login.php');
             exit;
         } else {
             $_SESSION['error_registro'] = "Error al registrar el usuario.";
@@ -57,20 +55,33 @@ if (isset($_POST['login'])) {
         $user = $usuario->login($correo, $contrasena);
 
         if ($user) {
-            $_SESSION['usuario'] = $user;
+            // Definimos aquí las listas de correos para cada rol
+            $admins = ['petlittle.soporte@gmail.com'];
+            $empleados = ['mpautorresb.06@gmail.com'];
+            $clientes = ['santiromerito30@gmail.com'];
 
-            // Redirigir según tipo de usuario
-            switch ($user['rol']) {
-                case 'administrador':
-                    header('Location: ../views/Admin/index.php');
-                    break;
-                case 'empleado':
-                    header('Location: ../views/Empleado/inicio.php');
-                    break;
-                default:
-                    header('Location: ../views/Usuario/agendamiento.php');
-                    break;
+            // Asignar rol según el correo
+            if (in_array($correo, $admins)) {
+                $rol = 'administrador';
+                $redirect = '../views/admin/perfil-admin.html';
+            } elseif (in_array($correo, $empleados)) {
+                $rol = 'empleado';
+                $redirect = '../views/Empleado/empleado.html';
+            } elseif (in_array($correo, $clientes)) {
+                $rol = 'cliente';
+                $redirect = '../views/Usuario/agendamiento.php';
+            } else {
+                // Si no está en ninguna lista, negar acceso
+                $_SESSION['error_login'] = "No tienes permisos para acceder.";
+                header('Location: ../models/login.php');
+                exit;
             }
+
+            // Guardar info en sesión, incluyendo rol asignado
+            $_SESSION['usuario'] = $user;
+            $_SESSION['usuario']['rol'] = $rol;
+
+            header("Location: $redirect");
             exit;
         } else {
             $_SESSION['error_login'] = "Correo o contraseña incorrectos.";
