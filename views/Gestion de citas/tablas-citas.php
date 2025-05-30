@@ -23,12 +23,9 @@ $usuario = $_SESSION['usuario'];
 
     <header>
         <div class="logo">
-            <img src="../../assets/img/logo negativo (1).png" alt="PetLittle" class="logonav">
+            <img src="../../assets/img/Logo blanco.png" alt="PetLittle" class="logonav">
         </div>
-        <div class="buscador">
-            <span class="icono-lupa">🔍</span>
-            <input type="text" placeholder="Buscar">
-        </div>
+
         <div class="notificaciones" onclick="mostrarNotificaciones()">🔔 <span id="notiCount">0</span></div>
         <div class="usuario-info">
             <img src="../../assets/img/admin.png" alt="Admin" class="adminimg">
@@ -42,6 +39,7 @@ $usuario = $_SESSION['usuario'];
             <li><a href="../Usuario/agendamiento.php">Volver</a></li>
             <li>Tabla agendamientos</li>
             <li>Ordenes pendientes</li>
+            <a href="../Usuario/agendamiento.php">⇦Volver</a>
         </ul>
     </aside>
 

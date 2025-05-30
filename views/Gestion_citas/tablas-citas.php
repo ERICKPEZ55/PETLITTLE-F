@@ -32,6 +32,7 @@
             <li><a href="../Usuario/agendamiento.php">Perfil</a></li>
             <li>Tabla agendamientos</li>
             <li>Ordenes pendientes</li>
+            <a href="agendamiento.php">⇦Volver</a>
         </ul>
     </aside>
 

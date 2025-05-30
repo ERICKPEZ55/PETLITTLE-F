@@ -15,7 +15,7 @@ body {
 header {
     position: fixed;
     width: 100%;
-    height: 60px;
+    height: 70px;
     background: #272A57;
     display: flex;
     justify-content: space-between;
@@ -24,18 +24,34 @@ header {
     color: white;
     z-index: 1000;
 }
-.usuario-info {
+.logo {
+    padding: 10px;
     display: flex;
     align-items: center;
-    gap: 8px; 
-    margin-left: auto; 
-    padding-right: 10px; /
 }
-.adminimg {
-    width: 40px;
-    height: 40px;
+
+.logo-img {
+    height: 75px;       
+    width: auto;        
+
+}
+
+.usuario-info img{
+    display: flex;
+    align-items: center;
+    gap: 800px; 
+    margin-left: auto; 
+    padding-right: 10px; 
+    height: 0%;
+
+
+}
+.usuarioimg {
+    width: 75px;  /* o el tamaño que quieras */
+    height: auto;
     padding: 0;
 }
+
 
 aside {
     width: 200px;
@@ -83,14 +99,18 @@ th {
 }
 
 button {
-    padding: 10px;
-    margin: 10px;
     background: #6EACDA;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    font-size: 14px;
+    padding: 10px 12px;       
+    min-width: 125px;          
+    white-space: nowrap;       
+    text-align: center;
 }
+
 
 .editar, .borrar {
     cursor: pointer;
@@ -118,6 +138,25 @@ button {
     text-align: center;
     z-index: 2001; 
 }
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+}
+
 
 /* Responsive */
 @media screen and (max-width: 768px) {

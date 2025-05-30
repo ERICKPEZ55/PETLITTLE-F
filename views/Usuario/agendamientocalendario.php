@@ -37,6 +37,7 @@
         <div class="specialty-item"><img src="../../assets/img/iconeurologia.png" /> Neurología</div>
         <div class="specialty-item"><img src="../../assets/img/icoendocri.png" /> Endocrinología</div>
         <div class="specialty-item"><img src="../../assets/img/icomedicinageneral.png" /> Medicina General</div>
+        <a href="agendamiento.php">⇦Volver</a>
       </div>
     </div>
 

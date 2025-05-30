@@ -73,7 +73,7 @@ $usuario = $_SESSION['usuario'];
                 <div class="opcion">
                     <img src="../../assets/img/imga4.png" alt="calendario" class="calendarioimg" />
                     <h3>Laboratorio clínico</h3>
-                    <button>Ingresar</button>
+                    <button onclick="window.location.href='laboratorios.html'">Ingresar</button>
                 </div>
             </div>
         </main>

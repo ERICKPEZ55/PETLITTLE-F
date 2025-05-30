@@ -48,8 +48,10 @@ header {
 }
 .usuarioimg {
     width: 75px;  /* o el tamaño que quieras */
-    height: auto;
+    height: 75px;
     padding: 0;
+    object-fit: contain; /* opcional para que no se deforme */
+
 }
 
 
@@ -84,7 +86,7 @@ main {
 table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
+    background: rgb(255, 255, 255);
 }
 
 th, td {
@@ -105,16 +107,6 @@ button {
     cursor: pointer;
     border-radius: 5px;
     font-size: 14px;
-    padding: 10px 12px;         /* Aumenta espacio interno */
-    min-width: 100px;          /* Asegura que no se corte el texto */
-    white-space: nowrap;       /* Evita que se divida el texto */
-    text-align: center;
-}
-
-
-.editar, .borrar {
-    cursor: pointer;
-    font-size: 18px;
 }
 
 .modal {
@@ -132,7 +124,6 @@ button {
 
 .modal-content {
     position: relative;
-    background: white;
     padding: 20px;
     border-radius: 5px;
     text-align: center;
@@ -167,58 +158,27 @@ button {
         padding: 10px 20px;
         align-items: center;
     }
-
-    .logo,
-    .buscador,
-    .notificaciones,
-    .usuario-info {
-        margin: 5px 0;
-    }
-
-    .buscador input {
-        width: 200px;
-    }
-
     .textousuario {
         font-size: 13px;
     }
 
-    .adminimg {
+    .usuarioimg {
         width: 30px;
         height: 30px;
     }
 }
 button {
-    width: 14%;
-    margin: 5px 0;
 
-}
-
-.buscador {
-    display: flex;
-    align-items: center;
-    background-color: #CFE6F8; /* azul claro */
-    border-radius: 30px;
-    padding: 5px 15px;
-    width: 300px;
-    height: 35px;
-}
-
-.buscador input {
+    padding: 10px 15px; 
+    background: #6EACDA;
+    color: white;
     border: none;
-    background: transparent;
-    outline: none;
-    padding-left: 10px;
-    font-size: 14px;
-    width: 100%;
-    color: #333;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px; 
 }
 
-.icono-lupa {
-    font-size: 18px;
-    color: #555;
-}
 .logonav{
-    width: 200px;
+    width: 20px;
     height: 60px;
 }
