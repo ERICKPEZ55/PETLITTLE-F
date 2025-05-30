@@ -22,7 +22,7 @@ $usuario = $_SESSION['usuario'];
 <body>
     <header class="header">
         <div class="logo-container">
-            <img src="../../assets/img/Logo negro.png" alt="Logo" class="logo" />
+            <img src="../../assets/img/logo negativo.png" alt="Logo" class="logo" />
         </div>
         <h1 class="titulo-header">Agendamiento</h1>
     </header>
@@ -66,7 +66,8 @@ $usuario = $_SESSION['usuario'];
                 <div class="opcion">
                     <img src="../../assets/img/imga3.png" alt="calendario" class="calendarioimg" />
                     <h3>Órdenes pendientes</h3>
-                    <button onclick="window.location.href=''">Ingresar</button>
+                    <button onclick="window.location.href='ordenes_pendientes.html'">Ingresar</button>
+
                 </div>
                 <div class="opcion">
                     <img src="../../assets/img/imga4.png" alt="calendario" class="calendarioimg" />
