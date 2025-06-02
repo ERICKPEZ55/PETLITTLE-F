@@ -1,27 +1,39 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: sans-serif;
+    background-color: #f5f5f5;
+}
+
+.bg-light {
+    background-color: #f5f5f5;
 }
 
 .header {
     display: flex;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
     background-color: #6EACDA;
     padding: 15px 30px;
     color: black;
     position: relative;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex-wrap: wrap; 
 }
 
 .header-left {
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 .btn-volver {
-    background-color: #090b45; 
+    background-color: #090b45;
     border: none;
     color: white;
     font-size: 1rem;
@@ -29,27 +41,30 @@
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.2s ease;
-    text-decoration: none; 
+    text-decoration: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
-    white-space: nowrap; 
+    white-space: nowrap;
+    /* Aseguramos que el botón no se encoja demasiado en desktop */
+    min-width: 100px;
 }
 
 .btn-volver:hover {
-    background-color: #111361; 
+    background-color: #111361;
 }
 
 .titulo-header {
+    /* En desktop, el título sigue centrado absoluto */
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 15px;
+    font-size: 22px; /* Aumentado ligeramente para desktop */
     font-weight: bold;
     text-align: center;
-    white-space: nowrap; 
-    flex-grow: 1; 
+    white-space: nowrap;
+    /* Flex-grow para que ocupe espacio, pero no es tan relevante con position absolute */
 }
 
 .logo-container {
@@ -62,127 +77,214 @@
     height: 50px;
     margin-right: 15px;
     border-radius: 15px;
+    object-fit: contain; /* Asegura que la imagen se ajuste sin distorsión */
 }
 
-.titulo {
-    font-size: 22px;
-    font-weight: bold;
-    align-content: center;
-}
-
-html, body {
-  height: 100%;
-  font-family: sans-serif;
-  background-color: #f5f5f5;
-}
-
-/* Fondo claro general */
-.bg-light {
-  background-color: #f5f5f5;
-}
-
-/* Estructura principal en pantalla completa */
+/* ---------------- Layout principal ---------------- */
 .flex-container {
-  display: flex;
-  min-height: 100vh; /* Ocupa toda la altura de la ventana */
+    display: flex;
+    /* min-height: 100vh; */ /* Esto puede causar problemas si el contenido es más pequeño que la ventana */
+    min-height: calc(100vh - 80px); /* Ajusta si tu header tiene una altura fija, restando su altura */
+    flex-wrap: wrap;
 }
 
-/* Encabezado superior */
-.header {
-  background-color: #69b0e4;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  color: white;
-  font-weight: bold;
-  font-size: 24px;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-}
-
-.avatar {
-  border-radius: 9999px;
-  width: 40px;
-  height: 40px;
-  margin-right: 0.5rem;
-}
-
-.username {
-  color: white;
-  font-weight: 600;
-}
-
-/* Barra lateral */
+/* ---------------- Barra lateral ---------------- */
 .sidebar {
-  background-color: #1e1b4b;
-  width: 20%;
-  padding: 1rem;
-  color: #a78bfa;
+    background-color: #1e1b4b;
+    width: 20%;
+    min-width: 220px; /* Mantener un ancho mínimo para desktop */
+    padding: 1rem;
+    color: #a78bfa;
 }
 
 .sidebar a {
-  display: block;
-  margin-bottom: 30px;
-  margin-top: 15px;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  margin-left: 15px;
-
+    display: block;
+    margin: 15px 0 30px 15px; /* Margen para desktop */
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem; /* Un poco más grande para mejor legibilidad */
+    transition: color 0.2s ease, text-decoration 0.2s ease;
 }
 
 .sidebar a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
+    color: #c4b5fd; /* Un color ligeramente diferente al pasar el ratón */
 }
 
-/* Contenedor del formulario */
+/* ---------------- Contenido principal ---------------- */
 .form-container {
-  flex: 1;
-  padding: 2.5rem;
-  background-color: #f5f5f5;
+    flex: 1;
+    padding: 2.5rem;
+    background-color: #f5f5f5;
 }
 
-/* Título del formulario */
 .form-container h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
+    font-size: 1.8rem; /* Aumentado ligeramente para desktop */
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #333; /* Un color más oscuro para el título del formulario */
 }
 
-/* Distribución del formulario en dos columnas */
 .form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem; /* Aumentado ligeramente el espacio entre campos */
 }
 
 .form-grid input,
 .form-grid select {
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
-  font-size: 1rem;
+    padding: 0.85rem; /* Un poco más de padding para mejor tactilidad */
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    width: 100%; /* Asegura que ocupen el 100% de la columna */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); /* Pequeña sombra interna para efecto de campo */
 }
 
-/* Botón para guardar */
+.form-grid input:focus,
+.form-grid select:focus {
+    outline: none;
+    border-color: #6EACDA; /* Resalta el borde al enfocar */
+    box-shadow: 0 0 0 3px rgba(110, 172, 218, 0.3);
+}
+
 .btn-save {
-  margin-top: 1.5rem;
-  background-color: #69b0e4;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.25rem;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
+    margin-top: 2rem; /* Más margen superior */
+    background-color: #69b0e4;
+    color: white;
+    padding: 0.85rem 1.5rem; /* Un poco más de padding para el botón */
+    border-radius: 0.25rem;
+    border: none;
+    font-size: 1.1rem; /* Un poco más grande */
+    cursor: pointer;
+    width: auto; /* Dejar que el contenido defina el ancho en desktop */
+    display: block; /* Para que el margin: auto; funcione si lo quieres centrar */
+    margin-left: auto; /* Para centrar el botón si es necesario o alinearlo a la derecha */
+    margin-right: auto;
+    transition: background 0.2s ease, transform 0.1s ease;
 }
 
 .btn-save:hover {
-  background-color: #539bd4;
+    background-color: #539bd4;
+    transform: translateY(-1px); /* Pequeño efecto al pasar el ratón */
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        text-align: center;
+        /* Eliminar justify-content para que flex-direction column y align-items center lo manejen */
+        justify-content: center;
+    }
+
+    .header-left {
+        width: 100%; /* Para que el logo ocupe todo el ancho si lo quieres centrar */
+        justify-content: center; /* Centra el logo */
+        margin-bottom: 10px; /* Espacio debajo del logo antes del título */
+    }
+
+    .titulo-header {
+        position: static; /* Quita el posicionamiento absoluto */
+        transform: none; /* Quita la transformación */
+        margin-top: 10px; /* Un poco de espacio desde el elemento anterior */
+        font-size: 24px; /* Un tamaño de fuente más grande para el título principal en móvil */
+        white-space: normal; /* Permitir que el título se envuelva */
+        width: 100%; /* Para que el título ocupe todo el ancho y se centre */
+        order: 2; /* Cambiar el orden para que aparezca después del logo */
+    }
+
+    .logo {
+        width: 120px; /* Reducido un poco más el tamaño del logo para móviles */
+        height: auto;
+        margin-right: 0; /* Eliminar margen derecho del logo */
+        margin-bottom: 0; /* El margen ya está en header-left */
+    }
+
+    .btn-volver {
+        order: 3; /* Cambiar el orden para que aparezca después del título */
+        margin-top: 15px; /* Espacio después del título */
+        width: 80%; /* Hacer el botón más ancho en móvil */
+        max-width: 200px; /* Limitar el ancho máximo del botón para que no sea demasiado grande */
+        font-size: 0.9rem; /* Ligeramente más pequeño para el botón */
+        padding: 0.6rem 1rem;
+    }
+
+    .flex-container {
+        flex-direction: column; /* Apilar la barra lateral y el contenido */
+        min-height: auto; /* Permitir que la altura se ajuste al contenido */
+    }
+
+    .sidebar {
+        width: 100%; /* La barra lateral ocupa todo el ancho */
+        min-width: unset; /* Quitar el min-width para que sea completamente fluido */
+        padding: 1rem 0; /* Padding vertical, sin padding horizontal para que los enlaces se centren */
+        display: flex; /* Usar flexbox para centrar los enlaces */
+        flex-direction: column; /* Apilar los enlaces */
+        align-items: center; /* Centrar horizontalmente los enlaces */
+    }
+
+    .sidebar a {
+        margin: 10px 0; /* Menos margen vertical y sin margen horizontal */
+        font-size: 1rem; /* Ajustar el tamaño de fuente para enlaces en móvil */
+    }
+
+    .form-container {
+        padding: 1.5rem; /* Un poco menos de padding en móvil */
+    }
+
+    .form-container h2 {
+        font-size: 1.4rem; /* Ajustar el tamaño del título del formulario */
+        text-align: center; /* Centrar el título del formulario */
+        margin-bottom: 1rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr; /* Una sola columna para el formulario */
+        gap: 1rem; /* Espacio entre los campos del formulario */
+    }
+
+    .form-grid input,
+    .form-grid select {
+        padding: 0.8rem; /* Un poco menos de padding en los campos */
+    }
+
+    .btn-save {
+        width: 100%; /* El botón de guardar ocupa todo el ancho */
+        max-width: 300px; /* Limitar el ancho máximo del botón */
+        margin: 1.5rem auto 0 auto; /* Centrar el botón y ajustar el margen superior */
+        font-size: 1rem; /* Ajustar el tamaño de fuente del botón */
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+/* Media query para pantallas muy pequeñas (e.g., teléfonos en modo vertical) */
+@media (max-width: 480px) {
+    .header {
+        padding: 8px; /* Menos padding en pantallas muy pequeñas */
+    }
+
+    .titulo-header {
+        font-size: 20px; /* Ajustar tamaño para pantallas muy pequeñas */
+    }
+
+    .logo {
+        width: 100px; /* Logo más pequeño */
+    }
+
+    .btn-volver {
+        width: 90%; /* Botón más ancho en pantallas muy pequeñas */
+        max-width: 180px;
+    }
+
+    .form-container {
+        padding: 1rem; /* Menos padding en el formulario */
+    }
+
+    .form-container h2 {
+        font-size: 1.3rem; /* Título del formulario más pequeño */
+    }
 }
