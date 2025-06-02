@@ -16,7 +16,7 @@ $usuario = $_SESSION['usuario'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel de Usuario - Veterinaria</title>
     <link rel="stylesheet" href="../../assets/css/agendamiento.css" />
-     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
@@ -56,22 +56,22 @@ $usuario = $_SESSION['usuario'];
                 <div class="opcion">
                     <img src="../../assets/img/imga1.png" alt="calendario" class="calendarioimg" />
                     <h3>Agendar citas</h3>
-                    <button onclick="window.location.href='../Usuario/agendamientocalendario.php'">Ingresar</button>
+                    <button onclick="window.location.href='../usuario/agendamientoCalendario.php'">Ingresar</button>
                 </div>
                 <div class="opcion">
                     <img src="../../assets/img/imga2.png" alt="calendario" class="calendarioimg" />
                     <h3>Citas agendadas</h3>
-                    <button onclick="window.location.href='../Gestion_citas/tablas-citas.php'">Ingresar</button>
+                    <button onclick="window.location.href='../gestionCitas/tablasCitas.php'">Ingresar</button>
                 </div>
                 <div class="opcion">
                     <img src="../../assets/img/imga3.png" alt="calendario" class="calendarioimg" />
                     <h3>Órdenes pendientes</h3>
-                    <button onclick="window.location.href='../Usuario/ordenes_pendientes.html'">Ingresar</button>
+                    <button onclick="window.location.href='../usuario/ordenesPendientes.php'">Ingresar</button>
                 </div>
                 <div class="opcion">
                     <img src="../../assets/img/imga4.png" alt="calendario" class="calendarioimg" />
                     <h3>Laboratorio clínico</h3>
-                    <button onclick="window.location.href='../Usuario/laboratorios.html'">Ingresar</button>
+                    <button onclick="window.location.href='../usuario/laboratorios.php'">Ingresar</button>
                 </div>
             </div>
         </main>

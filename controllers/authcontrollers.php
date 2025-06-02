@@ -3,7 +3,7 @@ session_start();
 
 require_once(__DIR__ . '/../models/usuarios.php');
 require_once(__DIR__ . '/../configuracion/conexion.php');
-require_once(__DIR__ . '/correo_registro.php');
+require_once(__DIR__ . '/correoRegistro.php');
 
 $pdo = conexion();
 $usuario = new Usuario($pdo);
@@ -66,14 +66,14 @@ if (isset($_POST['login'])) {
         // Asignar rol y redirección
         if (in_array($correo, $admins)) {
             $rol = 'administrador';
-            $redirect = '../views/admin/perfil-admin.html';
+            $redirect = '../views/admin/perfilAdmin.html';
         } elseif (in_array($correo, $empleados)) {
             $rol = 'empleado';
-            $redirect = '../views/Empleado/empleado.html';
+            $redirect = '../views/empleado/empleado.html';
         } else {
             // Cualquier otro correo es cliente
             $rol = 'cliente';
-            $redirect = '../views/Usuario/agendamiento.php';
+            $redirect = '../views/usuario/agendamiento.php';
         }
 
         // Guardar en sesión y redirigir

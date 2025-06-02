@@ -24,33 +24,23 @@ header {
     color: white;
     z-index: 1000;
 }
-.logo {
-    padding: 10px;
-    display: flex;
-    align-items: center;
+
+.logo-img{
+    width: 200px;
+    height: 60px;
 }
 
-.logo-img {
-    height: 75px;       
-    width: auto;        
-
-}
-
-.usuario-info img{
+.usuario-info {
     display: flex;
     align-items: center;
-    gap: 800px; 
+    gap: 8px; 
     margin-left: auto; 
-    padding-right: 10px; 
-    height: 0%;
-
-
+    padding-right: 10px; /
 }
-.usuarioimg {
-    width: 75px;  /* o el tamaño que quieras */
-    height: 75px;
+.adminimg {
+    width: 40px;
+    height: 40px;
     padding: 0;
-    object-fit: contain; /* opcional para que no se deforme */
 }
 
 

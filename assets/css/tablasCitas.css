@@ -16,7 +16,7 @@ header {
     position: fixed;
     width: 100%;
     height: 60px;
-    background: #6EACDA;
+    background: #272A57;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,7 +39,7 @@ header {
 
 aside {
     width: 200px;
-    background: #272A57;
+    background: #6EACDA;
     color: white;
     padding-top: 70px;
     height: 100vh;

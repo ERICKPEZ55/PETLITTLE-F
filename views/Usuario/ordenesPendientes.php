@@ -1,10 +1,14 @@
+<?php
+session_start();
+$nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['nombre'] : 'Invitado';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ordenes Pendientes</title>
-    <link rel="stylesheet" href="../../assets/css/ordenespendientes.css">
+    <link rel="stylesheet" href="../../assets/css/ordenesPendientes.css">
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
 </head>
@@ -16,17 +20,19 @@
         </div>
 
         <div class="usuario-info">
-            <img src="../../assets/img/usuario.png" alt="usuario" class="usuarioimg">
+            <img src="../../assets/img/admin.png" alt="Admin" class="adminimg">
+            <span class="textousuario"><?= htmlspecialchars($nombreUsuario) ?></span>
         </div>
 
     </header>
 
     <aside>
         <ul>
-            <li><a href="../Usuario/agendamiento.php">Volver</a></li>
-            <li><a href="agendamientocalendario.php">Agendar Citas</a></li>
-            <li><a href="">Citas Agendadas </a></li>
-            <li><a href="laboratorios.html">Laboratorio Clinico</a></li>
+            <li><a href="../Usuario/agendamiento.php">← Volver</a></li>
+            <li><a href="agendamientoCalendario.php">Agendar Cita</a></li>
+            <li><a href="../gestionCitas/tablasCitas.php">Citas Agendadas </a></li>
+            <li><a href="laboratorios.php">Laboratorio Clinico</a></li>
+            <li><a href="ordenesPendientes.php">Ordenes pendientes</a></li>
         </ul>
     </aside>
 

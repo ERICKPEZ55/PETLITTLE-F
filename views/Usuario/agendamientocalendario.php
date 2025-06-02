@@ -8,13 +8,14 @@ $nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['n
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="../../assets/css/agendamientoCalendario.css">
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <title>Agendamiento - PetLittle</title>
 </head>
 <body>
 
   <header>
     <div class="logo">
-      <a href="../Usuario/agendamiento.php">
+      <a href="../usuario/agendamiento.php">
         <img src="../../assets/img/logo negativo.png" alt="PetLittle" />
       </a>
     </div>

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/SessionManager.php';
+require_once __DIR__ . '/sessionManager.php';
 
 $session = new SessionManager();
 $session->logout();

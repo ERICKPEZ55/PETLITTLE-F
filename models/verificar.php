@@ -5,7 +5,7 @@ $mensaje = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $codigoIngresado = $_POST["codigo"];
     if ($codigoIngresado == $_SESSION["codigo_recuperacion"]) {
-        header("Location: nueva_contraseña.php");
+        header("Location: nuevaContraseña.php");
         exit;
     } else {
         $mensaje = "❌ Código incorrecto. Intenta de nuevo.";

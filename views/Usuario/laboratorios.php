@@ -1,3 +1,7 @@
+<?php
+session_start();
+$nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['nombre'] : 'Invitado';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,16 +18,18 @@
         </div>
 
         <div class="usuario-info">
-            <img src="../../assets/img/usuario.png" alt="usuario" class="usuarioimg">
+            <img src="../../assets/img/admin.png" alt="Admin" class="adminimg">
+            <span class="textousuario"><?= htmlspecialchars($nombreUsuario) ?></span>
         </div>
 
     </header>
     <aside>
         <ul>
-            <li><a href="agendamiento.php">Volver</a></li>
-            <li><a href="agendamientocalendario.php">Agendar Cita</a></li>
-            <li><a href="">Citas Agendadas</a></li>
-            <li><a href="ordenes_pendientes.html">Ordenes pendientes</a></li>
+            <li><a href="agendamiento.php">← Volver</a></li>
+            <li><a href="agendamientoCalendario.php">Agendar Cita</a></li>
+            <li><a href="../gestionCitas/tablasCitas.php">Citas Agendadas</a></li>
+            <li><a href="laboratorios.php">Laboratorio Clinico</a></li>
+            <li><a href="ordenesPendientes.php">Ordenes pendientes</a></li>
         </ul>
     </aside>
 

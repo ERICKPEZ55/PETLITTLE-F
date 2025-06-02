@@ -30,7 +30,7 @@ try {
 
     $mail->isHTML(true);
     $mail->Subject = 'Recupera tu contraseña en PetLittle';
-    $template = file_get_contents('../views/login/email_template.html'); 
+    $template = file_get_contents('../views/login/emailTemplate.html'); 
     $body = str_replace('{{link}}', $link, $template); 
     $mail->Body = $body;
 

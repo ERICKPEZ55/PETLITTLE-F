@@ -8,7 +8,7 @@ $nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['n
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Citas - PetLittle</title>
-    <link rel="stylesheet" href="../../assets/css/tablas-citas.css">
+    <link rel="stylesheet" href="../../assets/css/tablasCitas.css">
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
 </head>
@@ -16,13 +16,13 @@ $nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['n
 
     <header>
         <div class="logo">
-            <img src="../../assets/img/logo negativo.png" alt="PetLittle" class="logonav">
+            <img src="../../assets/img/Logo blanco.png" alt="PetLittle" class="logonav">
         </div>
-        <div class="buscador">
-            <span class="icono-lupa">🔍</span>
+        <!-- <div class="buscador">
+            <span class="icono-lupa">🔍</span> 
             <input type="text" placeholder="Buscar">
-        </div>
-        <div class="notificaciones" onclick="mostrarNotificaciones()">🔔 <span id="notiCount">0</span></div>
+        </div>-->
+        <!-- <div class="notificaciones" onclick="mostrarNotificaciones()">🔔 <span id="notiCount">0</span></div> -->
         <div class="usuario-info">
             <img src="../../assets/img/admin.png" alt="Admin" class="adminimg">
             <span class="textousuario"><?= htmlspecialchars($nombreUsuario) ?></span>
@@ -31,9 +31,11 @@ $nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['n
 
     <aside>
         <ul>
-            <li><a href="../Usuario/agendamiento.php">Perfil</a></li>
-            <li>Tabla agendamientos</li>
-            <li>Ordenes pendientes</li>
+            <li><a href="../usuario/agendamiento.php">← Volver</a></li>
+            <li><a href="../usuario/agendamientoCalendario.php">Agendar Cita</a></li>
+            <li><a href="tablasCitas.php">Citas Agendadas </a></li>
+            <li><a href="../usuario/laboratorios.php">Laboratorio Clinico</a></li>
+            <li><a href="../usuario/ordenesPendientes.php">Ordenes pendientes</a></li>
         </ul>
     </aside>
 

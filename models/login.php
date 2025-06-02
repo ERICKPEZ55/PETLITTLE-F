@@ -19,7 +19,7 @@ if (isset($_SESSION['registro_exitoso'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Login - PetLittle</title>
-    <link rel="stylesheet" href="../assets/css/styleslogin.css" />
+    <link rel="stylesheet" href="../assets/css/stylesLogin.css" />
     <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
@@ -34,7 +34,7 @@ if (isset($_SESSION['registro_exitoso'])) {
                 <p style="color: red; font-weight: bold;"><?php echo htmlspecialchars($error); ?></p>
             <?php endif; ?>
 
-            <form id="loginForm" action="../controllers/authcontrollers.php" method="post">
+            <form id="loginForm" action="../controllers/authControllers.php" method="post">
                 <label for="email">Correo:</label>
                 <input type="email" id="email" name="correo" placeholder="Correo" required />
 
