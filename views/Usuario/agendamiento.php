@@ -24,7 +24,7 @@ $usuario = $_SESSION['usuario'];
         <div class="logo-container">
             <img src="../../assets/img/Logo negro.png" alt="Logo" class="logo" />
         </div>
-        <h1 class="titulo-header">Agendamiento</h1>
+        <h1 class="titulo-header">Inicio</h1>
     </header>
 
     <div class="contenedor">
@@ -33,6 +33,7 @@ $usuario = $_SESSION['usuario'];
             <div class="info-perfil">
                 <p class="nombre"><?php echo htmlspecialchars($usuario['nombre']); ?></p>
                 <p class="rol">Plan básico de salud</p>
+                <a href="">Editar mi información</a>
             </div>
         </div>
 
