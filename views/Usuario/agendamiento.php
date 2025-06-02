@@ -31,9 +31,14 @@ $usuario = $_SESSION['usuario'];
         <!-- PERFIL SOBRE EL LATERAL -->
         <div class="perfil-sobre-menu">
             <div class="info-perfil">
+                <img src="../../assets/img/avatarusuario.png" alt="Empleado" class="foto-perfil">
                 <p class="nombre"><?php echo htmlspecialchars($usuario['nombre']); ?></p>
                 <p class="rol">Plan básico de salud</p>
+<<<<<<< HEAD
                 <a href="">Editar mi información</a>
+=======
+                <a href="../usuario/editarPerfilUsuario.html">Editar mi información</a>
+>>>>>>> f01c461 (se agrego la vista de editar informacion del usuario)
             </div>
         </div>
 
@@ -41,7 +46,7 @@ $usuario = $_SESSION['usuario'];
             <nav class="menu">
                 <a href="#">Inicio</a>
                 <a href="falta">Mis mascotas</a>
-                <a href="../Gestion_citas/tablas-citas.php">Cancelar citas</a>
+                <a href="../gestionCitas/tablasCitas.php">Cancelar citas</a>
                 <a href="#">Historia clínica</a>
                 <a href="#">Notificaciones</a>
                 <a href="../../models/logout.php" class="cerrar-sesion">Cerrar Sesión</a>

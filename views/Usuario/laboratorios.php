@@ -14,11 +14,11 @@ $nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['n
 <body>
     <header>
         <div class="logo">
-            <img src="../../assets/img/Logo blanco.png" alt="logo" class="logo-img">
+            <img src="../../assets/img/logo negativo.png" alt="logo" class="logo-img">
         </div>
 
         <div class="usuario-info">
-            <img src="../../assets/img/admin.png" alt="Admin" class="adminimg">
+            <img src="../../assets/img/avatarusuario.png" alt="Admin" class="adminimg">
             <span class="textousuario"><?= htmlspecialchars($nombreUsuario) ?></span>
         </div>
 
