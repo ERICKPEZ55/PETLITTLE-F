@@ -12,7 +12,7 @@ class Usuario {
      * Registrar nuevo usuario
      */
     public function registrar($data) {
-        if (!isset($data['nombre'], $data['apellido'], $data['correo'], $data['telefono'], $data['contrasena'])) {
+        if (!isset($data['nombre'], $data['apellido'], $data['correo'], $data['telefono'], $data['contrasena'], $data['rol'])) {
             throw new Exception("Faltan datos para registrar el usuario.");
         }
 
@@ -26,8 +26,8 @@ class Usuario {
 
         $data['contrasena'] = password_hash($data['contrasena'], PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO datos (nombre, apellido, correo, telefono, contrasena)
-                VALUES (:nombre, :apellido, :correo, :telefono, :contrasena)";
+        $sql = "INSERT INTO datos (nombre, apellido, correo, telefono, contrasena, rol)
+                VALUES (:nombre, :apellido, :correo, :telefono, :contrasena, :rol)";
         $stmt = $this->pdo->prepare($sql);
 
         return $stmt->execute([
@@ -36,6 +36,7 @@ class Usuario {
             'correo'     => $data['correo'],
             'telefono'   => $data['telefono'],
             'contrasena' => $data['contrasena'],
+            'rol'        => $data['rol']
         ]);
     }
 

@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $mail->isHTML(true);
             $mail->Subject = 'Código de recuperación - PetLittle';
-            $template = file_get_contents('../views/login/email_template.html');
+            $template = file_get_contents('../views/login/emailTemplate.html');
             $body = str_replace('{{codigo}}', $codigo, $template);
             $mail->Body = $body;
 

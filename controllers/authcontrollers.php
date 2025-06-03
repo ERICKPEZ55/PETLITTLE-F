@@ -11,12 +11,14 @@ $usuario = new Usuario($pdo);
 // Registro
 if (isset($_POST['registrar'])) {
     $data = [
-        'nombre'     => trim($_POST['nombre'] ?? ''),
-        'apellido'   => trim($_POST['apellido'] ?? ''),
-        'correo'     => trim($_POST['correo'] ?? ''),
-        'telefono'   => trim($_POST['telefono'] ?? ''),
-        'contrasena' => $_POST['contrasena'] ?? '',
+    'nombre'     => trim($_POST['nombre'] ?? ''),
+    'apellido'   => trim($_POST['apellido'] ?? ''),
+    'correo'     => trim($_POST['correo'] ?? ''),
+    'telefono'   => trim($_POST['telefono'] ?? ''),
+    'contrasena' => $_POST['contrasena'] ?? '',
+    'rol'        => 'cliente' // Se asigna el rol automáticamente
     ];
+
 
     try {
         if ($usuario->existeCorreo($data['correo'])) {
