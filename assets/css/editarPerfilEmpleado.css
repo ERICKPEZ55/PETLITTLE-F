@@ -1,4 +1,3 @@
-/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -12,22 +11,24 @@ html, body {
 }
 
 /* HEADER */
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 70px;
-  background: #6EACDA;
+.header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
-  z-index: 1000;
+  justify-content: space-between;
+  background-color: #6EACDA;
+  padding: 15px 30px;
+  color: black;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* BOTÓN VOLVER */
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
 .btn-volver {
-  background-color: #272A57;
+  background-color: #090b45;
   border: none;
   color: white;
   font-size: 1rem;
@@ -44,18 +45,28 @@ header {
 }
 
 .btn-volver:hover {
-  background-color: #1f2040;
+  background-color: #111361;
 }
 
-/* LOGO */
+.titulo-header {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  flex-grow: 1;
+}
+
 .logo-container {
   display: flex;
   align-items: center;
 }
 
 .logo {
-  width: 200px;
-  height: 60px;
+  width: 170px;
+  height: 50px;
   margin-right: 15px;
   border-radius: 15px;
 }
@@ -64,33 +75,28 @@ header {
 .flex-container {
   display: flex;
   min-height: 100vh;
-  padding-top: 70px; /* altura del header */
 }
 
 /* SIDEBAR */
 .sidebar {
-  width: 220px;
-  background: #272A57;
+  background-color: #1e1b4b;
+  width: 20%;
+  padding: 1rem;
   color: white;
-  padding-top: 20px;
-  height: calc(100vh - 70px);
-  position: fixed;
-  top: 70px;
-  left: 0;
-  overflow-y: auto;
 }
 
 .sidebar a {
   display: block;
-  padding: 15px 30px;
+  margin-bottom: 30px;
+  margin-top: 15px;
   text-decoration: none;
   color: white;
   font-weight: bold;
-  transition: background 0.2s ease;
+  margin-left: 15px;
 }
 
 .sidebar a:hover {
-  background-color: #1f2040;
+  text-decoration: underline;
 }
 
 /* FORMULARIO */
@@ -98,8 +104,6 @@ header {
   flex: 1;
   padding: 2.5rem;
   background-color: #f5f5f5;
-  margin-left: 220px;
-  min-height: calc(100vh - 70px);
 }
 
 .form-container h2 {
@@ -120,21 +124,11 @@ header {
   border: 1px solid #ccc;
   border-radius: 0.25rem;
   font-size: 1rem;
-  width: 100%;
-}
-
-/* CONTENEDOR DE BOTONES */
-.form-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 /* BOTÓN GUARDAR */
 .btn-save {
+  margin-top: 1.5rem;
   background-color: #69b0e4;
   color: white;
   padding: 0.75rem 1.5rem;
@@ -142,66 +136,33 @@ header {
   border: none;
   font-size: 1rem;
   cursor: pointer;
-  flex: 1 1 auto;
-  max-width: 250px;
 }
 
 .btn-save:hover {
   background-color: #539bd4;
 }
 
-/* BOTÓN ELIMINAR */
-.btn-delete {
-  background-color: #e94e4e;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.25rem;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  flex: 1 1 auto;
-  max-width: 250px;
-}
-
-.btn-delete:hover {
-  background-color: #cc3b3b;
-}
-
 /* RESPONSIVE */
-@media (max-width: 1024px) {
-  .form-container {
-    margin-left: 0;
-    padding: 2rem;
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
   }
 
   .sidebar {
-    position: relative;
-    top: 0;
-    height: auto;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    padding: 1rem 0;
   }
 
   .sidebar a {
-    margin: 10px 0;
+    margin: 10px;
     font-size: 14px;
-    padding: 10px;
-  }
-
-  .flex-container {
-    flex-direction: column;
-    padding-top: 70px;
   }
 
   .form-grid {
     grid-template-columns: 1fr;
-  }
-
-  .form-buttons {
-    flex-direction: column;
-    align-items: stretch;
   }
 
   .logo {
@@ -212,6 +173,18 @@ header {
   .btn-volver {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
+  }
+
+  .titulo-header {
+    font-size: 18px;
+  }
+
+  .form-container {
+    padding: 1rem;
+  }
+
+  .form-container h2 {
+    font-size: 1.3rem;
   }
 }
 
@@ -225,7 +198,7 @@ header {
     max-width: 180px;
   }
 
-  .form-container h2 {
-    font-size: 1.3rem;
+  .titulo-header {
+    font-size: 16px;
   }
 }

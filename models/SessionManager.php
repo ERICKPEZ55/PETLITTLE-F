@@ -2,7 +2,7 @@
 class SessionManager {
     private $timeout;
 
-    public function __construct($timeout = 1800) { // tiempo en segundos (1800 = 30 minutos)
+    public function __construct($timeout = 1000) { 
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -23,12 +23,11 @@ class SessionManager {
         $_SESSION['last_activity'] = time();
     }
 
-    // Verifica si el usuario está logueado
+    // verifica si el usuario está logueado
     public function isLoggedIn() {
         return isset($_SESSION['user_id']);
     }
 
-    // Obtiene el nombre del usuario actual
     public function getUserName() {
         return $_SESSION['user_name'] ?? null;
     }
@@ -62,4 +61,6 @@ class SessionManager {
         }
     }
 }
+
+
 ?>

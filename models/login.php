@@ -1,13 +1,16 @@
 <?php
 session_start();
 
+// Inicializamos las variables para evitar el warning
 $error = '';
+$registro_exitoso = false;
+
+// Comprobamos si existen mensajes de sesión
 if (isset($_SESSION['error_login'])) {
     $error = $_SESSION['error_login'];
     unset($_SESSION['error_login']);
 }
 
-$registro_exitoso = false;
 if (isset($_SESSION['registro_exitoso'])) {
     $registro_exitoso = true;
     unset($_SESSION['registro_exitoso']);
@@ -17,22 +20,19 @@ if (isset($_SESSION['registro_exitoso'])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login - PetLittle</title>
     <link rel="stylesheet" href="../assets/css/stylesLogin.css" />
     <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container">
         <div class="login-box">
             <h1 class="logo">PetLittle</h1>
             <p>Bienvenido, ingresa tus datos para iniciar sesión.</p>
-
-            <?php if ($error): ?>
-                <p style="color: red; font-weight: bold;"><?php echo htmlspecialchars($error); ?></p>
-            <?php endif; ?>
 
             <form id="loginForm" action="../controllers/authControllers.php" method="post">
                 <label for="email">Correo:</label>
@@ -88,13 +88,41 @@ if (isset($_SESSION['registro_exitoso'])) {
         }
     }
 
-    window.addEventListener("DOMContentLoaded", function () {
+        window.addEventListener("DOMContentLoaded", function () {
         new LoginSessionManager("loginForm", "email", "password");
 
         <?php if ($registro_exitoso): ?>
-            alert('¡Registro exitoso! Por favor inicia sesión.');
+            Swal.fire({
+                icon: 'success',
+                title: '¡Registro exitoso!',
+                text: 'Por favor inicia sesión.',
+                confirmButtonColor: '#3085d6'
+            });
+        <?php endif; ?>
+
+        <?php if ($error): ?>
+            <?php if ($error === 'correo_no_encontrado'): ?>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Correo no registrado',
+                    text: 'El correo que ingresaste no está registrado.'
+                });
+            <?php elseif ($error === 'contrasena_incorrecta'): ?>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Contraseña incorrecta',
+                    text: 'La contraseña que ingresaste no es correcta.'
+                });
+            <?php else: ?>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error de inicio de sesión',
+                    text: 'Por favor verifica tus datos.'
+                });
+            <?php endif; ?>
         <?php endif; ?>
     });
+
     </script>
 </body>
 </html>

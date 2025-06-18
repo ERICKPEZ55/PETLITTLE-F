@@ -33,17 +33,15 @@ $usuario = $_SESSION['usuario'];
             <div class="info-perfil">
                 <p class="nombre"><?php echo htmlspecialchars($usuario['nombre']); ?></p>
                 <p class="rol">Plan básico de salud</p>
-                <a href="">Editar mi información</a>
+                <a href="editarPerfilUsuario.php">Editar mi información</a>
             </div>
         </div>
 
         <aside class="menu-lateral">
             <nav class="menu">
-                <a href="#">Inicio</a>
-                <a href="falta">Mis mascotas</a>
-                <a href="../Gestion_citas/tablas-citas.php">Cancelar citas</a>
-                <a href="#">Historia clínica</a>
-                <a href="#">Notificaciones</a>
+                <a href="agendamiento.php">Inicio</a>
+                <a href="./misMascotas.php">Mis mascotas</a>
+                <a href="../gestionCitas/tablasCitas.php">Cancelar citas</a>
                 <a href="../../models/logout.php" class="cerrar-sesion">Cerrar Sesión</a>
             </nav>
         </aside>
@@ -88,7 +86,7 @@ $usuario = $_SESSION['usuario'];
 
         function reiniciarTemporizador() {
             clearTimeout(timeoutInactivity);
-            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 1000000); // 10 segundos
+            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 10000000); // 10 segundos
         }
 
         window.onload = reiniciarTemporizador;

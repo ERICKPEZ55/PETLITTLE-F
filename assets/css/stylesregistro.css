@@ -1,40 +1,62 @@
+/* ------------------ General ------------------ */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 98vh;
+    min-height: 100vh; /* Reemplaza height: 98vh para evitar salto con SweetAlert */
     background-color: #6EACDA;
-    font-family: 'montserrat' ;
-    
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
 }
+
+/* ------------------ Contenedor principal ------------------ */
 .container {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 50px;
     background: #FFFAF3;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
-    flex-direction: row-reverse; 
-
+    flex-direction: row-reverse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
+
+/* ------------------ Caja de login ------------------ */
 .login-box {
-    max-width: 300px;
+    max-width: 320px;
     text-align: center;
 }
+
+/* ------------------ Logo ------------------ */
 .logo {
     font-size: 30px;
     font-weight: bold;
-    font-family: 'Bowlby One SC';
+    font-family: 'Bowlby One SC', cursive;
+    margin-bottom: 10px;
 }
-input {
+
+/* ------------------ Inputs dentro del formulario ------------------ */
+.login-box input {
     width: 90%;
     padding: 10px;
     margin: 10px 0;
-    border: solid #ccc;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
 }
-button {
-    width: 50%;
+
+/* ------------------ Botón dentro del formulario ------------------ */
+.login-box button {
+    width: 60%;
     padding: 10px;
     background-color: #272A57;
     color: #ffffff;
@@ -42,23 +64,44 @@ button {
     border-radius: 10px;
     cursor: pointer;
     font-size: 18px;
+    transition: background-color 0.3s ease;
 }
 
+.login-box button:hover {
+    background-color: #1c1e42;
+}
 
+/* ------------------ Enlace inferior ------------------ */
+.register-link {
+    margin-top: 15px;
+}
+
+.register-link a {
+    color: #272A57;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* ------------------ Imagen redonda ------------------ */
 .image-container {
-    left: 100px;
-    top: 50%;
     padding: 10px;
-    background: url('img/borde.png') center;
+    background: url('../img/borde.png') center center no-repeat;
+    background-size: cover;
     border-radius: 50%;
 }
 
- .image-container img {
+.image-container img {
     width: 400px;
     height: 400px;
     border-radius: 100%;
-   
+    object-fit: cover;
 }
+
+/* ------------------ Responsive ------------------ */
 @media screen and (max-width: 630px) {
     .container {
         flex-direction: column-reverse;
@@ -68,7 +111,7 @@ button {
     }
 
     .image-container img {
-        width: 49%;
+        width: 80%;
         max-width: 300px;
         height: auto;
     }
@@ -78,7 +121,38 @@ button {
         max-width: 400px;
     }
 
-    .logo{
-        margin-top: -20%;
+    .logo {
+        margin-top: -10%;
     }
+}
+
+/* ------------------ SweetAlert2 Fix: No mover fondo ------------------ */
+body.swal2-shown {
+    overflow: hidden !important;
+    padding-right: 0 !important;
+}
+
+/* ------------------ Estilo visual de los botones del alert ------------------ */
+.swal2-popup {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.swal2-popup .swal2-actions button {
+    all: unset;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #3085d6;
+    color: white;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 100px;
+}
+
+.swal2-popup .swal2-actions button:hover {
+    background-color: #2563eb;
 }

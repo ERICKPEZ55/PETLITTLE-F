@@ -1,13 +1,19 @@
       
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    min-height: 100vh; /* Esto evita scroll y saltos */
     background-color: #6EACDA;
-    font-family: 'montserrat' ;
-    
+    font-family: 'montserrat';
+    overflow-x: hidden;
 }
+
 .container {
     display: flex;
     align-items: center;
@@ -83,3 +89,31 @@ button {
     }
 }
 
+/* ------------------ Estilos para SweetAlert2 (sin afectar tu diseño) ------------------ */
+.swal2-popup {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.swal2-popup .swal2-actions button {
+    all: unset;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #3085d6;
+    color: white;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 100px;
+}
+
+.swal2-popup .swal2-actions button:hover {
+    background-color: #2563eb;
+}
+body.swal2-shown {
+    overflow: hidden !important;
+    padding-right: 0 !important; /* Previene salto horizontal en algunos navegadores */
+}

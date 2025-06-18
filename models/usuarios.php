@@ -26,7 +26,7 @@ class Usuario {
 
         $data['contrasena'] = password_hash($data['contrasena'], PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO datos (nombre, apellido, correo, telefono, contrasena, rol)
+        $sql = "INSERT INTO usuarios (nombre, apellido, correo, telefono, contrasena, rol)
                 VALUES (:nombre, :apellido, :correo, :telefono, :contrasena, :rol)";
         $stmt = $this->pdo->prepare($sql);
 
@@ -44,22 +44,40 @@ class Usuario {
      * Iniciar sesión
      */
     public function login($email, $password) {
-        $stmt = $this->pdo->prepare("SELECT * FROM datos WHERE correo = :correo");
-        $stmt->execute(['correo' => $email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Buscar primero en la tabla datos (clientes/administradores)
+    $stmt = $this->pdo->prepare("SELECT * FROM usuarios WHERE correo = :correo");
+    $stmt->execute(['correo' => $email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['contrasena'])) {
-            return $user;
-        }
-
-        return false;
+    if ($user && password_verify($password, $user['contrasena'])) {
+        return $user;
     }
+
+    // Si no está en datos, buscar en empleados
+    $stmt = $this->pdo->prepare("SELECT * FROM empleados WHERE usuario = :usuario");
+    $stmt->execute(['usuario' => $email]);
+    $empleado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($empleado && $password === $empleado['contrasena']) {
+        // Adaptamos los datos para que tengan el mismo formato que 'datos'
+        return [
+            'id_usuario' => $empleado['id_empleado'],
+            'nombre' => $empleado['nombre'],
+            'apellido' => $empleado['apellido'],
+            'correo' => $empleado['usuario'],
+            'telefono' => $empleado['telefono'] ?? '',
+            'rol' => $empleado['rol'],
+        ];
+    }
+
+    return false;
+}
 
     /**
      * Verifica si un correo ya está registrado
      */
     public function existeCorreo($correo) {
-        $stmt = $this->pdo->prepare("SELECT id_usuario FROM datos WHERE correo = ?");
+        $stmt = $this->pdo->prepare("SELECT id_usuario FROM usuarios WHERE correo = ?");
         $stmt->execute([$correo]);
         return $stmt->fetch() !== false;
     }
@@ -68,7 +86,7 @@ class Usuario {
      * Verifica si un teléfono ya está registrado
      */
     public function existeTelefono($telefono) {
-        $stmt = $this->pdo->prepare("SELECT id_usuario FROM datos WHERE telefono = ?");
+        $stmt = $this->pdo->prepare("SELECT id_usuario FROM usuarios WHERE telefono = ?");
         $stmt->execute([$telefono]);
         return $stmt->fetch() !== false;
     }

@@ -1,3 +1,14 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION['usuario'])) {
+        header("Location: ../login/login.php");
+        exit;
+    }
+
+    $usuario = $_SESSION['usuario'];
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Empleado - Veterinaria</title>
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
-    <link rel="stylesheet" href="../../assets/css/empleado.css">
+    <link rel="stylesheet" href="../../assets/css/estilosEmpleado.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -19,9 +30,9 @@
     <div class="contenedor">
         
         <div class="perfil-sobre-menu">
-            <img src="../../assets/img/Foto empleado.png" alt="Empleado" class="foto-perfil">
-            <p class="nombre"></p>
-            <p class="rol">Asistente Veterinario</p>
+            <p class="nombre"><?php echo htmlspecialchars($usuario['nombre']); ?></p>
+               <p class="rol">Asistente veterinario</p>
+             <a href="editarPerfilEmpleado.html">Editar información</a>
         </div>
 
         <aside class="menu-lateral">

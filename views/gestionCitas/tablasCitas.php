@@ -16,22 +16,13 @@ $nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['n
 
     <header>
         <div class="logo">
-            <img src="../../assets/img/Logo blanco.png" alt="PetLittle" class="logonav">
+            <img src="../../assets/img/Logo negativo.png" alt="PetLittle" class="logonav">
         </div>
-        <!-- <div class="buscador">
-            <span class="icono-lupa">🔍</span> 
-            <input type="text" placeholder="Buscar">
-        </div>-->
-        <!-- <div class="notificaciones" onclick="mostrarNotificaciones()">🔔 <span id="notiCount">0</span></div> -->
-        <div class="usuario-info">
-            <img src="../../assets/img/admin.png" alt="Admin" class="adminimg">
-            <span class="textousuario"><?= htmlspecialchars($nombreUsuario) ?></span>
-        </div>
+        <a href="../usuario/agendamiento.php" id="btnVolver" class="btn-volver">&larr; Volver</a>
     </header>
 
     <aside>
         <ul>
-            <li><a href="../usuario/agendamiento.php">← Volver</a></li>
             <li><a href="../usuario/agendamientoCalendario.php">Agendar Cita</a></li>
             <li><a href="tablasCitas.php">Citas Agendadas </a></li>
             <li><a href="../usuario/laboratorios.php">Laboratorio Clinico</a></li>

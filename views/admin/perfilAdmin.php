@@ -1,3 +1,14 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION['usuario'])) {
+        header("Location: ../login/login.php");
+        exit;
+    }
+
+    $usuario = $_SESSION['usuario'];
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,9 +30,8 @@
 <div class="contenedor">
     
     <div class="perfil-sobre-menu">
-        <img src="../../assets/img/Foto empleado.png" alt="Empleado" class="foto-perfil">
-        <p class="nombre"></p>
-        <p class="rol">Asistente Veterinario</p>
+         <p class="nombre"><?php echo htmlspecialchars($usuario['nombre']); ?></p>
+        <p class="rol">Administrador</p>
         <a href="../admin/editarPerfil.html">Editar información</a>
     </div>
 

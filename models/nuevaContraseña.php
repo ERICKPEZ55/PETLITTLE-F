@@ -31,7 +31,7 @@ class RecuperarContrasena {
             return "Las contraseñas no coinciden.";
         }
         $nuevaHash = password_hash($nueva, PASSWORD_DEFAULT);
-        $sql = "UPDATE datos SET contrasena=? WHERE correo=?";
+        $sql = "UPDATE usuarios SET contrasena=? WHERE correo=?";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("ss", $nuevaHash, $correo);
 

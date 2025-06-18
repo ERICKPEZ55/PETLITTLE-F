@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pdo = conexion(); // Asegúrate de que la función conexion() esté bien definida
 
     // Verificar si el correo existe en la base de datos
-    $stmt = $pdo->prepare("SELECT * FROM datos WHERE correo = :correo");
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE correo = :correo");
     $stmt->bindParam(':correo', $email);
     $stmt->execute();
 
