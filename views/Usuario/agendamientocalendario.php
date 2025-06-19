@@ -216,7 +216,8 @@
   });
 
   async function guardarCita(fechaCompleta) {
-    const idMascota = document.getElementById('mascotaSelect').value;
+    const idMascota = document.getElementById('mascota').value;
+
     if (!idMascota) {
       Swal.fire('Selecciona una mascota', '', 'info');
       return;
@@ -228,7 +229,7 @@
       id_mascota: idMascota
     };
 
-    const respuesta = await fetch('guardarCita.php', {
+    const respuesta = await fetch('../../controllers/guardarCita.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(datos)
