@@ -37,7 +37,6 @@ $nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['n
                 <th>Especialidad</th>
                 <th>Fecha Orden</th>
                 <th>Veterinario</th>
-                <th>Estado</th>
                 <th>Acciones</th>
                 </tr>
             </thead>
@@ -46,7 +45,6 @@ $nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['n
                 <td>Oftalmología</td>
                 <td>2025-04-05</td>
                 <td>Dr. Ramos</td>
-                <td><span class="estado-pendiente">Pendiente</span></td>
                 <td><button class="btn-ver">Ver Orden</button></td>
                 </tr>
         </table>

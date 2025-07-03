@@ -1,55 +1,69 @@
+/* ============================================
+   RESETEO GLOBAL Y CONFIGURACIÓN GENERAL
+   ============================================ */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    margin: 0; /* Elimina márgenes por defecto */
+    padding: 0; /* Elimina rellenos por defecto */
+    box-sizing: border-box; /* Asegura que el padding y borde no aumenten el tamaño real */
+    font-family: Arial, sans-serif; /* Fuente base para todo el documento */
 }
 
+/* ============================================
+   CUERPO PRINCIPAL
+   ============================================ */
 body {
-    display: flex;
+    display: flex; /* Distribución principal en fila */
     flex-direction: row;
-    background: #f4f4f4;
-    min-height: 100vh;
+    background: #f4f4f4; /* Fondo gris claro */
+    min-height: 100vh; /* Altura mínima igual al alto de la ventana */
 }
 
+/* ============================================
+   HEADER FIJO SUPERIOR
+   ============================================ */
 header {
     position: fixed;
     width: 100%;
     height: 10%;
-    background: #6EACDA;
+    background: #6EACDA; /* Azul claro */
     display: flex;
     justify-content: space-between;
     padding: 15px 30px;
-    z-index: 1000;
+    z-index: 1000; /* Siempre por encima del contenido */
 }
 
-.logo-img{
+/* Logo en el header */
+.logo-img {
     width: 200px;
     height: 60px;
 }
 
+/* Botón de volver (estilo general) */
 .btn-volver {
-  background-color: #272A57;
-  border: none;
-  color: white;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  white-space: nowrap;
+    background-color: #272A57; /* Azul oscuro */
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    white-space: nowrap;
 }
 
+/* Hover para botón de volver */
 .btn-volver:hover {
-  background-color: #272A57;
+    background-color: #272A57; /* Mismo color (puede cambiar si se desea destacar) */
 }
 
-
+/* ============================================
+   MENÚ LATERAL (ASIDE)
+   ============================================ */
 aside {
     width: 220px;
     background: #272A57;
@@ -60,13 +74,15 @@ aside {
     margin-top: 20px;
 }
 
+/* Elementos de lista */
 aside li {
     padding: 15px;
     cursor: pointer;
     color: white;
 }
 
-aside a{
+/* Enlaces del menú lateral */
+aside a {
     display: block;
     margin-top: 20px;
     text-decoration: none;
@@ -75,14 +91,20 @@ aside a{
     margin-left: 15px;
 }
 
+/* ============================================
+   CONTENIDO PRINCIPAL
+   ============================================ */
 main {
     flex-grow: 1;
-    padding: 80px 20px 20px 220px; 
+    padding: 80px 20px 20px 220px; /* Espaciado considerando el aside */
     width: 100%;
     margin-top: 20px;
     margin-left: 10px;
 }
 
+/* ============================================
+   TABLAS
+   ============================================ */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -100,6 +122,9 @@ th {
     color: white;
 }
 
+/* ============================================
+   BOTONES GENERALES
+   ============================================ */
 button {
     background: #6EACDA;
     color: white;
@@ -107,63 +132,93 @@ button {
     cursor: pointer;
     border-radius: 5px;
     font-size: 14px;
-    padding: 10px 12px;       
-    min-width: 125px;          
-    white-space: nowrap;       
+    padding: 10px 12px;
+    min-width: 125px;
+    white-space: nowrap;
     text-align: center;
+    width: 14%; /* Reglas específicas añadidas luego */
+    margin: 5px 0;
 }
 
-
-.editar, .borrar {
+/* Iconos de acción */
+.editar,
+.borrar {
     cursor: pointer;
     font-size: 18px;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 2000; 
-}
-
-.modal-content {
-    position: relative;
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-    z-index: 2001; 
-}
+/* ============================================
+   MODAL DE CONFIRMACIÓN / EDICIÓN
+   ============================================ */
 .modal {
     display: none;
     position: fixed;
     z-index: 1;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo semitransparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
 }
 
+/* Contenido interno del modal */
 .modal-content {
+    position: relative;
     background-color: #fff;
     margin: 10% auto;
     padding: 20px;
     border-radius: 10px;
     width: 80%;
     max-width: 500px;
+    text-align: center;
+    z-index: 2001;
 }
 
+/* ============================================
+   BARRA DE BÚSQUEDA
+   ============================================ */
+.buscador {
+    display: flex;
+    align-items: center;
+    background-color: #CFE6F8; /* Azul claro pastel */
+    border-radius: 30px;
+    padding: 5px 15px;
+    width: 300px;
+    height: 35px;
+}
 
-/* Responsive */
+.buscador input {
+    border: none;
+    background: transparent;
+    outline: none;
+    padding-left: 10px;
+    font-size: 14px;
+    width: 100%;
+    color: #333;
+}
+
+/* Icono de lupa en buscador */
+.icono-lupa {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Logo en barra de navegación si se usa */
+.logonav {
+    width: 200px;
+    height: 60px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN (PANTALLAS PEQUEÑAS)
+   ============================================ */
 @media screen and (max-width: 768px) {
     body {
-        flex-direction: column;
+        flex-direction: column; /* En columnas para móviles */
     }
 
     aside {
@@ -177,11 +232,12 @@ button {
         padding: 100px 10px 20px 10px;
     }
 
-    table, th, td {
+    table,
+    th,
+    td {
         font-size: 14px;
     }
 
-   
     header {
         flex-direction: column;
         height: auto;
@@ -208,38 +264,4 @@ button {
         width: 30px;
         height: 30px;
     }
-}
-button {
-    width: 14%;
-    margin: 5px 0;
-
-}
-
-.buscador {
-    display: flex;
-    align-items: center;
-    background-color: #CFE6F8; /* azul claro */
-    border-radius: 30px;
-    padding: 5px 15px;
-    width: 300px;
-    height: 35px;
-}
-
-.buscador input {
-    border: none;
-    background: transparent;
-    outline: none;
-    padding-left: 10px;
-    font-size: 14px;
-    width: 100%;
-    color: #333;
-}
-
-.icono-lupa {
-    font-size: 18px;
-    color: #555;
-}
-.logonav{
-    width: 200px;
-    height: 60px;
 }

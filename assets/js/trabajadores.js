@@ -1,3 +1,6 @@
+console.log('trabajadores.js cargado');
+
+
 window.addEventListener('DOMContentLoaded', () => {
     const btnAgregar = document.getElementById('btnAgregar');
     const modalAgregar = document.getElementById('modalAgregar');
@@ -21,13 +24,18 @@ window.addEventListener('DOMContentLoaded', () => {
                     <td class="td-nombre">${emp.nombre}</td>
                     <td class="td-apellido">${emp.apellido}</td>
                     <td class="td-rol">${emp.rol}</td>
-                    <td>${emp.usuario}</td>
+                    <td class="td-correo">${emp.usuario}</td>
                     <td class="td-telefono">${emp.telefono}</td>
                     <td>${emp.contrasena}</td>
-                    <td><button class="editarBtn">✏️</button></td>
+                    <td>
+                        <button class="editarBtn">✏️</button>
+                        <button class="eliminarBtn">🗑️</button>
+                    </td>
                 `;
                 tablaUsuarios.appendChild(fila);
+
                 fila.querySelector('.editarBtn').addEventListener('click', () => abrirEdicion(fila));
+                fila.querySelector('.eliminarBtn').addEventListener('click', () => eliminarUsuario(emp.id_empleado));
             });
         });
 
@@ -57,13 +65,13 @@ window.addEventListener('DOMContentLoaded', () => {
         const apellido = document.getElementById('nuevoApellido').value.trim();
         const rol = document.getElementById("rol").value;
         const telefono = document.getElementById('nuevoTelefono').value.trim();
-        const usuario = nombre.toLowerCase().replace(/\s+/g, '') + '@gmail.com';
+        const usuario = document.getElementById('nuevoCorreo').value.trim();
         const contrasena = generarContrasena(6);
 
         const telefonoValido = /^[0-9]{10}$/.test(telefono);
+        const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usuario);
 
-        if (nombre && rol && telefonoValido) {
-            // guardar en la base de datos 
+        if (nombre && rol && telefonoValido && correoValido) {
             fetch('../../controllers/guardarEmpleado.php', {
                 method: 'POST',
                 headers: {
@@ -86,18 +94,25 @@ window.addEventListener('DOMContentLoaded', () => {
                         <td class="td-nombre">${nombre}</td>
                         <td class="td-apellido">${apellido}</td>
                         <td class="td-rol">${rol}</td>
-                        <td>${usuario}</td>
+                        <td class="td-correo">${usuario}</td>
                         <td class="td-telefono">${telefono}</td>
                         <td>${contrasena}</td>
-                        <td><button class="editarBtn">✏️</button></td>
+                        <td>
+                            <button class="editarBtn">✏️</button>
+                            <button class="eliminarBtn">🗑️</button>
+                        </td>
                     `;
                     tablaUsuarios.appendChild(fila);
-                    fila.querySelector('.editarBtn').addEventListener('click', () => abrirEdicion(fila));
 
+                    fila.querySelector('.editarBtn').addEventListener('click', () => abrirEdicion(fila));
+                    fila.querySelector('.eliminarBtn').addEventListener('click', () => eliminarUsuario(data.id)); // asume que el backend devuelve el id
+
+                    // Limpiar formulario
                     document.getElementById('nuevoNombre').value = '';
                     document.getElementById('nuevoApellido').value = '';
                     document.getElementById('rol').value = '';
                     document.getElementById('nuevoTelefono').value = '';
+                    document.getElementById('nuevoCorreo').value = '';
 
                     modalAgregar.style.display = 'none';
                 } else {
@@ -112,6 +127,8 @@ window.addEventListener('DOMContentLoaded', () => {
         } else {
             if (!telefonoValido) {
                 alert('El teléfono debe tener exactamente 10 dígitos numéricos.');
+            } else if (!correoValido) {
+                alert('Ingresa un correo válido.');
             } else {
                 alert('Por favor completa todos los campos.');
             }
@@ -149,4 +166,24 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    function eliminarUsuario(id) {
+        if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
+            fetch(`../../controllers/eliminarEmpleado.php?id=${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload(); // recargar para actualizar la tabla
+                } else {
+                    alert("No se pudo eliminar el usuario.");
+                }
+            })
+            .catch(err => {
+                console.error('Error al eliminar:', err);
+                alert("Error de conexión al eliminar.");
+            });
+        }
+    }
 });

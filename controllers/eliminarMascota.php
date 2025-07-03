@@ -31,19 +31,51 @@ if (isset($_GET['id'])) {
                 ':usuario' => $_SESSION['id_usuario']
             ]);
 
-            // Eliminar imagen del servidor (si existe)
+            // Eliminar imagen del servidor
             $ruta_imagen = __DIR__ . '/../assets/img/mascotas/' . $imagen;
             if (file_exists($ruta_imagen)) {
                 unlink($ruta_imagen);
             }
 
-            echo "<script>alert('Mascota eliminada exitosamente'); window.location.href = '../views/usuario/misMascotas.php';</script>";
+            $_SESSION['alerta'] = [
+                'tipo' => 'success',
+                'mensaje' => 'Mascota eliminada exitosamente.'
+            ];
+            header("Location: ../views/usuario/misMascotas.php");
+            exit;
+
         } else {
-            echo "<script>alert('Mascota no encontrada o no autorizada.'); window.location.href = '../views/usuario/misMascotas.php';</script>";
+            $_SESSION['alerta'] = [
+                'tipo' => 'error',
+                'mensaje' => 'Mascota no encontrada o no tienes permiso para eliminarla.'
+            ];
+            header("Location: ../views/usuario/misMascotas.php");
+            exit;
         }
+
     } catch (PDOException $e) {
-        echo "Error al eliminar: " . $e->getMessage();
+        // Verificar si el error es por restricción de clave foránea
+        if ($e->getCode() == 23000) {
+            $_SESSION['alerta'] = [
+                'tipo' => 'error',
+                'mensaje' => 'No puedes eliminar esta mascota porque tiene citas activas asociadas.'
+            ];
+        } else {
+            $_SESSION['alerta'] = [
+                'tipo' => 'error',
+                'mensaje' => 'Ocurrió un error al intentar eliminar la mascota.'
+            ];
+        }
+
+        header("Location: ../views/usuario/misMascotas.php");
+        exit;
     }
+
 } else {
-    echo "<script>alert('ID de mascota no proporcionado.'); window.location.href = '../views/usuario/misMascotas.php';</script>";
+    $_SESSION['alerta'] = [
+        'tipo' => 'error',
+        'mensaje' => 'ID de mascota no proporcionado.'
+    ];
+    header("Location: ../views/usuario/misMascotas.php");
+    exit;
 }

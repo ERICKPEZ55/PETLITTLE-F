@@ -1,53 +1,63 @@
-
+/* =========================================================
+   ESTILO BASE Y TIPOGRAFÍA GENERAL
+   ========================================================= */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna y legible */
+    background-color: #f4f6f8; /* Fondo gris claro */
     margin: 0;
     padding: 0;
-    color: #333;
-    line-height: 1.6;
+    color: #333; /* Texto general oscuro */
+    line-height: 1.6; /* Altura entre líneas mejorada */
 }
 
-
+/* =========================================================
+   ENCABEZADO PRINCIPAL (HEADER STICKY)
+   ========================================================= */
 .main-header {
-    background-color: #6EACDA;
+    background-color: #6EACDA; /* Azul pastel */
     padding: 1.5rem 2rem;
     border-bottom: 1px solid #e0e0e0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 100; /* Encima del contenido */
 }
 
+/* Contenedor del contenido dentro del header */
 .header-content {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
+/* Logo en el header */
 .logo {
     width: 150px;
     height: auto;
 }
 
+/* Título de la página */
 .page-title {
     margin: 0;
     font-size: 2.2rem;
     color: #000000;
     font-weight: 600;
-    flex-grow: 1; 
-    text-align: center; 
+    flex-grow: 1;
+    text-align: center;
 }
 
-
+/* =========================================================
+   CONTENIDO PRINCIPAL
+   ========================================================= */
 .main-content {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 2rem;
 }
 
+/* Tarjeta contenedora del perfil de mascota */
 .pet-profile {
     background-color: #fff;
     border-radius: 12px;
@@ -55,7 +65,7 @@ body {
     overflow: hidden;
 }
 
-
+/* Vista general de la mascota */
 .pet-overview {
     display: flex;
     padding: 2rem;
@@ -63,6 +73,7 @@ body {
     align-items: center;
 }
 
+/* Imagen circular de la mascota */
 .pet-image {
     flex-shrink: 0;
     width: 300px;
@@ -77,21 +88,22 @@ body {
 .pet-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Recorta y ajusta la imagen manteniendo proporción */
 }
 
+/* Detalles rápidos de la mascota */
 .pet-details-brief {
     flex-grow: 1;
     display: flex;
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    text-align: center; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .pet-name {
     font-size: 2.5rem;
-    color: #272A57;
+    color: #272A57; /* Azul oscuro */
     margin-bottom: 0.5rem;
 }
 
@@ -106,7 +118,9 @@ body {
     color: #333;
 }
 
-
+/* =========================================================
+   SECCIONES INTERNAS
+   ========================================================= */
 .section-title {
     font-size: 1.6rem;
     color: #ffffff;
@@ -116,6 +130,7 @@ body {
     font-weight: 500;
 }
 
+/* Grid de información médica u otras secciones */
 .info-grid {
     padding: 1.5rem 2rem;
     display: grid;
@@ -129,7 +144,9 @@ body {
     color: #000000;
 }
 
-
+/* =========================================================
+   SECCIÓN DE HISTORIAL Y CARGA DE ARCHIVOS
+   ========================================================= */
 .upload-history {
     padding: 1.5rem 2rem;
     border-top: 1px solid #e0e0e0;
@@ -137,6 +154,7 @@ body {
     text-align: center;
 }
 
+/* Contenedor de la subida */
 .upload-container {
     display: inline-block;
 }
@@ -161,10 +179,12 @@ body {
 }
 
 .upload-container button:hover {
-    background-color: #3498db;
+    background-color: #3498db; /* Azul más fuerte */
 }
 
-
+/* =========================================================
+   NAVEGACIÓN INFERIOR
+   ========================================================= */
 .navigation {
     padding: 1rem 2rem;
     text-align: center;
@@ -188,7 +208,9 @@ body {
     color: white;
 }
 
-
+/* =========================================================
+   RESPONSIVE: ADAPTACIÓN A MÓVILES
+   ========================================================= */
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
@@ -203,7 +225,6 @@ body {
 
     .page-title {
         font-size: 2rem;
-
     }
 
     .pet-overview {
@@ -224,7 +245,7 @@ body {
     }
 
     .info-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Una sola columna en móviles */
     }
 
     .upload-container {

@@ -1,35 +1,38 @@
-
+/* ========== RESET GENERAL ========== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif; /* Fuente base global */
 }
 
+/* ========== ESTILOS DEL CUERPO ========== */
 body {
-    background-color: #6EACDA;
-    display: flex;
+    background-color: #6EACDA; /* Color de fondo principal */
+    display: flex; /* Centrado del contenedor */
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100vh; /* Altura total del viewport */
 }
 
+/* ========== CONTENEDOR PRINCIPAL ========== */
 .container {
-    background: white;
+    background: white; /* Fondo blanco para contraste */
     padding: 35px;
-    border-radius: 10px;
+    border-radius: 10px; /* Bordes redondeados */
     text-align: center;
-    max-width: 330px;
+    max-width: 330px; /* Ancho máximo del formulario */
 }
 
+/* ========== TÍTULO PRINCIPAL ========== */
 h2 {
-    font-family: 'Bowlby One SC', sans-serif;
+    font-family: 'Bowlby One SC', sans-serif; /* Fuente personalizada para destacar */
     font-size: 24px;
     color: #272A57;
     margin-bottom: 10px;
 }
 
-
+/* ========== PÁRRAFOS INFORMATIVOS ========== */
 p {
     font-size: 14px;
     color: #272A57;
@@ -37,7 +40,7 @@ p {
     margin-top: 20px;
 }
 
-
+/* ========== CAMPOS DE ENTRADA ========== */
 input {
     width: 100%;
     padding: 10px;
@@ -48,21 +51,23 @@ input {
     margin-bottom: 10px;
 }
 
+/* ========== BOTÓN PRINCIPAL ========== */
 button {
-    background: #272A57;
-    color: #FFFAF3;
+    background: #272A57; /* Azul oscuro institucional */
+    color: #FFFAF3; /* Texto blanco/beige */
     padding: 10px;
     border-radius: 5px;
     width: 100%;
     text-align: center;
     cursor: pointer;
-
 }
 
+/* Hover sobre botón */
 button:hover {
-    background: #6EACDA;
+    background: #6EACDA; /* Tono celeste al pasar el mouse */
 }
 
+/* ========== MENSAJE DE ESTADO ========== */
 #mensaje {
     margin-top: 15px;
     font-size: 14px;

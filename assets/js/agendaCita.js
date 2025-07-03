@@ -66,10 +66,9 @@ function cargarCitasDelDia() {
         <div class="estado">
           <label>Estado:</label>
           <select>
-            <option${cita.estado === 'Pendiente' ? ' selected' : ''}>Pendiente</option>
-            <option${cita.estado === 'Confirmada' ? ' selected' : ''}>Confirmada</option>
-            <option${cita.estado === 'Completada' ? ' selected' : ''}>Completada</option>
+            <option${cita.estado === 'Confirmada' ? ' selected' : ''}>Asistio</option>
             <option${cita.estado === 'Cancelada' ? ' selected' : ''}>Cancelada</option>
+            <option${cita.estado === 'Pendiente' ? ' selected' : ''}>No asistio</option>
           </select>
         </div>
       `;

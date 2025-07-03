@@ -1,3 +1,4 @@
+/* ==== ESTILOS GENERALES ==== */
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -5,6 +6,7 @@ body {
     color: #1E1E1E;
 }
 
+/* ==== ENCABEZADO PRINCIPAL ==== */
 .header {
     display: flex;
     align-items: center;
@@ -15,12 +17,13 @@ body {
     position: relative;
 }
 
+/* Contenedor izquierdo del header (logo + título) */
 .header-left {
     display: flex;
     align-items: center;
-    
 }
 
+/* Botón de volver */
 .btn-volver {
     background-color: #090b45;
     border: none;
@@ -41,6 +44,7 @@ body {
     background-color: #111361;
 }
 
+/* Título centrado en el header */
 .titulo-header {
     position: absolute;
     left: 50%;
@@ -49,9 +53,9 @@ body {
     font-weight: bold;
     text-align: center;
     white-space: nowrap;
-  
 }
 
+/* ==== LOGO ==== */
 .logo-container {
     display: flex;
     align-items: center;
@@ -64,12 +68,14 @@ body {
     border-radius: 15px;
 }
 
+/* Título opcional al lado del logo */
 .titulo {
     font-size: 22px;
     font-weight: bold;
     align-content: center;
 }
 
+/* ==== CONTENEDOR GENERAL ==== */
 .contenedor {
     display: flex;
     min-height: calc(100vh - 90px);
@@ -77,12 +83,14 @@ body {
     overflow: hidden;
 }
 
+/* ==== CONTENEDOR DE AGENDA ==== */
 .agenda-container {
     max-width: 900px;
     margin: 2rem auto;
     padding: 1rem;
 }
 
+/* ==== CABECERA DEL CALENDARIO ==== */
 .calendar-header {
     display: flex;
     justify-content: space-between;
@@ -111,12 +119,14 @@ body {
     background-color: #111361;
 }
 
+/* ==== LISTA DE HORARIOS ==== */
 .time-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
 }
 
+/* Tarjetas individuales de horarios */
 .time-slot {
     background: #fff;
     padding: 1rem;
@@ -130,6 +140,7 @@ body {
     color: #333;
 }
 
+/* ==== TARJETAS DE SERVICIO ==== */
 .service-card {
     background-color: #fff;
     padding: 1rem;
@@ -148,6 +159,7 @@ body {
     margin: 0.2rem 0;
 }
 
+/* Información y estado de servicio */
 .info {
     flex: 1;
 }
@@ -167,6 +179,7 @@ body {
     border: 1px solid #ccc;
 }
 
+/* ==== COLORES POR ESTADO DE CITA ==== */
 .pendiente {
     border-left: 5px solid #ffc107;
 }
@@ -183,6 +196,9 @@ body {
     border-left: 5px solid #e83e8c;
 }
 
+/* ==== MEDIA QUERIES ==== */
+
+/* Estilos responsivos para tablets */
 @media (max-width: 768px) {
     .header {
         padding: 12px 20px;
@@ -216,18 +232,19 @@ body {
     }
 }
 
+/* Estilos para pantallas pequeñas (móviles) */
 @media (max-width: 600px) {
     .header {
-        flex-direction: column; /* Apila los elementos verticalmente */
+        flex-direction: column;
         padding: 10px 15px;
         text-align: center;
-        align-items: center; /* Centra los ítems apilados */
+        align-items: center;
     }
 
     .header-left {
         width: 100%;
-        justify-content: center; /* Centra el logo */
-        margin-bottom: 10px; /* Espacio debajo del logo */
+        justify-content: center;
+        margin-bottom: 10px;
     }
 
     .logo-container {
@@ -235,8 +252,8 @@ body {
     }
 
     .btn-volver {
-        margin-top: 10px; /* Añade margen encima del botón cuando está apilado */
-        margin-right: 0; /* Asegura que no haya margen derecho */
+        margin-top: 10px;
+        margin-right: 0;
         font-size: 0.9rem;
         padding: 0.4rem 0.8rem;
     }
@@ -248,7 +265,7 @@ body {
     }
 
     .titulo-header {
-        position: static; /* Quita el posicionamiento absoluto */
+        position: static;
         transform: none;
         font-size: 1.8rem;
         width: auto;
@@ -290,6 +307,7 @@ body {
     }
 }
 
+/* Estilos para dispositivos muy pequeños */
 @media (max-width: 400px) {
     .header {
         padding: 8px 10px;

@@ -1,12 +1,18 @@
 <?php
-    session_start();
+session_start();
 
-    if (!isset($_SESSION['usuario'])) {
-        header("Location: ../login/login.php");
-        exit;
-    }
+// ✅ Evitar que el navegador guarde en caché
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
-    $usuario = $_SESSION['usuario'];
+// ✅ Redirigir al login si no hay sesión activa
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../login/login.php");
+    exit;
+}
+
+$usuario = $_SESSION['usuario'];
 ?>
 
 <!DOCTYPE html>
@@ -28,18 +34,17 @@
     </header>
 
     <div class="contenedor">
-        
         <div class="perfil-sobre-menu">
             <p class="nombre"><?php echo htmlspecialchars($usuario['nombre']); ?></p>
-               <p class="rol">Asistente veterinario</p>
-             <a href="editarPerfilEmpleado.html">Editar información</a>
+            <p class="rol">Asistente veterinario</p>
+            <a href="editarPerfilEmpleado.php">Editar información</a>
         </div>
 
         <aside class="menu-lateral">
             <nav class="menu">
-                <a href="#">Inicio</a>
-                <a href="#">Notificaciones</a>
-                <a href="../../models/login.php" class="cerrar-sesion">Cerrar Sesión</a>
+                <a href="../empleado/empleado.php">Inicio</a>
+                <!-- Cambiado a cerrar sesión correctamente -->
+                <a href="#" class="cerrar-sesion" id="cerrarSesion">Cerrar Sesión</a>
             </nav>
         </aside>
 
@@ -50,15 +55,15 @@
             <div class="opciones">
                 <div class="opcion">
                     <h3>Gestión de Agenda y Citas</h3>
-                    <button onclick="window.location.href='../agendaCitasEmpleado/gestionAgendaCitas.html'">Ingresar</button>
+                    <button onclick="window.location.href='../agendaCitasEmpleado/gestionAgendaCitas.php'">Ingresar</button>
                 </div>
                 <div class="opcion">
-                    <h3>Ordenes de Laboratorio</h3>
-                    <button onclick="window.location.href='../ordenesLab/ordenes.html'">Ingresar</button>
+                    <h3>Órdenes de Laboratorio</h3>
+                    <button onclick="window.location.href='../ordenesLab/ordenesLaboratorio.php'">Ingresar</button>
                 </div>
                 <div class="opcion">
                     <h3>Gestión de Mascotas</h3>
-                    <button onclick="window.location.href='../gestionMascotas/gestion.html'">Ingresar</button>
+                    <button onclick="window.location.href='../gestionMascotas/gestion.php'">Ingresar</button>
                 </div>
                 <div class="opcion">
                     <h3>Reportes Médicos</h3>
@@ -67,5 +72,27 @@
             </div>
         </main>
     </div>
+
+    <!-- ✅ Script para cerrar sesión con confirmación -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById("cerrarSesion").addEventListener("click", function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Cerrar sesión?',
+                text: "¿Estás seguro de que quieres salir?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, cerrar sesión',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '../../models/logout.php';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

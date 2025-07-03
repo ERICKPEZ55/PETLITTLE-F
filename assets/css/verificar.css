@@ -1,60 +1,67 @@
+/* ========== ESTILOS GENERALES DEL CUERPO ========== */
 body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #7bb5e3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif; /* Fuente legible y moderna */
+    background-color: #7bb5e3;           /* Fondo azul claro */
+    display: flex;                       /* Centrado horizontal */
+    justify-content: center;            /* Centrado horizontal */
+    align-items: center;                /* Centrado vertical */
+    height: 100vh;                      /* Ocupa el 100% del alto de la pantalla */
+}
 
-        .card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-        }
+/* ========== TARJETA CONTENEDORA ========== */
+.card {
+    background: white;                               /* Fondo blanco para contraste */
+    padding: 40px;                                    /* Espaciado interno amplio */
+    border-radius: 15px;                              /* Bordes redondeados */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);           /* Sombra sutil */
+    text-align: center;                               /* Centrado del contenido */
+    width: 100%;                                      /* Ocupa todo el ancho disponible */
+    max-width: 400px;                                 /* Máximo ancho fijo */
+}
 
-        h2 {
-            margin-bottom: 10px;
-            color: #1c2141;
-        }
+/* ========== TÍTULOS Y TEXTOS ========== */
+h2 {
+    margin-bottom: 10px;
+    color: #1c2141;               /* Azul oscuro */
+}
 
-        p {
-            color: #333;
-            margin-bottom: 30px;
-        }
+p {
+    color: #333;                  /* Gris oscuro para lectura */
+    margin-bottom: 30px;         /* Separación con el siguiente elemento */
+}
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-        }
+/* ========== CAMPOS DE ENTRADA ========== */
+input {
+    width: 100%;                 /* Ocupa todo el ancho del contenedor */
+    padding: 12px;               /* Espaciado interno */
+    margin-bottom: 15px;         /* Separación entre campos */
+    border: 1px solid #ccc;      /* Borde gris claro */
+    border-radius: 8px;          /* Bordes redondeados */
+    font-size: 16px;             /* Tamaño legible */
+}
 
-        button {
-            background-color: #252551;
-            color: white;
-            padding: 12px;
-            width: 100%;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #181833;
-        }
+/* ========== BOTÓN PRINCIPAL ========== */
+button {
+    background-color: #252551;   /* Azul oscuro */
+    color: white;                /* Texto blanco */
+    padding: 12px;               /* Espaciado interno */
+    width: 100%;                 /* Ocupa todo el ancho del contenedor */
+    border: none;                /* Sin bordes */
+    border-radius: 8px;          /* Bordes redondeados */
+    font-size: 16px;             /* Tamaño legible */
+    cursor: pointer;            /* Cambia el cursor al pasar por encima */
+    box-shadow: 0 4px 0 #181833; /* Efecto de profundidad (sombra inferior) */
+}
 
-        button:hover {
-            background-color: #333369;
-        }
+/* Hover del botón */
+button:hover {
+    background-color: #333369;  /* Color más claro al pasar el mouse */
+}
 
-        #resultado {
-            margin-top: 20px;
-            font-weight: bold;
-            color: #1c2141;
-        }
+/* ========== MENSAJE RESULTADO ========== */
+#resultado {
+    margin-top: 20px;           /* Separación con el botón */
+    font-weight: bold;          /* Texto en negrita */
+    color: #1c2141;             /* Azul oscuro para coherencia */
+}

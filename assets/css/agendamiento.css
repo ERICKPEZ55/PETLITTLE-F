@@ -1,3 +1,6 @@
+/* =======================================
+   Estilos generales del cuerpo del sitio
+   ======================================= */
 body {
     margin: 0;
     padding: 0;
@@ -5,6 +8,9 @@ body {
     background-color: #FFFAF3;
 }
 
+/* ======================
+   Encabezado del sistema
+   ====================== */
 .header {
     display: flex;
     align-items: center;
@@ -35,9 +41,11 @@ body {
     font-size: 26px;
     font-weight: bold;
     width: 100%;
-
 }
 
+/* ===========================================
+   Contenedor general que divide el layout
+   =========================================== */
 .contenedor {
     display: flex;
     min-height: calc(100vh - 90px);
@@ -45,6 +53,9 @@ body {
     overflow: hidden;
 }
 
+/* =====================================
+   Perfil de usuario sobre el menú lateral
+   ===================================== */
 .perfil-sobre-menu {
     position: absolute;
     top: 60px;
@@ -55,10 +66,10 @@ body {
     text-align: left;
 }
 
-.perfil-sobre-menu a{
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
+.perfil-sobre-menu a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
 }
 
 .perfil-sobre-menu .foto-perfil {
@@ -87,6 +98,9 @@ body {
     margin-top: 5px;
 }
 
+/* ======================
+   Menú lateral izquierdo
+   ====================== */
 .menu-lateral {
     width: 215px;
     height: 220px;
@@ -112,6 +126,9 @@ body {
     color: white;
 }
 
+/* ===============================
+   Contenido principal del layout
+   =============================== */
 .contenido {
     flex-grow: 1;
     padding: 50px;
@@ -123,6 +140,9 @@ body {
     max-width: 100%;
 }
 
+/* ==========================
+   Opciones del panel usuario
+   ========================== */
 .opciones {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -143,7 +163,9 @@ body {
     align-items: center;
 }
 
-/* Centrado y zoom para imagen */
+/* ==========================
+   Imagen central de opción
+   ========================== */
 .calendarioimg {
     width: 60px;
     transition: transform 0.3s ease;
@@ -155,6 +177,9 @@ body {
     transform: scale(1.1);
 }
 
+/* ====================
+   Botones del sistema
+   ==================== */
 button {
     background-color: white;
     color: black;
@@ -175,12 +200,18 @@ button:hover {
     background-color: #1e1f45;
 }
 
+/* ========================
+   Reset adicional (scroll)
+   ======================== */
 html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
 }
 
+/* ================================
+   Adaptaciones para pantallas pequeñas
+   ================================ */
 @media (max-width: 768px) {
     .header {
         flex-direction: column;

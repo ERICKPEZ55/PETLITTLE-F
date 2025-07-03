@@ -1,3 +1,6 @@
+/* ================================
+   RESET GENERAL Y TIPOGRAFÍA BASE
+   ================================ */
 * {
     margin: 0;
     padding: 0;
@@ -5,6 +8,9 @@
     font-family: Arial, sans-serif;
 }
 
+/* ======================
+   ESTILOS DEL CUERPO
+   ====================== */
 body {
     display: flex;
     flex-direction: row;
@@ -12,6 +18,9 @@ body {
     min-height: 100vh;
 }
 
+/* ======================
+   ENCABEZADO PRINCIPAL
+   ====================== */
 header {
     position: fixed;
     width: 100%;
@@ -23,33 +32,37 @@ header {
     z-index: 1000;
 }
 
-.logo-img{
+/* Imagen del logo en el header */
+.logo-img {
     width: 200px;
     height: 60px;
 }
 
+/* Botón de volver (esquina derecha) */
 .btn-volver {
-  background-color: #272A57;
-  border: none;
-  color: white;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  white-space: nowrap;
+    background-color: #272A57;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    white-space: nowrap;
 }
 
 .btn-volver:hover {
-  background-color: #272A57;
+    background-color: #272A57;
 }
 
-
+/* ===========================
+   BARRA LATERAL (MENÚ)
+   =========================== */
 aside {
     width: 220px;
     background: #272A57;
@@ -60,13 +73,15 @@ aside {
     margin-top: 20px;
 }
 
+/* Ítems del menú */
 aside li {
     padding: 15px;
     cursor: pointer;
     color: white;
 }
 
-aside a{
+/* Enlaces del menú */
+aside a {
     display: block;
     margin-top: 20px;
     text-decoration: none;
@@ -75,14 +90,20 @@ aside a{
     margin-left: 15px;
 }
 
+/* ===========================
+   CONTENIDO PRINCIPAL
+   =========================== */
 main {
     flex-grow: 1;
-    padding: 80px 20px 20px 220px; 
+    padding: 80px 20px 20px 220px; /* Considera espacio del header y sidebar */
     width: 100%;
     margin-top: 20px;
     margin-left: 10px;
 }
 
+/* ===========================
+   TABLA DE DATOS
+   =========================== */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -100,6 +121,9 @@ th {
     color: white;
 }
 
+/* ===========================
+   BOTONES GENERALES
+   =========================== */
 button {
     background: #6EACDA;
     color: white;
@@ -107,8 +131,12 @@ button {
     cursor: pointer;
     border-radius: 5px;
     font-size: 14px;
+    padding: 10px 15px; 
 }
 
+/* ===========================
+   MODAL (VENTANA EMERGENTE)
+   =========================== */
 .modal {
     display: none;
     position: fixed;
@@ -119,7 +147,7 @@ button {
     background: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-    z-index: 2000; 
+    z-index: 2000;
 }
 
 .modal-content {
@@ -127,10 +155,20 @@ button {
     padding: 20px;
     border-radius: 5px;
     text-align: center;
-    z-index: 2001; 
+    z-index: 2001;
 }
 
-/* Responsive */
+/* ===========================
+   LOGO DENTRO DE NAVEGACIÓN
+   =========================== */
+.logonav {
+    width: 20px;
+    height: 60px;
+}
+
+/* ===========================
+   RESPONSIVE PARA TABLETS Y MÓVILES
+   =========================== */
 @media screen and (max-width: 768px) {
     body {
         flex-direction: column;
@@ -151,13 +189,13 @@ button {
         font-size: 14px;
     }
 
-   
     header {
         flex-direction: column;
         height: auto;
         padding: 10px 20px;
         align-items: center;
     }
+
     .textousuario {
         font-size: 13px;
     }
@@ -166,19 +204,4 @@ button {
         width: 30px;
         height: 30px;
     }
-}
-button {
-
-    padding: 10px 15px; 
-    background: #6EACDA;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px; 
-}
-
-.logonav{
-    width: 20px;
-    height: 60px;
 }

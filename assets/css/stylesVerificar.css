@@ -1,60 +1,68 @@
- body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #7bb5e3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+/* ========== ESTILOS GENERALES DEL BODY ========== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif; /* Fuente moderna y legible */
+    background-color: #7bb5e3; /* Azul claro de fondo */
+    display: flex; /* Centrado total del contenido */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ocupa toda la altura visible */
+}
 
-        .card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-        }
+/* ========== TARJETA CONTENEDORA CENTRAL ========== */
+.card {
+    background: white; /* Fondo limpio */
+    padding: 40px; /* Espaciado interno amplio */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Sombra sutil */
+    text-align: center; /* Centra el contenido de texto */
+    width: 100%;
+    max-width: 400px; /* Máximo ancho adaptable */
+}
 
-        h2 {
-            margin-bottom: 10px;
-            color: #1c2141;
-        }
+/* ========== TÍTULO PRINCIPAL ========== */
+h2 {
+    margin-bottom: 10px;
+    color: #1c2141; /* Azul oscuro */
+}
 
-        p {
-            color: #333;
-            margin-bottom: 30px;
-        }
+/* ========== PÁRRAFO DESCRIPTIVO ========== */
+p {
+    color: #333; /* Gris oscuro */
+    margin-bottom: 30px;
+}
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-        }
+/* ========== CAMPOS DE ENTRADA ========== */
+input {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 12px; /* Espaciado interno */
+    margin-bottom: 15px;
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 16px;
+}
 
-        button {
-            background-color: #252551;
-            color: white;
-            padding: 12px;
-            width: 100%;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #181833;
-        }
+/* ========== BOTÓN DE ACCIÓN ========== */
+button {
+    background-color: #252551; /* Azul muy oscuro */
+    color: white;
+    padding: 12px;
+    width: 100%; /* Se adapta al contenedor */
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #181833; /* Sombra interior más oscura */
+}
 
-        button:hover {
-            background-color: #333369;
-        }
+/* Efecto al pasar el mouse sobre el botón */
+button:hover {
+    background-color: #333369; /* Cambio a un tono más claro */
+}
 
-        #resultado {
-            margin-top: 20px;
-            font-weight: bold;
-            color: #1c2141;
-        }
+/* ========== RESULTADO O MENSAJE ========== */
+#resultado {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #1c2141; /* Azul oscuro */
+}

@@ -1,11 +1,79 @@
 <?php
 session_start();
 
-// Inicializamos las variables para evitar el warning
 $error = '';
 $registro_exitoso = false;
 
-// Comprobamos si existen mensajes de sesión
+if (isset($_SESSION['error_login'])) {
+    $error = $_SESSION['error_login'];
+    unset($_SESSION['error_login']);
+}
+
+if (isset($_SESSION['registro_exitoso'])) {
+    $registro_exitoso = true;
+    unset($_SESSION['registro_exitoso']);
+}
+
+require_once '../configuracion/conexion.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $correo = $_POST['correo'] ?? '';
+    $contrasena = $_POST['contrasena'] ?? '';
+
+    $pdo = conexion();
+
+    // Buscar en admins
+    $stmt = $pdo->prepare("SELECT * FROM admins WHERE correo = :correo LIMIT 1");
+    $stmt->bindParam(':correo', $correo);
+    $stmt->execute();
+    $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($admin && password_verify($contrasena, $admin['contrasena'])) {
+        $_SESSION['usuario'] = $admin['nombre'];
+        $_SESSION['id'] = $admin['id_admin'];
+        $_SESSION['rol'] = 'admin';
+
+        header("Location: ../../views/admin/vista.php");
+        exit();
+    }
+
+    // Buscar en empleados
+    $stmt = $pdo->prepare("SELECT * FROM empleados WHERE correo = :correo LIMIT 1");
+    $stmt->bindParam(':correo', $correo);
+    $stmt->execute();
+    $empleado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($empleado && password_verify($contrasena, $empleado['contrasena'])) {
+        $_SESSION['usuario'] = $empleado['nombre'];
+        $_SESSION['id'] = $empleado['id_empleado'];
+        $_SESSION['rol'] = 'empleado';
+
+        header("Location: ../../views/empleado/empleado.php");
+        exit();
+    }
+
+    // Buscar en usuarios normales
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE correo = :correo LIMIT 1");
+    $stmt->bindParam(':correo', $correo);
+    $stmt->execute();
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($usuario && password_verify($contrasena, $usuario['contrasena'])) {
+        $_SESSION['usuario'] = $usuario['nombre'];
+        $_SESSION['id'] = $usuario['id_usuario'];
+        $_SESSION['rol'] = 'usuario';
+
+        header("Location: ../../views/Usuario/agendamiento.php");
+        exit();
+    }
+
+    // Si no se encontró en ninguna tabla
+    $_SESSION['error_login'] = "Correo o contraseña incorrectos.";
+    header("Location: ../login.php");
+    exit();
+}
+
+// Mensajes de error o éxito por sesión (por si vienes de otra página)
 if (isset($_SESSION['error_login'])) {
     $error = $_SESSION['error_login'];
     unset($_SESSION['error_login']);
@@ -16,6 +84,7 @@ if (isset($_SESSION['registro_exitoso'])) {
     unset($_SESSION['registro_exitoso']);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -54,75 +123,62 @@ if (isset($_SESSION['registro_exitoso'])) {
     </div>
 
     <script>
-    class LoginSessionManager {
-        constructor(formId, emailId, passwordId) {
-            this.form = document.getElementById(formId);
-            this.emailInput = document.getElementById(emailId);
-            this.passwordInput = document.getElementById(passwordId);
+        class LoginSessionManager {
+            constructor(formId, emailId, passwordId) {
+                this.form = document.getElementById(formId);
+                this.emailInput = document.getElementById(emailId);
+                this.passwordInput = document.getElementById(passwordId);
 
-            this.autocompletar();
-            this.configurarEventos();
+                this.autocompletar();
+                this.configurarEventos();
+            }
+
+            autocompletar() {
+                const correo = sessionStorage.getItem("correo");
+                const contrasena = sessionStorage.getItem("contrasena");
+
+                if (correo) this.emailInput.value = correo;
+                if (contrasena) this.passwordInput.value = contrasena;
+            }
+
+            guardarEnSession() {
+                sessionStorage.setItem("correo", this.emailInput.value);
+                sessionStorage.setItem("contrasena", this.passwordInput.value);
+            }
+
+            limpiarSession() {
+                sessionStorage.removeItem("correo");
+                sessionStorage.removeItem("contrasena");
+            }
+
+            configurarEventos() {
+                this.form.addEventListener("submit", () => this.guardarEnSession());
+                window.addEventListener("beforeunload", () => this.limpiarSession());
+            }
         }
-
-        autocompletar() {
-            const correo = sessionStorage.getItem("correo");
-            const contrasena = sessionStorage.getItem("contrasena");
-
-            if (correo) this.emailInput.value = correo;
-            if (contrasena) this.passwordInput.value = contrasena;
-        }
-
-        guardarEnSession() {
-            sessionStorage.setItem("correo", this.emailInput.value);
-            sessionStorage.setItem("contrasena", this.passwordInput.value);
-        }
-
-        limpiarSession() {
-            sessionStorage.removeItem("correo");
-            sessionStorage.removeItem("contrasena");
-        }
-
-        configurarEventos() {
-            this.form.addEventListener("submit", () => this.guardarEnSession());
-            window.addEventListener("beforeunload", () => this.limpiarSession());
-        }
-    }
 
         window.addEventListener("DOMContentLoaded", function () {
-        new LoginSessionManager("loginForm", "email", "password");
+            new LoginSessionManager("loginForm", "email", "password");
 
-        <?php if ($registro_exitoso): ?>
+            <?php if ($registro_exitoso): ?>
             Swal.fire({
                 icon: 'success',
                 title: '¡Registro exitoso!',
                 text: 'Por favor inicia sesión.',
                 confirmButtonColor: '#3085d6'
             });
-        <?php endif; ?>
-
-        <?php if ($error): ?>
-            <?php if ($error === 'correo_no_encontrado'): ?>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Correo no registrado',
-                    text: 'El correo que ingresaste no está registrado.'
-                });
-            <?php elseif ($error === 'contrasena_incorrecta'): ?>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Contraseña incorrecta',
-                    text: 'La contraseña que ingresaste no es correcta.'
-                });
-            <?php else: ?>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error de inicio de sesión',
-                    text: 'Por favor verifica tus datos.'
-                });
             <?php endif; ?>
-        <?php endif; ?>
-    });
 
+            <?php if (!empty($error)): ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Correo o contraseña incorrectos',
+                text: 'Por favor verifica tus datos e intenta nuevamente.',
+                confirmButtonColor: '#d33'
+            });
+            <?php endif; ?>
+        });
     </script>
+
 </body>
 </html>

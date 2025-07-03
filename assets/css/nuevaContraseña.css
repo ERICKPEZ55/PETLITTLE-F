@@ -1,60 +1,88 @@
+/* ===========================
+   ESTILOS GENERALES DEL BODY
+   =========================== */
+
+/* Establece márgenes en 0, fuente base, color de fondo, y centra el contenido */
 body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #7bb5e3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif; /* Fuente legible y moderna */
+    background-color: #7bb5e3; /* Fondo azul claro */
+    display: flex; /* Centrado usando Flexbox */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura completa de la pantalla */
+}
 
-        .card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-        }
+/* ================================
+   TARJETA CENTRAL DE RECUPERACIÓN
+   ================================ */
 
-        h2 {
-            margin-bottom: 10px;
-            color: #1c2141;
-        }
+.card {
+    background: white; /* Fondo blanco para destacar sobre el fondo */
+    padding: 40px; /* Espaciado interno generoso */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Sombra sutil */
+    text-align: center; /* Centrado de texto */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 400px; /* Máximo de 400px para dispositivos grandes */
+}
 
-        p {
-            color: #333;
-            margin-bottom: 30px;
-        }
+/* =====================
+   TÍTULOS Y PÁRRAFOS
+   ===================== */
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-        }
+/* Estilo del título */
+h2 {
+    margin-bottom: 10px;
+    color: #1c2141; /* Azul oscuro */
+}
 
-        button {
-            background-color: #252551;
-            color: white;
-            padding: 12px;
-            width: 100%;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #181833;
-        }
+/* Estilo del párrafo */
+p {
+    color: #333;
+    margin-bottom: 30px;
+}
 
-        button:hover {
-            background-color: #333369;
-        }
+/* ============================
+   CAMPOS DE ENTRADA (INPUT)
+   ============================ */
 
-        .mensaje {
-            margin-top: 20px;
-            font-weight: bold;
-            color: #1c2141;
-        }
+input {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 12px; /* Espaciado interno */
+    margin-bottom: 15px; /* Separación entre campos */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente legible */
+}
+
+/* ========================
+   BOTÓN DE ENVÍO / ACCIÓN
+   ======================== */
+
+button {
+    background-color: #252551; /* Azul oscuro uniforme */
+    color: white; /* Texto blanco */
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer; /* Cursor de clic */
+    box-shadow: 0 4px 0 #181833; /* Sombra inferior tipo "relieve" */
+}
+
+/* Estilo al pasar el mouse por encima del botón */
+button:hover {
+    background-color: #333369; /* Tono ligeramente más claro */
+}
+
+/* =====================
+   MENSAJE DE CONFIRMACIÓN
+   ===================== */
+
+.mensaje {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #1c2141; /* Azul oscuro para coherencia */
+}

@@ -1,0 +1,14 @@
+{
+    "name": "dell/pet-little",
+    "description": "exportador de usuarios y mascotas",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Paulis",
+            "email": "mpautoresb.06@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^4.4"
+    }
+}

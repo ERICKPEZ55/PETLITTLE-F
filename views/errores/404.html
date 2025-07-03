@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Error 404 - Página no encontrada</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #F5F3EB; /* Beige */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+      color: #002F5A; /* Azul oscuro */
+    }
+
+    h1 {
+      font-size: 6rem;
+      margin: 0;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      background-color: #4D9DE0; /* Azul claro */
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3b89c4;
+    }
+
+    img {
+      max-width: 300px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>404</h1>
+  <p>¡Ups! La página que buscas no existe.</p>
+  <button onclick="volverAtras()">Volver a la página anterior</button>
+  <img src="https://i.imgur.com/qIufhof.png" alt="Página no encontrada">
+
+  <script>
+    function volverAtras() {
+      if (document.referrer) {
+        window.history.back();
+      } else {
+        window.location.href = '/PetLittle/index.php'; // Ruta por defecto si no hay historial
+      }
+    }
+  </script>
+</body>
+</html>

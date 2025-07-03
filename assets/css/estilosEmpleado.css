@@ -1,3 +1,6 @@
+/* =============================
+   ESTILOS GLOBALES Y RESETEO
+   ============================= */
 body {
     margin: 0;
     padding: 0;
@@ -5,15 +8,27 @@ body {
     background-color: #FFFAF3;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* =============================
+   CABECERA PRINCIPAL
+   ============================= */
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #6EACDA;
-    padding: 15px 30px;
+    padding: 15px 20px;
     color: black;
 }
 
+/* =============================
+   LOGO Y TÍTULO
+   ============================= */
 .logo-container {
     display: flex;
     align-items: center;
@@ -38,6 +53,9 @@ body {
     width: 100%;
 }
 
+/* =============================
+   ESTRUCTURA PRINCIPAL
+   ============================= */
 .contenedor {
     display: flex;
     min-height: calc(100vh - 90px); 
@@ -45,20 +63,22 @@ body {
     overflow: hidden;
 }
 
-
+/* =============================
+   PERFIL DEL USUARIO
+   ============================= */
 .perfil-sobre-menu {
     position: absolute;
-    top: 40px; 
+    top: 80px; 
     left: 30px;
     text-align: center;
     width: 250px;
     z-index: 10;
 }
 
-.perfil-sobre-menu a{
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
+.perfil-sobre-menu a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
 }
 
 .perfil-sobre-menu .foto-perfil {
@@ -81,9 +101,12 @@ body {
     margin: 5px 0;
 }
 
+/* =============================
+   MENÚ LATERAL
+   ============================= */
 .menu-lateral {
     width: 230px;
-    height: 220px;
+    height: 150px;
     background-color: #6EACDA;
     padding: 30px;
     border-radius: 30px;
@@ -103,17 +126,23 @@ body {
     text-align: center;
 }
 
-.menu a:hover, .cerrar-sesion {
-   
+.menu a:hover,
+.cerrar-sesion {
     color: white;
 }
 
+/* =============================
+   CONTENIDO PRINCIPAL
+   ============================= */
 .contenido {
     flex-grow: 1;
     padding: 50px;
     background: #FFFAF3;
 }
 
+/* =============================
+   OPCIONES DE PANEL
+   ============================= */
 .opciones {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -136,6 +165,9 @@ body {
     background-color: #1E1F45;
 }
 
+/* =============================
+   BOTÓN GENERAL
+   ============================= */
 button {
     background-color: white;
     color: black;
@@ -150,12 +182,10 @@ button {
 button:hover {
     background-color: rgba(255, 255, 255, 0.8);
 }
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
 
+/* =============================
+   RESPONSIVE – ADAPTACIÓN MÓVIL
+   ============================= */
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
@@ -190,22 +220,22 @@ html, body {
         border-radius: 20px;
         padding: 20px;
     }
-    
+
     .menu {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    
+
     .menu a {
         width: 100%;
         box-sizing: border-box;
     }
-    
+
     .cerrar-sesion {
         margin-top: auto;
-       
     }
+
     .contenido {
         padding: 20px;
     }
@@ -222,4 +252,3 @@ html, body {
         width: 100%;
     }
 }
-

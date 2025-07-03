@@ -1,27 +1,34 @@
+
+/* ------------------------------
+   ESTILO BASE Y TIPOGRAFÍA GLOBAL
+------------------------------ */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Fuente moderna y legible */
     margin: 0;
     padding: 0;
-    background-color: #272A57;
-    color: #333;
+    background-color: #272A57; /* Fondo oscuro principal */
+    color: #333; /* Color base del texto */
     line-height: 1.6;
 }
 
+/* ------------------------------
+   ENCABEZADO PRINCIPAL
+------------------------------ */
 .header {
-    background-color: #6EACDA;
+    background-color: #6EACDA; /* Azul pastel */
     color: black;
-    padding: 15px 20px; 
+    padding: 15px 20px;
     display: flex;
     align-items: center;
-    gap: 20px; 
+    gap: 20px;
     height: auto;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .logo-container {
-    width: 80px; 
-    height: 60px; 
+    width: 80px;
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,13 +47,16 @@ body {
     flex-basis: 100%;
 }
 
+/* ------------------------------
+   RESPONSIVE HEADER
+------------------------------ */
 @media (min-width: 768px) {
     .header {
         padding: 20px 30px;
         height: 80px;
         flex-wrap: nowrap;
-        display: flex; 
-        align-items: center; 
+        display: flex;
+        align-items: center;
     }
 
     .logo-container {
@@ -56,12 +66,15 @@ body {
     }
 
     .titulo-header {
-        text-align: center; 
-        flex-grow: 1; 
+        text-align: center;
+        flex-grow: 1;
         margin-top: 0;
     }
 }
 
+/* ------------------------------
+   CONTENEDOR GENERAL
+------------------------------ */
 .container {
     max-width: 95%;
     margin: 20px auto;
@@ -77,6 +90,9 @@ h2 {
     margin-bottom: 30px;
 }
 
+/* ------------------------------
+   FORMULARIO
+------------------------------ */
 form {
     display: flex;
     flex-wrap: wrap;
@@ -100,13 +116,17 @@ label {
     font-size: 0.95em;
 }
 
-select, input[type="text"], input[type="date"], textarea, input[type="file"] {
+select,
+input[type="text"],
+input[type="date"],
+textarea,
+input[type="file"] {
     padding: 10px;
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 16px;
     box-sizing: border-box;
-    width: 100%; 
+    width: 100%;
 }
 
 textarea {
@@ -114,6 +134,9 @@ textarea {
     min-height: 80px;
 }
 
+/* ------------------------------
+   PREVISUALIZACIÓN DE IMAGEN
+------------------------------ */
 .image-preview {
     flex: 1 1 45%;
     display: flex;
@@ -131,6 +154,9 @@ textarea {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* ------------------------------
+   BOTÓN DE ENVÍO
+------------------------------ */
 .submit-btn {
     background-color: #272A57;
     color: white;
@@ -147,28 +173,33 @@ textarea {
     background-color: #1c1e40;
 }
 
-
+/* ------------------------------
+   CAMPO DE MASCOTA (FORZANDO 100%)
+------------------------------ */
 .form-group label[for="mascota"] {
-    flex-basis: 100%; 
+    flex-basis: 100%;
 }
 
 #mascota {
     width: 100%;
 }
 
-
+/* ------------------------------
+   BOTONES FINALES (VOLVER Y ENVIAR)
+------------------------------ */
 .form-group-full.botones-finales {
     display: flex;
-    flex-direction: column; 
-    justify-content: center; 
+    flex-direction: column;
+    justify-content: center;
     margin-top: 20px;
-    align-items: stretch; 
-    gap: 10px; 
-    margin-left: 0; 
-    margin-right: 0; 
+    align-items: stretch;
+    gap: 10px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
-.volver-btn, .submit-btn {
+.volver-btn,
+.submit-btn {
     background-color: #272A57;
     color: white;
     text-decoration: none;
@@ -177,36 +208,36 @@ textarea {
     padding-bottom: 12px;
     line-height: 1.2;
     box-sizing: border-box;
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 0; 
-    margin-left: 0; 
-    margin-right: 0; 
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .volver-btn:hover {
     background-color: #1c1e40;
 }
 
-.submit-btn:hover {
-    background-color: #1c1e40;
-}
-
+/* ------------------------------
+   RESPONSIVE BOTONES FINALES
+------------------------------ */
 @media (min-width: 768px) {
     .form-group-full.botones-finales {
-        flex-direction: row; 
-        justify-content: space-between; 
-        align-items: center; 
-        gap: 10px; 
-        margin-left: 360px; 
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-left: 360px;
     }
 
-    .volver-btn, .submit-btn {
-        width: auto; 
-        min-width: 150px; 
-        margin-top: 20px; 
-        margin-left: 0; 
-        margin-right: 0; 
+    .volver-btn,
+    .submit-btn {
+        width: auto;
+        min-width: 150px;
+        margin-top: 20px;
+        margin-left: 0;
+        margin-right: 0;
     }
 }

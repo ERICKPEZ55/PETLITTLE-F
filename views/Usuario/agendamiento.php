@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// ✅ Evitar que el navegador guarde en caché
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
+// ✅ Redirigir al login si no hay sesión activa
 if (!isset($_SESSION['usuario'])) {
     header("Location: ../login/login.php");
     exit;
@@ -17,6 +23,7 @@ $usuario = $_SESSION['usuario'];
     <title>Panel de Usuario - Veterinaria</title>
     <link rel="stylesheet" href="../../assets/css/agendamiento.css" />
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
@@ -42,7 +49,7 @@ $usuario = $_SESSION['usuario'];
                 <a href="agendamiento.php">Inicio</a>
                 <a href="./misMascotas.php">Mis mascotas</a>
                 <a href="../gestionCitas/tablasCitas.php">Cancelar citas</a>
-                <a href="../../models/logout.php" class="cerrar-sesion">Cerrar Sesión</a>
+                <a href="#" class="cerrar-sesion" id="cerrarSesion">Cerrar Sesión</a>
             </nav>
         </aside>
 
@@ -76,7 +83,7 @@ $usuario = $_SESSION['usuario'];
         </main>
     </div>
 
-    <!-- Script para cerrar sesión tras inactividad -->
+    <!-- ✅ Script para cerrar sesión tras inactividad -->
     <script>
         let timeoutInactivity;
 
@@ -86,7 +93,7 @@ $usuario = $_SESSION['usuario'];
 
         function reiniciarTemporizador() {
             clearTimeout(timeoutInactivity);
-            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 10000000); // 10 segundos
+            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 600000); // 10 minutos (ajustable)
         }
 
         window.onload = reiniciarTemporizador;
@@ -94,5 +101,27 @@ $usuario = $_SESSION['usuario'];
         document.onkeydown = reiniciarTemporizador;
         document.onclick = reiniciarTemporizador;
     </script>
+
+    <!-- ✅ Confirmación antes de cerrar sesión manualmente -->
+    <script>
+        document.getElementById("cerrarSesion").addEventListener("click", function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Cerrar sesión?',
+                text: "¿Estás seguro de que quieres salir?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, cerrar sesión',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '../../models/logout.php';
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>

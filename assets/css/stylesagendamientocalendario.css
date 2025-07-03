@@ -1,249 +1,288 @@
+/* =========================================================
+   Archivo CSS
+   Proyecto: PetLittle - Módulo de Agendamiento
+   Autor: [Tu nombre o equipo]
+   Fecha: [Fecha actual]
+   Descripción: Estilos para la vista de selección de especialidades 
+   y agendamiento con calendario.
+========================================================= */
+
+/* ------------------------------
+   ESTILOS GENERALES
+------------------------------ */
 * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fefbf9;
-      color: #272A57;
-    }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fefbf9;
+  color: #272A57;
+}
 
-    header {
-      background-color: #6EACDA;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      border-bottom: 2px solid #ccc;
-      height: 90px;
-    }
+/* ------------------------------
+   ENCABEZADO (HEADER)
+------------------------------ */
+header {
+  background-color: #6EACDA;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 2px solid #ccc;
+  height: 90px;
+}
 
-    .logo img {
-      height: 40px;
-    }
+.logo img {
+  height: 40px;
+}
 
-    .title {
-      font-weight: bold;
-      font-size: 1.0rem;
-      color: #fff;
-    }
+.title {
+  font-weight: bold;
+  font-size: 1.0rem;
+  color: #fff;
+}
 
-    .user-section {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #fff;
-    }
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+}
 
-    .user-section img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      cursor: pointer;
-    }
+.user-section img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
 
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-    }
+/* ------------------------------
+   CONTENEDORES PRINCIPALES
+------------------------------ */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-    .left-panel, .right-panel {
-      flex: 1;
-      min-width: 300px;
-      padding: 40px;
-    }
+.left-panel, .right-panel {
+  flex: 1;
+  min-width: 300px;
+  padding: 40px;
+}
 
-    .left-panel {
-      background-color: #272A57;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+/* ------------------------------
+   PANEL IZQUIERDO: LISTADO DE ESPECIALIDADES
+------------------------------ */
+.left-panel {
+  background-color: #272A57;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    .left-panel h2 {
-      margin-bottom: 30px;
-      text-align: center;
-    }
+.left-panel h2 {
+  margin-bottom: 30px;
+  text-align: center;
+}
 
-    .specialty-list {
-      background: white;
-      border-radius: 20px;
-      padding: 50px;
-      color: #272A57;
-      width: 90%;
-      max-width: 340px;
-    }
+.specialty-list {
+  background: white;
+  border-radius: 20px;
+  padding: 50px;
+  color: #272A57;
+  width: 90%;
+  max-width: 340px;
+}
 
-    .specialty-item {
-      display: flex;
-      align-items: center;
-      margin: 12px 0;
-      font-weight: 500;
-      cursor: pointer;
-      border-radius: 10px;
-      padding: 10px;
-      transition: background 0.2s;
-    }
+.specialty-item {
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 10px;
+  transition: background 0.2s;
+}
 
-    .specialty-item:hover {
-      background-color: #f0f0f0;
-    }
+.specialty-item:hover {
+  background-color: #f0f0f0;
+}
 
-    .specialty-item.selected {
-      background-color: #6EACDA;
-      color: white;
-    }
+.specialty-item.selected {
+  background-color: #6EACDA;
+  color: white;
+}
 
-    .specialty-item img {
-      width: 24px;
-      margin-right: 10px;
-    }
+.specialty-item img {
+  width: 24px;
+  margin-right: 10px;
+}
 
-    .right-panel {
-      background-color: #fefbf9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+/* ------------------------------
+   PANEL DERECHO: CALENDARIO Y AGENDAMIENTO
+------------------------------ */
+.right-panel {
+  background-color: #fefbf9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    .right-panel h2 {
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .calendariotitulo{
-      color: wheat;
-    }
-    .calendar-container {
-      background: #ffffff;
-      padding: 10px;
-      border-radius: 12px;
-      color: black;
-      font-weight: bold;
-      width: 100%;
-      max-width: 500px;
-    }
+.right-panel h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-    .calendar-header {
-      background: #272A57;
-      color: #272A57;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 15px;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-      font-weight: bold;
-    }
+.calendariotitulo {
+  color: wheat;
+}
 
-    .calendar-header select {
-      background: white;
-      color: black;
-      border: none;
-      border-radius: 5px;
-      padding: 5px;
-      margin-left: 5px;
-    }
+.calendar-container {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 12px;
+  color: black;
+  font-weight: bold;
+  width: 100%;
+  max-width: 500px;
+}
 
-    .calendar-days, .calendar-dates {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      text-align: center;
-    }
+.calendar-header {
+  background: #272A57;
+  color: #272A57;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-weight: bold;
+}
 
-    .calendar-days div {
-      font-weight: bold;
-    }
+.calendar-header select {
+  background: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 5px;
+}
 
-    .calendar-dates div {
-      margin: 10px 0;
-      padding: 8px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
+.calendar-days,
+.calendar-dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
 
-    .calendar-dates div:hover {
-      background: #272A57;
-      color: white;
-    }
+.calendar-days div {
+  font-weight: bold;
+}
 
-    .calendar-dates .selected {
-      background: white;
-      color: #272A57;
-      font-weight: bold;
-      border: 2px solid #272A57;
-    }
+.calendar-dates div {
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
 
-    .calendar-dates .no-service {
-      background-color: #272A57;
-      color: white;
-      cursor: not-allowed;
-    }
+.calendar-dates div:hover {
+  background: #272A57;
+  color: white;
+}
 
-    button#agendar {
-      margin-top: 25px;
-      background: #272A57;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 12px 24px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s;
-    }
+.calendar-dates .selected {
+  background: white;
+  color: #272A57;
+  font-weight: bold;
+  border: 2px solid #272A57;
+}
 
-    button#agendar:hover {
-      background: #1b1d3f;
-    }
+.calendar-dates .no-service {
+  background-color: #272A57;
+  color: white;
+  cursor: not-allowed;
+}
 
-    .hidden-file {
-      display: none;
-    }
+/* ------------------------------
+   BOTÓN DE AGENDAMIENTO
+------------------------------ */
+button#agendar {
+  margin-top: 25px;
+  background: #272A57;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
 
-    .modal-success {
-      position: fixed;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #74B2E2;
-      color: white;
-      font-size: 22px;
-      font-family: sans-serif;
-      padding: 30px 40px;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      z-index: 9999;
-      text-align: center;
-      display: none;
-    }
+button#agendar:hover {
+  background: #1b1d3f;
+}
 
-    .modal-success .close-btn {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      font-size: 20px;
-      cursor: pointer;
-      color: white;
-    }
+/* ------------------------------
+   INPUT FILE OCULTO
+------------------------------ */
+.hidden-file {
+  display: none;
+}
 
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
+/* ------------------------------
+   MODAL DE ÉXITO
+------------------------------ */
+.modal-success {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #74B2E2;
+  color: white;
+  font-size: 22px;
+  font-family: sans-serif;
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 9999;
+  text-align: center;
+  display: none;
+}
 
-      .left-panel, .right-panel {
-        padding: 20px;
-      }
+.modal-success .close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+}
 
-      .specialty-list {
-        width: 100%;
-      }
+/* ------------------------------
+   MEDIA QUERIES - RESPONSIVE
+------------------------------ */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
 
-      .calendar-container {
-        width: 100%;
-      }
-    }
+  .left-panel, .right-panel {
+    padding: 20px;
+  }
+
+  .specialty-list {
+    width: 100%;
+  }
+
+  .calendar-container {
+    width: 100%;
+  }
+}

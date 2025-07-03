@@ -1,12 +1,18 @@
 <?php
-    session_start();
+session_start();
 
-    if (!isset($_SESSION['usuario'])) {
-        header("Location: ../login/login.php");
-        exit;
-    }
+// ✅ Evitar que el navegador guarde en caché
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
-    $usuario = $_SESSION['usuario'];
+// ✅ Verifica que haya sesión activa
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../login/login.php");
+    exit;
+}
+
+$usuario = $_SESSION['usuario'];
 ?>
 
 <!DOCTYPE html>
@@ -16,8 +22,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
   <title>Panel de Administrador</title>
-  <link rel="stylesheet" href="../../assets/css/estilosPerfil.css" />
+  <link rel="stylesheet" href="../../assets/css/estilosPerfilAdmin.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   <header class="header">
@@ -25,21 +32,18 @@
         <img src="../../assets/img/logo negativo.png" alt="Logo" class="logo">
     </div>
     <h1 class="titulo-header">Panel de Administrador</h1>
-</header>
+  </header>
 
-<div class="contenedor">
-    
+  <div class="contenedor">
     <div class="perfil-sobre-menu">
-         <p class="nombre"><?php echo htmlspecialchars($usuario['nombre']); ?></p>
+        <p class="nombre"><?php echo htmlspecialchars($usuario['nombre']); ?></p>
         <p class="rol">Administrador</p>
-        <a href="../admin/editarPerfil.html">Editar información</a>
     </div>
 
     <aside class="menu-lateral">
         <nav class="menu">
-            <a href="#">Inicio</a>
-            <a href="#">Notificaciones</a>
-            <a href="../../models/logout.php" class="cerrar-sesion">Cerrar Sesión</a>
+            <a href="../admin/editarPerfil.php">Editar información</a>
+            <a href="#" class="cerrar-sesion" id="cerrarSesion">Cerrar Sesión</a>
         </nav>
     </aside>
 
@@ -51,22 +55,43 @@
       <div class="opciones">
           <div class="opcion">
               <h3>Gestión de Clientes</h3>
-              <button onclick="window.location.href='usuarios.html'">Ingresar</button>
+              <button onclick="window.location.href='usuarios.php'">Ingresar</button>
           </div>
           <div class="opcion">
               <h3>Gráficas</h3>
-              <button onclick="window.location.href='graficos.html'">Ingresar</button>
+              <button onclick="window.location.href='graficos.php'">Ingresar</button>
           </div>
           <div class="opcion">
               <h3>Agenda</h3>
-              <button onclick="window.location.href='vista.html'">Ingresar</button>
+              <button onclick="window.location.href='vista.php'">Ingresar</button>
           </div>
           <div class="opcion">
               <h3>Trabajadores</h3>
               <button onclick="window.location.href='trabajadores.php'">Ingresar</button>
           </div>
       </div>
-  </main>
+    </main>
   </div>
+
+  <!-- ✅ SweetAlert2 para confirmar cierre de sesión -->
+  <script>
+    document.getElementById("cerrarSesion").addEventListener("click", function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: '¿Cerrar sesión?',
+            text: "¿Estás seguro de que quieres salir?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, cerrar sesión',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '../../models/logout.php';
+            }
+        });
+    });
+  </script>
 </body>
 </html>
