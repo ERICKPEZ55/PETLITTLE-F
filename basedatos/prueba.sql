@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-06-2025 a las 01:39:33
+-- Tiempo de generación: 08-07-2025 a las 08:53:38
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -130,7 +130,9 @@ CREATE TABLE `citas` (
 INSERT INTO `citas` (`id_cita`, `id_usuario`, `id_mascota`, `id_especialidad`, `fecha_hora`, `estado`) VALUES
 (4, 25, 5, 3, '2025-06-26 09:00:00', 'Asistió'),
 (5, 20, 12, 5, '2025-06-27 09:30:00', 'Cancelada'),
-(6, 20, 12, 3, '2025-06-10 08:00:00', 'No asistió');
+(6, 20, 12, 3, '2025-06-10 08:00:00', 'No asistió'),
+(7, 25, 5, 2, '2025-07-16 08:00:00', 'No asistió'),
+(46, 25, 5, 1, '2025-07-10 08:00:00', 'No asistió');
 
 -- --------------------------------------------------------
 
@@ -143,6 +145,7 @@ CREATE TABLE `empleados` (
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
   `rol` varchar(20) NOT NULL,
+  `id_especialidad` int(11) DEFAULT NULL,
   `usuario` varchar(100) NOT NULL,
   `telefono` varchar(20) NOT NULL,
   `contrasena` varchar(250) NOT NULL
@@ -152,9 +155,8 @@ CREATE TABLE `empleados` (
 -- Volcado de datos para la tabla `empleados`
 --
 
-INSERT INTO `empleados` (`id_empleado`, `nombre`, `apellido`, `rol`, `usuario`, `telefono`, `contrasena`) VALUES
-(3, 'Juan', 'Garzon', 'Empleado', 'juang@gmail.com', '3456789876', '1yTPKz'),
-(4, 'Deiner', 'suarez', 'Empleado', 'deiner@gmail.com', '3233044072', '9bnk2a');
+INSERT INTO `empleados` (`id_empleado`, `nombre`, `apellido`, `rol`, `id_especialidad`, `usuario`, `telefono`, `contrasena`) VALUES
+(9, 'Luis', 'Castro', 'Empleado', 3, 'luisc@gmail.com', '3456765256', 'rjazJY');
 
 -- --------------------------------------------------------
 
@@ -174,6 +176,7 @@ CREATE TABLE `especialidades` (
 --
 
 INSERT INTO `especialidades` (`id_especialidad`, `nombre`, `imagen`, `duracion`) VALUES
+(1, 'Medicina General', 'icomedicinageneral.png', 20),
 (2, 'Nutrición', 'icoiconutricion.png', 20),
 (3, 'Dermatología', 'icoicodermatologia.png', 30),
 (4, 'Odontología', 'icoicoodontologia.png', 50),
@@ -341,7 +344,8 @@ ALTER TABLE `citas`
 -- Indices de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  ADD PRIMARY KEY (`id_empleado`);
+  ADD PRIMARY KEY (`id_empleado`),
+  ADD KEY `fk_empleados_especialidad` (`id_especialidad`);
 
 --
 -- Indices de la tabla `especialidades`
@@ -390,13 +394,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `especialidades`
@@ -439,6 +443,12 @@ ALTER TABLE `citas`
   ADD CONSTRAINT `citas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   ADD CONSTRAINT `citas_ibfk_2` FOREIGN KEY (`id_mascota`) REFERENCES `mascotas` (`id_mascota`),
   ADD CONSTRAINT `citas_ibfk_3` FOREIGN KEY (`id_especialidad`) REFERENCES `especialidades` (`id_especialidad`);
+
+--
+-- Filtros para la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  ADD CONSTRAINT `fk_empleados_especialidad` FOREIGN KEY (`id_especialidad`) REFERENCES `especialidades` (`id_especialidad`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `mascotas`

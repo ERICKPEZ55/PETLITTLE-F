@@ -3,8 +3,11 @@ require_once(__DIR__ . '/../configuracion/conexion.php');
 
 // Cargar PhpSpreadsheet
 require __DIR__ . '/../vendor/autoload.php';
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 try {
     $pdo = conexion();
@@ -34,6 +37,24 @@ try {
     $sheet->setCellValue('E1', 'Cantidad Mascotas');
     $sheet->setCellValue('F1', 'Nombres Mascotas');
 
+    // Estilo para encabezados
+    $headerStyle = [
+        'font' => ['bold' => true, 'color' => ['rgb' => '000000']],
+        'fill' => [
+            'fillType' => Fill::FILL_SOLID,
+            'startColor' => ['rgb' => '6EACDA']
+        ],
+        'borders' => [
+            'allBorders' => [
+                'borderStyle' => Border::BORDER_THIN,
+                'color' => ['rgb' => '000000']
+            ]
+        ],
+        'alignment' => ['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER]
+    ];
+
+    $sheet->getStyle('A1:F1')->applyFromArray($headerStyle);
+
     // Contenido
     $row = 2;
     foreach ($usuarios as $usuario) {
@@ -44,6 +65,16 @@ try {
         $sheet->setCellValue("E$row", $usuario['cantidad_mascotas']);
         $sheet->setCellValue("F$row", $usuario['nombres_mascotas']);
         $row++;
+    }
+
+    // Bordes para toda la tabla
+    $sheet->getStyle("A1:F" . ($row - 1))->applyFromArray([
+        'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
+    ]);
+
+    // Autowidth
+    foreach (range('A', 'F') as $col) {
+        $sheet->getColumnDimension($col)->setAutoSize(true);
     }
 
     // Descargar archivo

@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-// ✅ Evitar que el navegador guarde en caché
+// Evitar que el navegador guarde en caché
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-// ✅ Verifica que haya sesión activa
+//Verifica que haya sesión activa
 if (!isset($_SESSION['usuario'])) {
     header("Location: ../login/login.php");
     exit;
@@ -22,7 +22,7 @@ $usuario = $_SESSION['usuario'];
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
   <title>Panel de Administrador</title>
-  <link rel="stylesheet" href="../../assets/css/estilosPerfilAdmin.css" />
+  <link rel="stylesheet" href="../../assets/css/vistaAdminDashboard.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -43,6 +43,7 @@ $usuario = $_SESSION['usuario'];
     <aside class="menu-lateral">
         <nav class="menu">
             <a href="../admin/editarPerfil.php">Editar información</a>
+            <a href="../admin/editarEspecialidad.php">Especialidades</a>
             <a href="#" class="cerrar-sesion" id="cerrarSesion">Cerrar Sesión</a>
         </nav>
     </aside>
@@ -53,27 +54,27 @@ $usuario = $_SESSION['usuario'];
       <p>Accede a las herramientas de gestión para organizar mejor la atención de los pacientes.</p>
 
       <div class="opciones">
-          <div class="opcion">
-              <h3>Gestión de Clientes</h3>
-              <button onclick="window.location.href='usuarios.php'">Ingresar</button>
-          </div>
-          <div class="opcion">
-              <h3>Gráficas</h3>
-              <button onclick="window.location.href='graficos.php'">Ingresar</button>
-          </div>
-          <div class="opcion">
-              <h3>Agenda</h3>
-              <button onclick="window.location.href='vista.php'">Ingresar</button>
-          </div>
-          <div class="opcion">
-              <h3>Trabajadores</h3>
-              <button onclick="window.location.href='trabajadores.php'">Ingresar</button>
-          </div>
+        <div class="opcion">
+            <h3>Gestión de Clientes</h3>
+            <button onclick="window.location.href='usuarios.php'">Ingresar</button>
+        </div>
+        <div class="opcion">
+            <h3>Gráficas</h3>
+            <button onclick="window.location.href='graficos.php'">Ingresar</button>
+        </div>
+        <div class="opcion">
+            <h3>Agenda</h3>
+            <button onclick="window.location.href='vista.php'">Ingresar</button>
+        </div>
+        <div class="opcion">
+            <h3>Trabajadores</h3>
+            <button onclick="window.location.href='trabajadores.php'">Ingresar</button>
+        </div>
       </div>
     </main>
   </div>
 
-  <!-- ✅ SweetAlert2 para confirmar cierre de sesión -->
+  <!--  SweetAlert2 para confirmar cierre de sesión -->
   <script>
     document.getElementById("cerrarSesion").addEventListener("click", function (e) {
         e.preventDefault();

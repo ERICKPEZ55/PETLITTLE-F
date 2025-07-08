@@ -74,13 +74,20 @@ html, body {
   text-align: center;
   width: 250px;
   z-index: 10;
-  margin-top: 55px;
 }
 
 .perfil-sobre-menu a {
   text-decoration: none;
   color: black;
   font-weight: bold;
+}
+
+.perfil-sobre-menu .foto-perfil {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 3px solid white;
 }
 
 .perfil-sobre-menu .nombre {
@@ -100,7 +107,7 @@ html, body {
    ============================= */
 .menu-lateral {
   width: 230px;
-  height: 150px;
+  height: 290px;
   background-color: #6EACDA;
   padding: 30px;
   border-radius: 30px;

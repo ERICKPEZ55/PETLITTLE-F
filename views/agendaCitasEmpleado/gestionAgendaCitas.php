@@ -32,6 +32,6 @@
             </div>
     </main>
 
-    <script src="../../assets/js/agendaCitas.js"></script>
+    <script src="../../assets/js/agendaCita.js"></script>
 </body>
 </html>

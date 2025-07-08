@@ -154,7 +154,8 @@ h2 {
     background-color: #6EACDA;
     color: white;
     border: none;
-    padding: 8px 12px;
+    padding: 8px 60px;
+    margin: 5px 280px;
     border-radius: 6px;
     cursor: pointer;
 }

@@ -98,7 +98,7 @@ button:hover {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 105%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
     justify-content: center;
@@ -107,12 +107,18 @@ button:hover {
 
 /* Contenido del modal */
 .modal-content {
-    background: white;
-    padding: 30px;
+    background: red;
+    padding: 20px;
     border-radius: 5px;
     text-align: center;
     margin: 270px;
+    border-color: black;
 }
+
+.modal-content h2{
+    margin-bottom: 15px;
+}
+
 .btn-volver{
     text-decoration: none;
     margin-bottom: 20px;
@@ -121,5 +127,4 @@ button:hover {
     padding: 10px 20px; 
     border-radius: 8px; 
     display: inline-block;
-
 }

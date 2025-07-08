@@ -3,25 +3,18 @@ const btnAnterior = document.getElementById('btnAnterior');
 const btnSiguiente = document.getElementById('btnSiguiente');
 const timeGrid = document.querySelector('.time-grid');
 
-let fechaActual = new Date(2025, 4, 27); // 27 mayo 2025
+// Fecha dinámica: hoy
+let fechaActual = new Date();
 
 const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-const citasPorFecha = {
-  '2025-05-27': [
-    { hora: '09:00', tipo: 'Consulta General', mascota: 'Luna', duenio: 'Marta Pérez', duracion: '20 min', estado: 'Pendiente' },
-    { hora: '09:40', tipo: 'Vacunación', mascota: 'Rocky', duenio: 'Sofía Vargas', duracion: '20 min', estado: 'Confirmada' },
-    { hora: '10:20', tipo: 'Control postoperatorio', mascota: 'Kiara', duenio: 'Mateo León', duracion: '20 min', estado: 'Completada' }
-  ],
-  '2025-05-28': [
-    { hora: '09:00', tipo: 'Desparasitación', mascota: 'Simba', duenio: 'Andrés Castro', duracion: '20 min', estado: 'Pendiente' },
-    { hora: '10:00', tipo: 'Consulta General', mascota: 'Lola', duenio: 'Daniela Flores', duracion: '20 min', estado: 'Confirmada' }
-  ]
-};
-
 function formatearFechaClave(fecha) {
-  return fecha.toISOString().split('T')[0];
+  // Formato YYYY-MM-DD sin convertir a UTC
+  const anio = fecha.getFullYear();
+  const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // +1 porque enero es 0
+  const dia = String(fecha.getDate()).padStart(2, '0');
+  return `${anio}-${mes}-${dia}`;
 }
 
 function actualizarFecha() {
@@ -40,45 +33,81 @@ function cambiarFecha(dias) {
 
 function cargarCitasDelDia() {
   const claveFecha = formatearFechaClave(fechaActual);
-  const citas = citasPorFecha[claveFecha] || [];
-
-  const horas = ['09:00', '09:20', '09:40', '10:00', '10:20', '10:40'];
+  const horas = ['08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00'];
   timeGrid.innerHTML = ''; // Limpiar todo
 
-  horas.forEach(hora => {
-    // Crear slot vacío
-    const slot = document.createElement('div');
-    slot.classList.add('time-slot');
-    slot.innerHTML = `<span>${hora}</span>`;
-    timeGrid.appendChild(slot);
+  fetch(`../../controllers/agendaVeterinario.php?fecha=${claveFecha}`)
+    .then(res => res.json())
+    .then(citas => {
+      horas.forEach(hora => {
+        // Crear slot vacío
+        const slot = document.createElement('div');
+        slot.classList.add('time-slot');
+        slot.innerHTML = `<span>${hora}</span>`;
+        timeGrid.appendChild(slot);
 
-    // Si hay cita en esa hora
-    const cita = citas.find(c => c.hora === hora);
-    if (cita) {
-      const card = document.createElement('div');
-      card.classList.add('time-slot', 'service-card', cita.estado.toLowerCase());
-      card.innerHTML = `
-        <div class="info">
-          <h3>${cita.tipo} - ${cita.mascota}</h3>
-          <p>Dueño: ${cita.duenio}</p>
-          <p>Duración: ${cita.duracion}</p>
-        </div>
-        <div class="estado">
-          <label>Estado:</label>
-          <select>
-            <option${cita.estado === 'Confirmada' ? ' selected' : ''}>Asistio</option>
-            <option${cita.estado === 'Cancelada' ? ' selected' : ''}>Cancelada</option>
-            <option${cita.estado === 'Pendiente' ? ' selected' : ''}>No asistio</option>
-          </select>
-        </div>
-      `;
-      timeGrid.appendChild(card);
-    }
-  });
+        // Buscar cita en esa hora
+        const cita = citas.find(c => c.fecha_hora.slice(11, 16) === hora);
+        if (cita) {
+          const card = document.createElement('div');
+          card.classList.add('time-slot', 'service-card');
+
+          // Crear el <select> dinámicamente
+          const select = document.createElement('select');
+          const estados = ['Asistió', 'No asistió', 'Cancelada'];
+          select.innerHTML = estados.map(e =>
+            `<option${cita.estado === e ? ' selected' : ''}>${e}</option>`
+          ).join('');
+
+          // Evento: actualizar estado al cambiar
+          select.addEventListener('change', () => {
+            const nuevoEstado = select.value;
+
+            fetch('../../controllers/actualizarEstadoCita.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: `id_cita=${encodeURIComponent(cita.id_cita)}&estado=${encodeURIComponent(nuevoEstado)}`
+            })
+            .then(res => res.json())
+            .then(data => {
+              if (data.success) {
+                console.log('Estado actualizado');
+              } else {
+                alert('Error al actualizar el estado');
+              }
+            })
+            .catch(err => {
+              console.error('Error en la solicitud:', err);
+              alert('Error al conectar con el servidor');
+            });
+          });
+
+          card.innerHTML = `
+          <div class="info">
+            <h3>${cita.especialidad}</h3>
+            <p>Dueño: ${cita.nombre}</p>
+            <p>Paciente: ${cita.nombreM}</p>
+            <p>Duración: ${cita.duracion} min</p>
+          </div>
+          <div class="estado">
+            <label>Estado:</label>
+          </div>
+        `;
+
+          card.querySelector('.estado').appendChild(select);
+          timeGrid.appendChild(card);
+        }
+      });
+    })
+    .catch(error => {
+      console.error('Error al cargar las citas:', error);
+      timeGrid.innerHTML = '<p style="color:red;">Error al cargar las citas.</p>';
+    });
 }
 
-// Conexión de botones
+// Botones de navegación
 btnAnterior.addEventListener('click', () => cambiarFecha(-1));
 btnSiguiente.addEventListener('click', () => cambiarFecha(1));
 
+// Al cargar la página
 document.addEventListener('DOMContentLoaded', actualizarFecha);

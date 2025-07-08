@@ -61,16 +61,7 @@ $nombreUsuario = $_SESSION['usuario']['nombre'] ?? 'Invitado';
       <input type="text" id="nombreMascota" placeholder="Nombre de la mascota" disabled>
 
       <label for="tipoCita">Tipo de cita</label>
-      <select id="tipoCita">
-        <option value="Cardiología">Cardiología</option>
-        <option value="Nutrición">Nutrición</option>
-        <option value="Dermatología">Dermatología</option>
-        <option value="Odontología">Odontología</option>
-        <option value="Neurología">Neurología</option>
-        <option value="Endocrinología">Endocrinología</option>
-        <option value="Medicina general">Medicina general</option>
-      </select>
-
+      <select id="tipoCita"></select>
       <label for="fechaHora">Fecha y hora</label>
       <input type="datetime-local" id="fechaHora">
 

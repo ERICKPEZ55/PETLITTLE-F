@@ -402,6 +402,33 @@ select:invalid {
     display: block;
 }
 
+.contenedor-boton {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-excel {
+  display: inline-flex;
+  align-items: center;
+  background-color: #28a745;
+  color: #fff;
+  padding: 5px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-excel:hover {
+  background-color: #218838;
+}
+
+.btn-excel img {
+  margin-right: 8px;
+}
+
+
 .modal {
     display: none;
     position: fixed;

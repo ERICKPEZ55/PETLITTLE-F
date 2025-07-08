@@ -3,23 +3,23 @@ session_start();
 require_once '../configuracion/conexion.php';
 $pdo = conexion();
 
-// Mostrar errores para depuración (desactívalo en producción)
+// Mostrar errores para depuración (desactíalo en producción)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 header('Content-Type: application/json');
 
-$action = $_GET['action'] ?? '';
-
-// Verifica sesión activa
+// Verifica si el usuario está autenticado
 $id_usuario = $_SESSION['id_usuario'] ?? null;
 if (!$id_usuario) {
     echo json_encode(['success' => false, 'message' => 'Usuario no autenticado']);
     exit;
 }
 
-// Si viene por POST y no hay acción en URL, toma del JSON
+$action = $_GET['action'] ?? '';
+
+// Si viene por POST sin parámetro "action", se toma del JSON
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($action)) {
     $json = json_decode(file_get_contents("php://input"), true);
     $action = $json['action'] ?? '';
@@ -88,17 +88,25 @@ if ($action === 'actualizar') {
     }
 
     try {
+        // Buscar el id_especialidad por nombre
+        $stmt = $pdo->prepare("SELECT id_especialidad FROM especialidades WHERE nombre = ?");
+        $stmt->execute([$json['especialidad']]);
+        $id_especialidad = $stmt->fetchColumn();
+
+        if (!$id_especialidad) {
+            echo json_encode(['success' => false, 'message' => 'Especialidad no válida.']);
+            exit;
+        }
+
+        // Actualizar la cita
         $stmt = $pdo->prepare("
             UPDATE citas 
-            SET id_especialidad = (
-                    SELECT id_especialidad FROM especialidades WHERE nombre = ?
-                ),
-                fecha_hora = ?
+            SET id_especialidad = ?, fecha_hora = ?
             WHERE id_cita = ? AND id_usuario = ?
         ");
 
         $ok = $stmt->execute([
-            $json['especialidad'],
+            $id_especialidad,
             $json['fecha_hora'],
             $json['id_cita'],
             $id_usuario

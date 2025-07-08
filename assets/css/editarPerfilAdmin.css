@@ -1,0 +1,228 @@
+/* ===============================
+   Reset general y configuraciones base
+   =============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* ===============================
+   Encabezado principal del sistema
+   =============================== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #6EACDA;
+  padding: 15px 30px;
+  color: black;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Botón de volver */
+.btn-volver {
+  background-color: #090b45;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.btn-volver:hover {
+  background-color: #111361;
+}
+
+/* Título central del header */
+.titulo-header {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  flex-grow: 1;
+}
+
+/* Contenedor del logo */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 170px;
+  height: 50px;
+  margin-right: 15px;
+  border-radius: 15px;
+}
+
+/* ===============================
+   Estructura del layout principal
+   =============================== */
+.flex-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===============================
+   Barra lateral izquierda (sidebar)
+   =============================== */
+.sidebar {
+  background-color: #1e1b4b;
+  width: 20%;
+  padding: 1rem;
+  color: white;
+}
+
+.sidebar a {
+  display: block;
+  margin-bottom: 30px;
+  margin-top: 15px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   Contenedor principal del formulario
+   =============================== */
+.form-container {
+  flex: 1;
+  padding: 2.5rem;
+  background-color: #f5f5f5;
+}
+
+.form-container h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* ===============================
+   Grid de campos del formulario
+   =============================== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.form-grid input,
+.form-grid select {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+/* ===============================
+   Botón de guardar formulario
+   =============================== */
+.btn-save {
+  margin-top: 1.5rem;
+  background-color: #69b0e4;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-save:hover {
+  background-color: #539bd4;
+}
+
+/* ===============================
+   Diseño responsive: tablets
+   =============================== */
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 1rem 0;
+  }
+
+  .sidebar a {
+    margin: 10px;
+    font-size: 14px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .logo {
+    width: 120px;
+    height: auto;
+  }
+
+  .btn-volver {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .titulo-header {
+    font-size: 10px;
+  }
+
+  .form-container {
+    padding: 1rem;
+  }
+
+  .form-container h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* ===============================
+   Diseño responsive: celulares
+   =============================== */
+@media (max-width: 480px) {
+  .logo {
+    width: 100px;
+  }
+
+  .btn-volver {
+    width: 90%;
+    max-width: 180px;
+  }
+
+  .titulo-header {
+    font-size: 10px;
+  }
+}

@@ -62,7 +62,7 @@ $usuario = $_SESSION['usuario'];
                 <div class="opcion">
                     <img src="../../assets/img/imga1.png" alt="calendario" class="calendarioimg" />
                     <h3>Agendar citas</h3>
-                    <button onclick="window.location.href='../usuario/agendamientoCalendario.php'">Ingresar</button>
+                    <button onclick="window.location.href='../usuario/agendamientoCalen.php'">Ingresar</button>
                 </div>
                 <div class="opcion">
                     <img src="../../assets/img/imga2.png" alt="calendario" class="calendarioimg" />

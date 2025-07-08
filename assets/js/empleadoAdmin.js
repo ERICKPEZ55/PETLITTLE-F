@@ -13,6 +13,32 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let usuarioEditando = null;
 
+    // Función para llenar un select con especialidades
+    function cargarEspecialidadesEnSelect(selectId, especialidadesData, especialidadSeleccionada = null) {
+        const select = document.getElementById(selectId);
+        select.innerHTML = '<option value="">Seleccione la especialidad</option>';
+
+        especialidadesData.forEach(esp => {
+            const option = document.createElement('option');
+            option.value = esp.id_especialidad;
+            option.textContent = esp.nombre;
+            if (especialidadSeleccionada && esp.nombre === especialidadSeleccionada) {
+                option.selected = true;
+            }
+            select.appendChild(option);
+        });
+    }
+
+    // Cargar especialidades para el modal de agregar
+    fetch('../../controllers/obtenerEspecialidad.php')
+        .then(response => response.json())
+        .then(data => {
+            cargarEspecialidadesEnSelect('especialidad', data);
+        })
+        .catch(error => {
+            console.error('Error al cargar especialidades:', error);
+        });
+
     // Cargar empleados desde la base de datos
     fetch('../../controllers/listarEmpleado.php')
         .then(response => response.json())
@@ -21,17 +47,19 @@ window.addEventListener('DOMContentLoaded', () => {
                 const fila = document.createElement('tr');
                 fila.dataset.id = emp.id_empleado;
                 fila.innerHTML = `
-                    <td class="td-nombre">${emp.nombre}</td>
-                    <td class="td-apellido">${emp.apellido}</td>
-                    <td class="td-rol">${emp.rol}</td>
-                    <td class="td-correo">${emp.usuario}</td>
-                    <td class="td-telefono">${emp.telefono}</td>
-                    <td>${emp.contrasena}</td>
-                    <td>
-                        <button class="editarBtn">✏️</button>
-                        <button class="eliminarBtn">🗑️</button>
-                    </td>
-                `;
+                <td class="td-nombre">${emp.nombre}</td>
+                <td class="td-apellido">${emp.apellido}</td>
+                <td class="td-rol">${emp.rol}</td>
+                <td class="td-especialidad">${emp.especialidad}</td> <!-- CORREGIDO -->
+                <td class="td-correo">${emp.usuario}</td>
+                <td class="td-telefono">${emp.telefono}</td>
+                <td>${emp.contrasena}</td>
+                <td>
+                    <button class="editarBtn">✏️</button>
+                    <button class="eliminarBtn">🗑️</button>
+                </td>
+            `;
+
                 tablaUsuarios.appendChild(fila);
 
                 fila.querySelector('.editarBtn').addEventListener('click', () => abrirEdicion(fila));
@@ -54,6 +82,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const nombre = document.getElementById('nuevoNombre').value.trim();
         const apellido = document.getElementById('nuevoApellido').value.trim();
         const rol = document.getElementById("rol").value;
+        const id_especialidad = document.getElementById("especialidad").value;
         const telefono = document.getElementById('nuevoTelefono').value.trim();
         const usuario = document.getElementById('nuevoCorreo').value.trim();
         const contrasena = generarContrasena(6);
@@ -61,7 +90,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const telefonoValido = /^[0-9]{10}$/.test(telefono);
         const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usuario);
 
-        if (!nombre || !apellido || !usuario || !telefono) {
+        if (!nombre || !apellido || !id_especialidad || !usuario || !telefono) {
             Swal.fire('Error', 'Todos los campos son obligatorios.', 'warning');
             return;
         }
@@ -79,7 +108,15 @@ window.addEventListener('DOMContentLoaded', () => {
         fetch('../../controllers/guardarEmpleado.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nombre, apellido, rol, usuario, telefono, contrasena })
+            body: JSON.stringify({
+                nombre,
+                apellido,
+                rol,
+                especialidad: id_especialidad,
+                usuario,
+                telefono,
+                contrasena
+            })
         })
         .then(response => response.json())
         .then(data => {
@@ -87,7 +124,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 Swal.fire('¡Guardado!', 'Empleado agregado exitosamente.', 'success');
                 setTimeout(() => location.reload(), 1500);
             } else {
-                Swal.fire('Error', 'No se pudo guardar el empleado.', 'error');
+                Swal.fire('Error', `No se pudo guardar el empleado. ${data.error}`, 'error');
             }
         })
         .catch(err => {
@@ -98,10 +135,27 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function abrirEdicion(fila) {
         usuarioEditando = fila;
-        document.getElementById('editNombre').value = fila.querySelector('.td-nombre').textContent;
-        document.getElementById('editApellido').value = fila.querySelector('.td-apellido').textContent;
-        document.getElementById('editTelefono').value = fila.querySelector('.td-telefono').textContent;
-        document.getElementById('editCorreo').value = fila.querySelector('.td-correo').textContent;
+
+        const nombre = fila.querySelector('.td-nombre').textContent;
+        const apellido = fila.querySelector('.td-apellido').textContent;
+        const especialidad = fila.querySelector('.td-especialidad').textContent;
+        const telefono = fila.querySelector('.td-telefono').textContent;
+        const correo = fila.querySelector('.td-correo').textContent;
+
+        document.getElementById('editNombre').value = nombre;
+        document.getElementById('editApellido').value = apellido;
+        document.getElementById('editTelefono').value = telefono;
+        document.getElementById('editCorreo').value = correo;
+
+        // Cargar especialidades en el select del modal de edición y seleccionar la actual
+        fetch('../../controllers/obtenerEspecialidad.php')
+            .then(response => response.json())
+            .then(data => {
+                cargarEspecialidadesEnSelect('editEspecialidad', data, especialidad);
+            })
+            .catch(error => {
+                console.error('Error al cargar especialidades para edición:', error);
+            });
 
         modalEditar.style.display = 'block';
     }
@@ -109,6 +163,7 @@ window.addEventListener('DOMContentLoaded', () => {
     guardarCambios.addEventListener('click', () => {
         const nuevoNombre = document.getElementById('editNombre').value.trim();
         const nuevoApellido = document.getElementById('editApellido').value.trim();
+        const nuevaEspecialidad = document.getElementById('editEspecialidad').value;
         const nuevoTelefono = document.getElementById('editTelefono').value.trim();
         const nuevoCorreo = document.getElementById('editCorreo').value.trim();
 
@@ -119,7 +174,7 @@ window.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (!nuevoNombre || !nuevoApellido || !nuevoTelefono || !nuevoCorreo) {
+        if (!nuevoNombre || !nuevoApellido || !nuevaEspecialidad || !nuevoTelefono || !nuevoCorreo) {
             Swal.fire('Error', 'Todos los campos deben estar completos.', 'warning');
             return;
         }
@@ -136,6 +191,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 id: idEmpleado,
                 nombre: nuevoNombre,
                 apellido: nuevoApellido,
+                id_especialidad: nuevaEspecialidad,
                 telefono: nuevoTelefono,
                 usuario: nuevoCorreo
             })
