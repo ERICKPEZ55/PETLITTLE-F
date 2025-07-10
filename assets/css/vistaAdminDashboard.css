@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* =============================
    RESETEO Y CONFIGURACIÓN GENERAL
    ============================= */
@@ -251,3 +252,253 @@ button:hover {
     width: 100%;
   }
 }
+=======
+/* =============================
+   RESETEO Y CONFIGURACIÓN GENERAL
+   ============================= */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #FFFAF3;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* =============================
+   CABECERA PRINCIPAL (HEADER)
+   ============================= */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #6EACDA;
+  padding: 15px 30px;
+  color: black;
+}
+
+/* =============================
+   LOGO Y TÍTULOS
+   ============================= */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 180px;
+  height: 60px;
+  margin-right: 15px;
+  border-radius: 15px;
+}
+
+.titulo {
+  font-size: 22px;
+  font-weight: bold;
+  align-content: center;
+}
+
+.titulo-header {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  width: 100%;
+}
+
+/* =============================
+   CONTENEDOR GENERAL
+   ============================= */
+.contenedor {
+  display: flex;
+  min-height: calc(100vh - 90px); 
+  position: relative;
+  overflow: hidden;
+}
+
+/* =============================
+   PERFIL DEL USUARIO SOBRE EL MENÚ
+   ============================= */
+.perfil-sobre-menu {
+  position: absolute;
+  top: 40px; 
+  left: 30px;
+  text-align: center;
+  width: 250px;
+  z-index: 10;
+  margin-top: 55px;
+}
+
+.perfil-sobre-menu a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.perfil-sobre-menu .nombre {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.perfil-sobre-menu .rol {
+  font-size: 14px;
+  color: #333;
+  margin: 5px 0;
+}
+
+/* =============================
+   MENÚ LATERAL
+   ============================= */
+.menu-lateral {
+  width: 230px;
+  height: 150px;
+  background-color: #6EACDA;
+  padding: 30px;
+  border-radius: 30px;
+  color: black;
+  margin-top: 210px;
+  margin-left: 10px;
+}
+
+.menu a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  padding: 0px;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.menu a:hover,
+.cerrar-sesion {
+  color: white;
+}
+
+/* =============================
+   SECCIÓN DE CONTENIDO PRINCIPAL
+   ============================= */
+.contenido {
+  flex-grow: 1;
+  padding: 50px;
+  background: #FFFAF3;
+}
+
+/* =============================
+   OPCIONES INTERNAS DEL PANEL
+   ============================= */
+.opciones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.opcion {
+  background-color: #272A57;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 20px;
+  transition: 0.3s;
+  margin-top: 40px;
+}
+
+.opcion:hover {
+  transform: scale(1.05);
+  background-color: #1E1F45;
+}
+
+/* =============================
+   BOTÓN GENÉRICO
+   ============================= */
+button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 15px;
+  font-size: 14px;
+  width: 100px;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* =============================
+   RESPONSIVE DESIGN
+   ============================= */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .titulo-header {
+    font-size: 20px;
+    text-align: left;
+    margin-top: 10px;
+  }
+
+  .contenedor {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .perfil-sobre-menu {
+    position: static;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  .menu-lateral {
+    width: 90%;
+    max-width: 300px;
+    margin: 0 auto 20px auto; 
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .menu a {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cerrar-sesion {
+    margin-top: auto;
+  }
+
+  .contenido {
+    padding: 20px;
+  }
+
+  .opciones {
+    grid-template-columns: 1fr;
+  }
+
+  .opcion {
+    margin-top: 20px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+>>>>>>> f09693777529f8988286f9f474767640441d8127

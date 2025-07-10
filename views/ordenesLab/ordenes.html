@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+    <title>Perfil de Veterinario - Órdenes de Laboratorio</title>
+    <link rel="stylesheet" href="../../assets/css/ordenesLab.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <div class="logo-container">
+                <img src="../../assets/img/logo negativo.png" alt="Logo" class="logo">
+            </div>
+        </div>
+        <div class="titulo-header">
+            <h1>Órdenes de Laboratorio</h1>
+        </div>
+        <a href="javascript:history.back()" class="btn-volver">&larr; Volver</a>
+    </header>
+
+    <main class="main-content">
+        <section class="section-card">
+            <h2><i class="fas fa-flask icon-spacing"></i> Crear Nueva Orden de Laboratorio</h2>
+            <form class="lab-order-form">
+                <div class="form-group">
+                    <label for="paciente">Paciente:</label>
+                    <input type="text" id="paciente" name="paciente" placeholder="Buscar paciente" required>
+                </div>
+                <div class="form-group">
+                    <label for="propietario">Propietario:</label>
+                    <input type="text" id="propietario" name="propietario" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="tipoMuestra">Tipo de Muestra:</label>
+                    <select id="tipoMuestra" name="tipoMuestra" required>
+                        <option value="">Seleccione</option>
+                        <option value="sangre">Sangre</option>
+                        <option value="orina">Orina</option>
+                        <option value="heces">Heces</option>
+                        <option value="tejido">Tejido</option>
+                        <option value="frotis">Frotis</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pruebas">Pruebas a Solicitar:</label>
+                    <textarea id="pruebas" name="pruebas" rows="3" placeholder="Ej: Hemograma completo, Perfil hepático, Uroanálisis..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="laboratorio">Laboratorio Destino:</label>
+                    <select id="laboratorio" name="laboratorio" required>
+                        <option value="">Seleccione</option>
+                        <option value="labA">Laboratorio Central A</option>
+                        <option value="labB">Laboratorio Diagnóstico B</option>
+                    </select>
+                </div>
+                 <div class="form-group">
+                    <label for="urgencia">Urgencia:</label>
+                    <select id="urgencia" name="urgencia">
+                        <option value="normal">Normal</option>
+                        <option value="urgente">Urgente</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notasClinicas">Notas Clínicas Relevantes:</label>
+                    <textarea id="notasClinicas" name="notasClinicas" rows="4" placeholder="Síntomas, historial, diagnóstico presuntivo..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary-action"><i class="fas fa-plus-circle icon-spacing"></i> Crear Orden</button>
+            </form>
+        </section>
+
+        <section class="section-card">
+            <h2><i class="fas fa-clipboard-list icon-spacing"></i> Historial de Órdenes de Laboratorio</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Paciente</th>
+                            <th>Propietario</th>
+                            <th>Pruebas</th>
+                            <th>Laboratorio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="estado-resultados-disponibles">
+                            <td>2025-05-28</td>
+                            <td>Max (Canino)</td>
+                            <td>Ana López</td>
+                            <td>Hemograma, Perfil Renal</td>
+                            <td>Laboratorio A</td>
+                            <td><span class="status-badge disponible">Resultados Disponibles</span></td>
+                            <td>
+                                <button class="btn-action view-details"><i class="fas fa-eye"></i> Ver</button>
+                                <button class="btn-action reorder"><i class="fas fa-sync-alt"></i> Reordenar</button>
+                            </td>
+                        </tr>
+                        <tr class="estado-en-procesamiento">
+                            <td>2025-05-27</td>
+                            <td>Luna (Felino)</td>
+                            <td>Carlos Ruiz</td>
+                            <td>Panel Tiroideo</td>
+                            <td>Laboratorio B</td>
+                            <td><span class="status-badge procesamiento">En Procesamiento</span></td>
+                            <td>
+                                <button class="btn-action view-details"><i class="fas fa-eye"></i> Ver</button>
+                                <button class="btn-action cancel"><i class="fas fa-times-circle"></i> Cancelar</button>
+                            </td>
+                        </tr>
+                        <tr class="estado-pendiente-envio">
+                            <td>2025-05-26</td>
+                            <td>Buddy (Canino)</td>
+                            <td>María Gómez</td>
+                            <td>Uroanálisis, Cultivo</td>
+                            <td>Laboratorio A</td>
+                            <td><span class="status-badge pendiente">Pendiente de Envío</span></td>
+                            <td>
+                                <button class="btn-action view-details"><i class="fas fa-eye"></i> Ver</button>
+                                <button class="btn-action edit"><i class="fas fa-edit"></i> Editar</button>
+                            </td>
+                        </tr>
+                         <tr class="estado-cancelada">
+                            <td>2025-05-25</td>
+                            <td>Mona (Ave)</td>
+                            <td>Juan Pérez</td>
+                            <td>Coprología</td>
+                            <td>Laboratorio B</td>
+                            <td><span class="status-badge cancelada">Cancelada</span></td>
+                            <td>
+                                <button class="btn-action view-details"><i class="fas fa-eye"></i> Ver</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    </body>
+</html>

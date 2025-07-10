@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ========== RESETEO GLOBAL Y FUENTE BASE ========== */
 * {
     margin: 0;
@@ -254,3 +255,135 @@ button:hover {
         margin-bottom: 5px; /* deja espacio con el select */
     }
 }
+=======
+/* ========== RESETEO GLOBAL Y FUENTE BASE ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif; /* Fuente predeterminada */
+}
+
+/* ========== CUERPO DE LA PÁGINA ========== */
+body {
+    background: #f4f4f4; /* Fondo gris claro */
+    text-align: center; /* Centrado del texto */
+}
+
+/* ========== ENCABEZADO PRINCIPAL ========== */
+header {
+    display: flex; /* Distribución horizontal */
+    justify-content: space-between; /* Elementos a los extremos */
+    align-items: center; /* Alineación vertical centrada */
+    background: #6EACDA; /* Azul institucional */
+    padding: 15px;
+    color: white; /* Color de texto */
+}
+
+/* ========== LOGO DE LA IZQUIERDA ========== */
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c2c54; /* Azul oscuro para contraste */
+    display: flex;
+    align-items: center;
+}
+
+/* Imagen del logo */
+.logo img {
+    height: 60px;
+    margin-right: 10px;
+}
+
+/* ========== SECCIÓN DE USUARIO (DERECHA DEL HEADER) ========== */
+.usuario {
+    display: flex;
+    align-items: center;
+}
+
+/* ========== CAMPOS DE ENTRADA ========== */
+input {
+    padding: 8px;
+    border-radius: 5px;
+    border: none; /* Estilo limpio sin borde */
+}
+
+/* ========== TABLAS ========== */
+table {
+    width: 90%;
+    margin: 20px auto;
+    background: white;
+    border-collapse: collapse; /* Bordes colapsados */
+}
+
+/* Celdas y encabezados */
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Línea suave de separación */
+}
+
+/* Encabezado de la tabla */
+th {
+    background: #6EACDA;
+    color: white;
+}
+
+/* ========== BOTONES GENERALES ========== */
+button {
+    padding: 10px;
+    margin: 10px;
+    background: rgb(226, 226, 226);
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Efecto hover (aunque se mantiene el mismo color, sirve para ajustes futuros) */
+button:hover {
+    background: rgba(255, 255, 255, 0.676);
+}
+
+/* ========== ÍCONOS DE ACCIÓN ========== */
+.editar, .borrar {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* ========== MODAL ========== */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 105%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenido del modal */
+.modal-content {
+    background: #6EACDA;
+    padding: 7px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 270px;
+    border-color: black;
+}
+
+.modal-content h2{
+    margin-bottom: 15px;
+}
+
+.btn-volver{
+    text-decoration: none;
+    margin-bottom: 20px;
+    background-color: #272A57;
+    color: white;
+    padding: 10px 20px; 
+    border-radius: 8px; 
+    display: inline-block;
+}
+>>>>>>> f09693777529f8988286f9f474767640441d8127

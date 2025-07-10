@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+<<<<<<< HEAD
 -- Tiempo de generación: 10-07-2025 a las 06:41:42
+=======
+-- Tiempo de generación: 08-07-2025 a las 08:53:38
+>>>>>>> f09693777529f8988286f9f474767640441d8127
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -131,8 +135,12 @@ INSERT INTO `citas` (`id_cita`, `id_usuario`, `id_mascota`, `id_especialidad`, `
 (5, 20, 12, 5, '2025-06-27 09:30:00', 'Cancelada'),
 (6, 20, 12, 3, '2025-06-10 08:00:00', 'No asistió'),
 (7, 25, 5, 2, '2025-07-16 08:00:00', 'No asistió'),
+<<<<<<< HEAD
 (46, 25, 5, 1, '2025-07-10 08:00:00', 'Asistió'),
 (47, 25, 5, 5, '2025-07-24 10:00:00', 'No asistió');
+=======
+(46, 25, 5, 1, '2025-07-10 08:00:00', 'No asistió');
+>>>>>>> f09693777529f8988286f9f474767640441d8127
 
 -- --------------------------------------------------------
 
@@ -396,7 +404,11 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
+<<<<<<< HEAD
   MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+=======
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+>>>>>>> f09693777529f8988286f9f474767640441d8127
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`

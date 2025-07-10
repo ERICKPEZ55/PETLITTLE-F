@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ========== RESETEO GLOBAL Y FUENTE BASE ========== */
 * {
     margin: 0;
@@ -126,3 +127,133 @@ button:hover {
     border-radius: 5px;
     text-align: center;
 }
+=======
+/* ========== RESETEO GLOBAL Y FUENTE BASE ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif; /* Fuente predeterminada */
+}
+
+/* ========== CUERPO DE LA PÁGINA ========== */
+body {
+    background: #f4f4f4; /* Fondo gris claro */
+    text-align: center; /* Centrado del texto */
+}
+
+/* ========== ENCABEZADO PRINCIPAL ========== */
+header {
+    display: flex; /* Distribución horizontal */
+    justify-content: space-between; /* Elementos a los extremos */
+    align-items: center; /* Alineación vertical centrada */
+    background: #6EACDA; /* Azul institucional */
+    padding: 15px;
+    color: white; /* Color de texto */
+}
+
+/* ========== LOGO DE LA IZQUIERDA ========== */
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c2c54; /* Azul oscuro para contraste */
+    display: flex;
+    align-items: center;
+}
+
+/* Imagen del logo */
+.logo img {
+    height: 60px;
+    margin-right: 10px;
+}
+
+/* ========== SECCIÓN DE USUARIO (DERECHA DEL HEADER) ========== */
+.usuario {
+    display: flex;
+    align-items: center;
+}
+
+/* Foto de perfil del usuario */
+.usuario img {
+    border-radius: 50%; /* Círculo */
+    width: 40px;
+    height: 40px;
+    margin-left: 15px;
+}
+
+/* ========== CAMPOS DE ENTRADA ========== */
+input {
+    padding: 8px;
+    border-radius: 5px;
+    border: none; /* Estilo limpio sin borde */
+}
+
+/* ========== ÍCONO DE NOTIFICACIONES ========== */
+.notificaciones {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* ========== TABLAS ========== */
+table {
+    width: 90%;
+    margin: 20px auto;
+    background: white;
+    border-collapse: collapse; /* Bordes colapsados */
+}
+
+/* Celdas y encabezados */
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Línea suave de separación */
+}
+
+/* Encabezado de la tabla */
+th {
+    background: #6EACDA;
+    color: white;
+}
+
+/* ========== BOTONES GENERALES ========== */
+button {
+    padding: 10px;
+    margin: 10px;
+    background: #6EACDA;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Efecto hover (aunque se mantiene el mismo color, sirve para ajustes futuros) */
+button:hover {
+    background: #6EACDA;
+}
+
+/* ========== ÍCONOS DE ACCIÓN ========== */
+.editar, .borrar {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* ========== MODAL ========== */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenido del modal */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+>>>>>>> f09693777529f8988286f9f474767640441d8127

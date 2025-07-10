@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ========== ESTILOS BASE ========== */
 body {
     font-family: 'Inter', sans-serif;
@@ -336,3 +337,343 @@ table tbody tr:hover {
         font-size: 1.1rem;
     }
 }
+=======
+/* ========== ESTILOS BASE ========== */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background-color: #FDF8F4;
+    color: #1E1E1E;
+}
+
+/* ========== ENCABEZADO PRINCIPAL ========== */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    background-color: #6EACDA;
+    padding: 15px 30px;
+    color: black;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+}
+
+/* Contenedor izquierdo del encabezado */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+/* Botón de volver */
+.btn-volver {
+    background-color: #272A57; 
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-decoration: none; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    white-space: nowrap; 
+}
+
+/* Hover del botón de volver */
+.btn-volver:hover {
+    background-color: #272A57; 
+}
+
+/* Título centrado dentro del header */
+.titulo-header {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap; 
+    flex-grow: 1; 
+}
+
+/* ========== LOGO Y TÍTULO ========== */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 180px;
+    height: 60px;
+    margin-right: 15px;
+    border-radius: 15px;
+}
+
+.titulo {
+    font-size: 22px;
+    font-weight: bold;
+    align-content: center;
+}
+
+/* ========== CONTENIDO PRINCIPAL ========== */
+.main-content {
+    max-width: 1000px; 
+    margin: 2rem auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; 
+}
+
+/* ========== TARJETAS DE SECCIÓN ========== */
+.section-card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.section-card h2 {
+    color: #1E1F59; 
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Espaciado para íconos al lado de títulos */
+.icon-spacing {
+    margin-right: 10px;
+}
+
+/* ========== TABLA RESPONSIVA ========== */
+.table-responsive {
+    overflow-x: auto; 
+}
+
+/* Tabla general */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+/* Encabezado de tabla */
+table thead {
+    background-color: #272A57; 
+    color: rgb(255, 255, 255);
+}
+
+/* Celdas de tabla */
+table th,
+table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Estilo para encabezados */
+table th {
+    font-weight: 600;
+    white-space: nowrap; 
+}
+
+/* Filas intercaladas */
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; 
+}
+
+/* Hover sobre fila */
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* ========== COLUMNA ESPECÍFICA: TELÉFONO ========== */
+.column-telefono {
+    min-width: 150px; 
+    width: 15%; 
+    white-space: nowrap; 
+}
+
+.column-telefono span {
+    font-size: 0.95em; 
+}
+
+/* ========== BOTONES DE ACCIONES (EDITAR, ELIMINAR, ETC.) ========== */
+.btn-action {
+    background-color: #090b45;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s ease;
+    margin-right: 5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap; 
+}
+
+.btn-action:hover {
+    background-color: #272A57;
+}
+
+/* Botón eliminar */
+.btn-action.btn-delete {
+    background-color: #CC3333; 
+}
+
+.btn-action.btn-delete:hover {
+    background-color: #A32929; 
+}
+
+/* ========== MEDIA QUERIES - ADAPTABILIDAD RESPONSIVE ========== */
+
+/* PANTALLAS ≤ 768px */
+@media (max-width: 768px) {
+    .header {
+        padding: 12px 20px;
+    }
+
+    .titulo-header {
+        font-size: 22px;
+    }
+
+    .logo {
+        width: 150px;
+        height: 50px;
+    }
+
+    .main-content {
+        margin: 1.5rem auto;
+        padding: 0.8rem;
+    }
+
+    .section-card {
+        padding: 1rem;
+    }
+
+    .section-card h2 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    table th,
+    table td {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+
+    .column-telefono {
+        min-width: 120px;
+    }
+
+    .btn-action {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+        gap: 3px;
+    }
+}
+
+/* PANTALLAS ≤ 600px */
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+        padding: 10px 15px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .header-left {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .logo-container {
+        margin-bottom: 0;
+    }
+
+    .btn-volver {
+        order: 3; 
+        margin-top: 10px;
+        margin-right: 0;
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .titulo-header {
+        order: 2; 
+        position: static;
+        transform: none;
+        font-size: 1.8rem;
+        width: auto;
+        white-space: normal;
+        margin-bottom: 10px; 
+    }
+
+    .logo {
+        order: 1; 
+        width: 120px;
+        height: 40px;
+        margin-right: 0;
+    }
+
+    .main-content {
+        margin: 1rem auto;
+        padding: 0.5rem;
+        gap: 1.5rem;
+    }
+
+    .section-card {
+        padding: 0.8rem;
+    }
+
+    .section-card h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    table th,
+    table td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+
+    .column-telefono {
+        min-width: 100px;
+    }
+}
+
+/* PANTALLAS ≤ 400px */
+@media (max-width: 400px) {
+    .header {
+        padding: 8px 10px;
+    }
+
+    .titulo-header {
+        font-size: 1.6rem;
+    }
+
+    .logo {
+        width: 100px;
+        height: 35px;
+    }
+
+    .main-content {
+        margin: 0.5rem auto;
+        padding: 0.3rem;
+        gap: 1rem;
+    }
+
+    .section-card h2 {
+        font-size: 1.1rem;
+    }
+}
+>>>>>>> f09693777529f8988286f9f474767640441d8127

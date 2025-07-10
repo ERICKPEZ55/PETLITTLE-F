@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* --------- ESTILOS BASE --------- */
 body {
   margin: 0;
@@ -176,3 +177,183 @@ body {
 .action-buttons button:hover {
   background-color: #8c4de0; /* Violeta más oscuro al pasar el mouse */
 }
+=======
+/* --------- ESTILOS BASE --------- */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif; /* Fuente moderna y legible */
+  background-color: #f3f3f3;           /* Fondo gris claro */
+}
+
+/* --------- BARRA SUPERIOR --------- */
+.header {
+  background-color: #71b6e4;           /* Azul corporativo */
+  padding: 15px 30px;                  /* Espaciado interno */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;      /* Distribuye elementos a los extremos */
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1b1b4d;                      /* Azul oscuro para contraste */
+}
+
+.admin-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;                           /* Espaciado entre imagen y nombre */
+}
+
+.admin-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;                  /* Imagen circular */
+  object-fit: cover;                   /* Ajuste sin deformar */
+  border: 2px solid white;             /* Borde blanco decorativo */
+}
+
+.admin-info span {
+  font-weight: 500;
+  color: #fff;
+  font-size: 14px;                     /* Texto del nombre del administrador */
+}
+
+/* --------- PANEL GENERAL --------- */
+.panel {
+  display: flex;
+  gap: 30px;
+  padding: 30px;
+  flex-wrap: wrap;                     /* Permite que los paneles bajen en pantallas pequeñas */
+  justify-content: center;
+}
+
+.panel-card {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  padding: 20px;
+  min-width: 300px;
+  max-width: 400px;
+  flex: 1;
+  transition: transform 0.2s;         /* Animación al hacer hover */
+}
+
+.panel-card:hover {
+  transform: translateY(-5px);         /* Efecto flotante */
+}
+
+.panel-title {
+  background-color: #71b6e4;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* --------- CALENDARIO FUNCIONAL --------- */
+.calendar-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Encabezado del calendario (mes/año y controles) */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.calendar-header select {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f3f8ff;
+  font-family: inherit;
+  color: #333;
+}
+
+/* Días de la semana */
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columnas para los días */
+  text-align: center;
+  font-weight: 600;
+  color: #1b1b4d;
+  margin-bottom: 10px;
+}
+
+.calendar-days div {
+  padding: 8px 0;
+}
+
+/* Celdas de cada fecha del mes */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-cell {
+  background-color: #eee;
+  padding: 12px 0;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.calendar-cell:hover {
+  background-color: #d8eafe;  /* Hover celeste */
+}
+
+.calendar-cell.today {
+  background-color: #292960; /* Día actual resaltado */
+  color: white;
+}
+
+/* Leyenda informativa bajo el calendario */
+.calendar-legend {
+  margin-top: 15px;
+  background-color: #cde5fc;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #1b1b4d;
+  font-weight: 500;
+}
+
+/* --------- BOTONES DE ACCIÓN --------- */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-buttons button {
+  padding: 12px;
+  background-color: #a168f5; /* Violeta fuerte */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.action-buttons button:hover {
+  background-color: #8c4de0; /* Violeta más oscuro al pasar el mouse */
+}
+>>>>>>> f09693777529f8988286f9f474767640441d8127
