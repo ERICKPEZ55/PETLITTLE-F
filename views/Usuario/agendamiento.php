@@ -47,7 +47,6 @@ $usuario = $_SESSION['usuario'];
         <aside class="menu-lateral">
             <nav class="menu">
                 <a href="agendamiento.php">Inicio</a>
-                <a href="./misMascotas.php">Mis mascotas</a>
                 <a href="../gestionCitas/tablasCitas.php">Cancelar citas</a>
                 <a href="#" class="cerrar-sesion" id="cerrarSesion">Cerrar Sesión</a>
             </nav>
@@ -55,14 +54,14 @@ $usuario = $_SESSION['usuario'];
 
         <main class="contenido">
             <img src="../../assets/img/img 1.png" alt="doctor cargando perros" class="img1" />
-            <h2>Bienvenido</h2>
+            <h2>Bienvenido/a, <?php echo htmlspecialchars($usuario['nombre']); ?></h2> 
             <p>Aquí encuentras todas las opciones del plan de salud disponible para tu mascota.</p>
 
             <div class="opciones">
                 <div class="opcion">
                     <img src="../../assets/img/imga1.png" alt="calendario" class="calendarioimg" />
                     <h3>Agendar citas</h3>
-                    <button onclick="window.location.href='../usuario/agendamientoCalendario.php'">Ingresar</button>
+                    <button onclick="window.location.href='../usuario/agendamientoCalen.php'">Ingresar</button>
                 </div>
                 <div class="opcion">
                     <img src="../../assets/img/imga2.png" alt="calendario" class="calendarioimg" />
@@ -70,9 +69,9 @@ $usuario = $_SESSION['usuario'];
                     <button onclick="window.location.href='../gestionCitas/tablasCitas.php'">Ingresar</button>
                 </div>
                 <div class="opcion">
-                    <img src="../../assets/img/imga3.png" alt="calendario" class="calendarioimg" />
-                    <h3>Órdenes pendientes</h3>
-                    <button onclick="window.location.href='../usuario/ordenesPendientes.php'">Ingresar</button>
+                    <img src="../../assets/img/perroGato.png" alt="calendario" class="calendarioimg" />
+                    <h3>Mis mascotas</h3>
+                    <button onclick="window.location.href='../usuario/misMascotas.php'">Ingresar</button>
                 </div>
                 <div class="opcion">
                     <img src="../../assets/img/imga4.png" alt="calendario" class="calendarioimg" />
@@ -93,7 +92,7 @@ $usuario = $_SESSION['usuario'];
 
         function reiniciarTemporizador() {
             clearTimeout(timeoutInactivity);
-            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 600000); // 10 minutos (ajustable)
+            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); //5 minutos
         }
 
         window.onload = reiniciarTemporizador;
@@ -113,7 +112,7 @@ $usuario = $_SESSION['usuario'];
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, cerrar sesión',
+                confirmButtonText: 'Sí',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {

@@ -105,14 +105,14 @@ html, body {
    MENÚ LATERAL
    ============================= */
 .menu-lateral {
-    width: 230px;
-    height: 150px;
+    width: 210px;
+    height: 80px;
     background-color: #6EACDA;
     padding: 30px;
     border-radius: 30px;
     color: black;
-    margin-top: 210px;
-    margin-left: 10px;
+    margin-top: 200px;
+    margin-left: 20px;
 }
 
 .menu a {
@@ -122,7 +122,7 @@ html, body {
     padding: 12px;
     font-size: 16px;
     border-radius: 10px;
-    margin-bottom: 35px;
+    margin-bottom: -3px;
     text-align: center;
 }
 
@@ -139,6 +139,13 @@ html, body {
     padding: 50px;
     background: #FFFAF3;
 }
+
+.img3 {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+
 
 /* =============================
    OPCIONES DE PANEL

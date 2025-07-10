@@ -123,6 +123,44 @@ h2 {
 .btn-volver-center a:hover {
     background-color: #5594c0;
 }
+.ver-detalle, .overlay {
+    display: none;
+}
+.ver-detalle.active, .overlay.active {
+    display: block;
+}
+.ver-detalle {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 2px solid #444;
+    padding: 25px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    z-index: 1001;
+}
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+.btn-cerrar {
+    background-color: #6EACDA;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.btn-cerrar:hover {
+    background-color: #5594c0;
+}
 
 /* ======================
    RESPONSIVE

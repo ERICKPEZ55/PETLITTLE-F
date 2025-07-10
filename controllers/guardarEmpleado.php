@@ -25,13 +25,14 @@ if ($conexion->connect_error) {
 $nombre = $conexion->real_escape_string($data['nombre']);
 $apellido = $conexion->real_escape_string($data['apellido']);
 $rol = $conexion->real_escape_string($data['rol']);
+$especialidad = $conexion->real_escape_string($data['especialidad']);
 $usuario = $conexion->real_escape_string($data['usuario']);
 $telefono = $conexion->real_escape_string($data['telefono']);
 $contrasena = $conexion->real_escape_string($data['contrasena']);
 
 // Inserción
-$sql = "INSERT INTO empleados (nombre, apellido, rol, usuario, telefono, contrasena)
-        VALUES ('$nombre', '$apellido', '$rol', '$usuario', '$telefono', '$contrasena')";
+$sql = "INSERT INTO empleados (nombre, apellido, rol, id_especialidad, usuario, telefono, contrasena)
+        VALUES ('$nombre', '$apellido', '$rol', $especialidad, '$usuario', '$telefono', '$contrasena')";
 
 if ($conexion->query($sql)) {
     echo json_encode(["success" => true]);

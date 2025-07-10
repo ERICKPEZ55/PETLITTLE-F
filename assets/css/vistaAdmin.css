@@ -125,6 +125,7 @@ body {
   color: #333;
 }
 
+
 /* Días de la semana */
 .calendar-days {
   display: grid;
@@ -155,15 +156,17 @@ body {
   transition: background-color 0.2s;
   cursor: pointer;
 }
+.calendar-cell.con-cita {
+  background-color: #272A57; /* azul claro */
+  color: #ffffff;
+  font-weight: bold;
+}
 
 .calendar-cell:hover {
-  background-color: #d8eafe;  /* Hover celeste */
+  background-color: #98b5d8;  /* Hover celeste */
 }
 
-.calendar-cell.today {
-  background-color: #292960; /* Día actual resaltado */
-  color: white;
-}
+
 
 /* Leyenda informativa bajo el calendario */
 .calendar-legend {
@@ -207,12 +210,18 @@ body {
 }
 
 .btn-volver{
-    text-decoration: none;
-    margin-bottom: 20px;
-    background-color: #272A57;
-    color: white;
-    padding: 10px 20px; 
-    border-radius: 8px; 
-    display: inline-block;
-
+  background-color: #272A57;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  white-space: nowrap;
 }

@@ -1,6 +1,12 @@
 /* ==========================================
-   ESTILOS BASE GENERALES PARA TODO EL CUERPO
+   RESET GLOBAL Y BASE
    ========================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -9,11 +15,10 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    box-sizing: border-box;
 }
 
 /* ==========================================
-   ENCABEZADO DE LA APLICACIÓN (Header)
+   ENCABEZADO DE LA APLICACIÓN
    ========================================== */
 .app-header {
     background-color: #6EACDA;
@@ -23,17 +28,16 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
-/* Logo en el encabezado */
 .app-header .logo img {
     height: 40px;
-    width: 160px;
-    vertical-align: middle;
+    width: auto;
 }
 
 /* ==========================================
-   BOTÓN DE REGRESO
+   BOTÓN DE VOLVER
    ========================================== */
 .back-button {
     background-color: #1976D2;
@@ -61,7 +65,7 @@ body {
 }
 
 /* ==========================================
-   CONTENEDOR PRINCIPAL DEL DASHBOARD
+   CONTENEDOR DEL DASHBOARD
    ========================================== */
 .dashboard-container {
     max-width: 960px;
@@ -72,7 +76,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Título principal */
 h1 {
     color: #2C3E50;
     margin-bottom: 30px;
@@ -80,7 +83,7 @@ h1 {
 }
 
 /* ==========================================
-   GRID DE ELEMENTOS DEL DASHBOARD
+   GRID DEL DASHBOARD
    ========================================== */
 .dashboard-grid {
     display: grid;
@@ -88,7 +91,6 @@ h1 {
     gap: 20px;
 }
 
-/* Elementos individuales */
 .dashboard-item {
     background-color: white;
     border-radius: 8px;
@@ -108,24 +110,25 @@ h1 {
 }
 
 .dashboard-item canvas {
-    width: 100%;
-    height: 200px;
+    width: 100% !important;
+    max-width: 100%;
+    height: auto !important;
+    aspect-ratio: 2 / 1;
     border-radius: 6px;
 }
 
-/* Item que ocupa el ancho completo */
+/* Item de ancho completo */
 .dashboard-item-full {
     grid-column: 1 / -1;
 }
 
 /* ==========================================
-   MEDIA QUERIES PARA RESPONSIVIDAD
+   MEDIA QUERIES
    ========================================== */
 
-/* Pantallas medianas (tablets y laptops pequeñas) */
+/* Pantallas medianas (tablets) */
 @media (max-width: 992px) {
     .dashboard-container {
-        margin: 15px auto;
         padding: 15px;
     }
 
@@ -137,18 +140,14 @@ h1 {
     .dashboard-item h2 {
         font-size: 1.1em;
     }
-
-    .dashboard-item canvas {
-        height: 180px;
-    }
 }
 
-/* Pantallas pequeñas (teléfonos móviles) */
+/* Móviles grandes y pequeños */
 @media (max-width: 768px) {
     .app-header {
         flex-direction: column;
-        padding: 10px 15px;
         align-items: flex-start;
+        padding: 10px 15px;
     }
 
     .app-header .logo {
@@ -161,20 +160,18 @@ h1 {
         padding: 12px 0;
     }
 
-    .dashboard-container {
-        margin: 10px auto;
-        padding: 10px;
-        border-radius: 5px;
-    }
-
-    h1 {
-        font-size: 1.8em;
-        margin-bottom: 15px;
-    }
-
     .dashboard-grid {
         grid-template-columns: 1fr;
         gap: 15px;
+    }
+
+    .dashboard-container {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.7em;
     }
 
     .dashboard-item {
@@ -185,17 +182,9 @@ h1 {
         font-size: 1em;
         margin-bottom: 10px;
     }
-
-    .dashboard-item canvas {
-        height: 150px;
-    }
-
-    .dashboard-item-full {
-        grid-column: auto;
-    }
 }
 
-/* Pantallas muy pequeñas (480px o menos) */
+/* Pantallas muy pequeñas (menos de 480px) */
 @media (max-width: 480px) {
     .app-header {
         padding: 8px 10px;
@@ -203,12 +192,10 @@ h1 {
 
     .app-header .logo img {
         height: 35px;
-        width: auto;
     }
 
     .dashboard-container {
-        margin: 5px auto;
-        padding: 5px;
+        padding: 10px;
     }
 
     h1 {
@@ -224,6 +211,6 @@ h1 {
     }
 
     .dashboard-item canvas {
-        height: 120px;
+        aspect-ratio: 2 / 1;
     }
 }

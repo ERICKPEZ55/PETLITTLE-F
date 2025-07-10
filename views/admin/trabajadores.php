@@ -15,7 +15,7 @@ $usuario = $_SESSION['usuario'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Empleados</title>
-    <link rel="stylesheet" href="../../assets/css/estilosTrabajadores.css">
+    <link rel="stylesheet" href="../../assets/css/trabajadoresAdmin.css">
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -42,6 +42,7 @@ $usuario = $_SESSION['usuario'];
                 <th>Nombre</th>
                 <th>Apellidos</th>
                 <th>Rol</th>
+                <th>Especialidad</th>
                 <th>Correo/Usuario</th>
                 <th>Teléfono</th>
                 <th>Contraseña</th>
@@ -65,6 +66,9 @@ $usuario = $_SESSION['usuario'];
         <input type="text" id="nuevoNombre" placeholder="Nombre" required>
         <input type="text" id="nuevoApellido" placeholder="Apellido" required>
         <input type="text" id="rol" value="Empleado" readonly>
+        <select id="especialidad" name="opciones">
+            <option value="">Seleccione la especialidad</option>
+        </select>
         <input type="email" id="nuevoCorreo" placeholder="Correo electrónico/Usuario" required>
         <input type="text" id="nuevoTelefono" placeholder="Teléfono" maxlength="10"
                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
@@ -80,6 +84,9 @@ $usuario = $_SESSION['usuario'];
         <input type="text" id="editNombre" placeholder="Nombre" required>
         <input type="text" id="editApellido" placeholder="Apellido" required>
         <input type="text" id="editRol" value="Empleado" readonly>
+        <select id="editEspecialidad" name="opciones">
+            <option value="">Seleccione la especialidad</option>
+        </select>
         <input type="email" id="editCorreo" placeholder="Correo electrónico/Usuario" required>
         <input type="text" id="editTelefono" placeholder="Teléfono" maxlength="10"
                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
@@ -88,7 +95,26 @@ $usuario = $_SESSION['usuario'];
     </div>
 </div>
 
-<script src="../../assets/js/empleados.js"></script>
+<script src="../../assets/js/empleadoAdmin.js"></script>
+
+<!-- ✅ Script para cerrar sesión tras inactividad -->
+  <script>
+    let timeoutInactivity;
+
+    function cerrarSesionPorInactividad() {
+        window.location.href = '../../models/logout.php';
+    }
+
+    function reiniciarTemporizador() {
+        clearTimeout(timeoutInactivity);
+        timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 5 minutos
+    }
+
+    window.onload = reiniciarTemporizador;
+    document.onmousemove = reiniciarTemporizador;
+    document.onkeydown = reiniciarTemporizador;
+    document.onclick = reiniciarTemporizador;
+  </script>
 
 </body>
 </html>

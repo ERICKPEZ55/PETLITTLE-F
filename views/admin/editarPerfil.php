@@ -44,10 +44,10 @@
     <div class="flex-container">
       <!-- Sidebar -->
       <div class="sidebar">
-        <a href="../../views/admin/usuarios.html">Gestión de clientes</a>
-        <a href="../../views/admin/graficos.html">Graficas</a>
-        <a href="../../views/admin/vista.html">Agenda</a>
-        <a href="../../views/admin/trabajadores.html">Trabajadores</a>
+        <a href="../../views/admin/usuarios.php">Gestión de clientes</a>
+        <a href="../../views/admin/graficos.php">Graficas</a>
+        <a href="../../views/admin/vista.php">Agenda</a>
+        <a href="../../views/admin/trabajadores.php">Trabajadores</a>
       </div>
 
       <!-- Formulario -->
@@ -69,5 +69,24 @@
   </div>
 
   <script src="../../assets/js/editarPerfilAdmins.js"></script>
+
+  <!-- ✅ Script para cerrar sesión tras inactividad -->
+  <script>
+    let timeoutInactivity;
+
+    function cerrarSesionPorInactividad() {
+        window.location.href = '../../models/logout.php';
+    }
+
+    function reiniciarTemporizador() {
+        clearTimeout(timeoutInactivity);
+        timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 5 minutos
+    }
+
+    window.onload = reiniciarTemporizador;
+    document.onmousemove = reiniciarTemporizador;
+    document.onkeydown = reiniciarTemporizador;
+    document.onclick = reiniciarTemporizador;
+  </script>
 </body>
 </html>

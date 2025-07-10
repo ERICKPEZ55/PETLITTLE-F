@@ -2,15 +2,17 @@
    ESTILOS GENERALES DEL BODY
    =========================== */
 
-/* Establece márgenes en 0, fuente base, color de fondo, y centra el contenido */
-body {
+html, body {
     margin: 0;
+    padding: 0;
     font-family: 'Segoe UI', sans-serif; /* Fuente legible y moderna */
     background-color: #7bb5e3; /* Fondo azul claro */
+    min-height: 100vh; /* Asegura al menos el alto de pantalla */
     display: flex; /* Centrado usando Flexbox */
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Altura completa de la pantalla */
+    flex-direction: column; /* Alinea verticalmente si se agrega contenido */
+    overflow: hidden; /* Evita que SweetAlert2 agregue scroll */
 }
 
 /* ================================
@@ -25,19 +27,18 @@ body {
     text-align: center; /* Centrado de texto */
     width: 100%; /* Ocupa todo el ancho disponible */
     max-width: 400px; /* Máximo de 400px para dispositivos grandes */
+    z-index: 1; /* Asegura que esté debajo de cualquier modal */
 }
 
 /* =====================
    TÍTULOS Y PÁRRAFOS
    ===================== */
 
-/* Estilo del título */
 h2 {
     margin-bottom: 10px;
     color: #1c2141; /* Azul oscuro */
 }
 
-/* Estilo del párrafo */
 p {
     color: #333;
     margin-bottom: 30px;
@@ -72,7 +73,6 @@ button {
     box-shadow: 0 4px 0 #181833; /* Sombra inferior tipo "relieve" */
 }
 
-/* Estilo al pasar el mouse por encima del botón */
 button:hover {
     background-color: #333369; /* Tono ligeramente más claro */
 }

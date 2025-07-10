@@ -50,5 +50,25 @@ $propietarios = $conexion->query("SELECT id_usuario, nombre FROM usuarios")->fet
         <button type="submit">Crear Orden</button>
     </form>
     <a href="ordenesLaboratorio.php">← Volver</a>
+
+    <!-- ✅ Script para cerrar sesión tras inactividad -->
+    <script>
+        let timeoutInactivity;
+
+        function cerrarSesionPorInactividad() {
+            window.location.href = '../../models/logout.php';
+        }
+
+        function reiniciarTemporizador() {
+            clearTimeout(timeoutInactivity);
+            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 5 minutos
+        }
+
+        window.onload = reiniciarTemporizador;
+        document.onmousemove = reiniciarTemporizador;
+        document.onkeydown = reiniciarTemporizador;
+        document.onclick = reiniciarTemporizador;
+    </script>
+
 </body>
 </html>

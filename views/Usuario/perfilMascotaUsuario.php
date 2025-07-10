@@ -1,9 +1,4 @@
 <?php
-// perfilMascotaUsuario.php
-// Muestra el perfil detallado de una mascota para el usuario/dueño.
-
-// Asegúrate de que la ruta a tu archivo de conexión sea correcta.
-// Si perfilMascotaUsuario.php está en 'views/Usuario/', y conexion.php en 'configuracion/', la ruta sería:
 require_once '../../configuracion/conexion.php';
 $pdo = conexion(); // Llama a tu función de conexión para obtener el objeto PDO
 
@@ -282,5 +277,24 @@ try {
             }
         });
     </script>
+
+    <!-- ✅ Script para cerrar sesión tras inactividad -->
+  <script>
+    let timeoutInactivity;
+
+    function cerrarSesionPorInactividad() {
+        window.location.href = '../../models/logout.php';
+    }
+
+    function reiniciarTemporizador() {
+        clearTimeout(timeoutInactivity);
+        timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 5 minutos
+    }
+
+    window.onload = reiniciarTemporizador;
+    document.onmousemove = reiniciarTemporizador;
+    document.onkeydown = reiniciarTemporizador;
+    document.onclick = reiniciarTemporizador;
+  </script>
 </body>
 </html>

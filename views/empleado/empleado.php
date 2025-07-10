@@ -43,13 +43,13 @@ $usuario = $_SESSION['usuario'];
         <aside class="menu-lateral">
             <nav class="menu">
                 <a href="../empleado/empleado.php">Inicio</a>
-                <!-- Cambiado a cerrar sesión correctamente -->
-                <a href="#" class="cerrar-sesion" id="cerrarSesion">Cerrar Sesión</a>
+                <a href="../../models/login.php" class="cerrar-sesion" id="cerrarSesion">Cerrar Sesión</a>
             </nav>
         </aside>
 
         <main class="contenido">
-            <h2>Bienvenido</h2>
+            <img src="../../assets/img/imgEmpleado.png" alt="imgEmpleado" class="img3">
+            <h2>Bienvenido/a, <?php echo htmlspecialchars($usuario['nombre']); ?></h2>
             <p>Accede a las herramientas de gestión para organizar mejor la atención de los pacientes.</p>
 
             <div class="opciones">
@@ -67,13 +67,33 @@ $usuario = $_SESSION['usuario'];
                 </div>
                 <div class="opcion">
                     <h3>Reportes Médicos</h3>
-                    <button onclick="window.location.href='../gestionMascotas/reportes.html'">Ingresar</button>
+                    <button onclick="window.location.href='../gestionMascotas/reportes.php'">Ingresar</button>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- ✅ Script para cerrar sesión con confirmación -->
+    <!-- ✅ Script para cerrar sesión tras inactividad -->
+    <script>
+        let timeoutInactivity;
+
+        function cerrarSesionPorInactividad() {
+            window.location.href = '../../models/logout.php';
+        }
+
+        function reiniciarTemporizador() {
+            clearTimeout(timeoutInactivity);
+            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 10 minutos (ajustable)
+        }
+
+        window.onload = reiniciarTemporizador;
+        document.onmousemove = reiniciarTemporizador;
+        document.onkeydown = reiniciarTemporizador;
+        document.onclick = reiniciarTemporizador;
+    </script>
+
+
+    <!-- Script para cerrar sesión con confirmación -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.getElementById("cerrarSesion").addEventListener("click", function (e) {
@@ -85,7 +105,7 @@ $usuario = $_SESSION['usuario'];
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, cerrar sesión',
+                confirmButtonText: 'Sí',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -95,4 +115,3 @@ $usuario = $_SESSION['usuario'];
         });
     </script>
 </body>
-</html>

@@ -43,10 +43,9 @@
     <div class="flex-container">
       <!-- Sidebar -->
       <div class="sidebar">
-            <a href="agendamientoCalendario.php">Agendar Cita</a>
+            <a href="agendamientoCalen.php">Agendar Cita</a>
             <a href="../gestionCitas/tablasCitas.php">Citas Agendadas</a>
             <a href="laboratorios.php">Laboratorio Clínico</a>
-            <a href="ordenesPendientes.php">Órdenes pendientes</a>
       </div>
 
       <!-- Formulario -->
@@ -80,5 +79,24 @@
       });
     });
   </script>-->
+
+  <!-- ✅ Script para cerrar sesión tras inactividad -->
+  <script>
+    let timeoutInactivity;
+
+    function cerrarSesionPorInactividad() {
+        window.location.href = '../../models/logout.php';
+    }
+
+    function reiniciarTemporizador() {
+        clearTimeout(timeoutInactivity);
+        timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 5 minutos
+    }
+
+    window.onload = reiniciarTemporizador;
+    document.onmousemove = reiniciarTemporizador;
+    document.onkeydown = reiniciarTemporizador;
+    document.onclick = reiniciarTemporizador;
+  </script>
 </body>
 </html>

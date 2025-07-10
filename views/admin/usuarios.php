@@ -59,5 +59,24 @@
     </main>
 
     <script src="../../assets/js/adminUsuarios.js"></script>
+    
+    <!-- ✅ Script para cerrar sesión tras inactividad -->
+  <script>
+    let timeoutInactivity;
+
+    function cerrarSesionPorInactividad() {
+        window.location.href = '../../models/logout.php';
+    }
+
+    function reiniciarTemporizador() {
+        clearTimeout(timeoutInactivity);
+        timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 5 minutos
+    }
+
+    window.onload = reiniciarTemporizador;
+    document.onmousemove = reiniciarTemporizador;
+    document.onkeydown = reiniciarTemporizador;
+    document.onclick = reiniciarTemporizador;
+  </script>
 </body>
 </html>

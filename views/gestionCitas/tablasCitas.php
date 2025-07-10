@@ -19,15 +19,15 @@ $nombreUsuario = $_SESSION['usuario']['nombre'] ?? 'Invitado';
     <div class="logo">
       <img src="../../assets/img/Logo negativo.png" alt="PetLittle" class="logonav">
     </div>
+    <h2>Citas Agendadas</h2>
     <a href="../usuario/agendamiento.php" id="btnVolver" class="btn-volver">&larr; Volver</a>
   </header>
 
   <aside>
     <ul>
-      <li><a href="../usuario/agendamientoCalendario.php">Agendar Cita</a></li>
+      <li><a href="../usuario/agendamientoCalen.php">Agendar Cita</a></li>
       <li><a href="tablasCitas.php">Citas Agendadas</a></li>
       <li><a href="../usuario/laboratorios.php">Laboratorio Clínico</a></li>
-      <li><a href="../usuario/ordenesPendientes.php">Órdenes pendientes</a></li>
     </ul>
   </aside>
 
@@ -61,16 +61,7 @@ $nombreUsuario = $_SESSION['usuario']['nombre'] ?? 'Invitado';
       <input type="text" id="nombreMascota" placeholder="Nombre de la mascota" disabled>
 
       <label for="tipoCita">Tipo de cita</label>
-      <select id="tipoCita">
-        <option value="Cardiología">Cardiología</option>
-        <option value="Nutrición">Nutrición</option>
-        <option value="Dermatología">Dermatología</option>
-        <option value="Odontología">Odontología</option>
-        <option value="Neurología">Neurología</option>
-        <option value="Endocrinología">Endocrinología</option>
-        <option value="Medicina general">Medicina general</option>
-      </select>
-
+      <select id="tipoCita"></select>
       <label for="fechaHora">Fecha y hora</label>
       <input type="datetime-local" id="fechaHora">
 
@@ -80,5 +71,24 @@ $nombreUsuario = $_SESSION['usuario']['nombre'] ?? 'Invitado';
   </div>
 
   <script src="../../assets/js/controlCitas.js"></script>
+
+  <!-- ✅ Script para cerrar sesión tras inactividad -->
+  <script>
+    let timeoutInactivity;
+
+    function cerrarSesionPorInactividad() {
+        window.location.href = '../../models/logout.php';
+    }
+
+    function reiniciarTemporizador() {
+        clearTimeout(timeoutInactivity);
+        timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 5 minutos
+    }
+
+    window.onload = reiniciarTemporizador;
+    document.onmousemove = reiniciarTemporizador;
+    document.onkeydown = reiniciarTemporizador;
+    document.onclick = reiniciarTemporizador;
+  </script>
 </body>
 </html>

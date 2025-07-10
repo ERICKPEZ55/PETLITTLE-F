@@ -22,7 +22,7 @@ $nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['n
 
     <aside>
         <ul>
-            <li><a href="agendamientoCalendario.php">Agendar Cita</a></li>
+            <li><a href="agendamientoCalen.php">Agendar Cita</a></li>
             <li><a href="../gestionCitas/tablasCitas.php">Citas Agendadas </a></li>
             <li><a href="laboratorios.php">Laboratorio Clinico</a></li>
             <li><a href="ordenesPendientes.php">Ordenes pendientes</a></li>
@@ -49,6 +49,62 @@ $nombreUsuario = isset($_SESSION['usuario']['nombre']) ? $_SESSION['usuario']['n
                 </tr>
         </table>
     </main>
+    <!-- Overlay y Modal para mostrar detalle -->
+    <div id="overlay" class="overlay" onclick="cerrarDetalle()"></div>
+    <div id="detalleModal" class="ver-detalle">
+        <h2>Orden laboratorio</h2>
+        <div id="detalleContenido">
+            <!-- Aquí se inserta dinámicamente el contenido de la orden -->
+        </div>
+        <button class="btn-cerrar" onclick="cerrarDetalle()">Cerrar</button>
+    </div>
+
+
+    <script>
+        const botonesVer = document.querySelectorAll('.btn-ver');
+        const overlay = document.getElementById('overlay');
+        const modal = document.getElementById('detalleModal');
+        const contenido = document.getElementById('detalleContenido');
+
+        botonesVer.forEach(boton => {
+            boton.addEventListener('click', () => {
+                // Aquí puedes cargar dinámicamente los datos reales
+                contenido.innerHTML = `
+                    <p><strong>Mascota:</strong> Max</p>
+                    <p><strong>Especialidad:</strong> Oftalmología</p>
+                    <p><strong>Fecha:</strong> 2025-04-05</p>
+                    <p><strong>Veterinario:</strong> Dr. Ramos</p>
+                    <p><strong>Notas:</strong> Revisar córnea izquierda.</p>
+                `;
+                overlay.style.display = 'block';
+                modal.style.display = 'block';
+            });
+        });
+
+        function cerrarDetalle() {
+            overlay.style.display = 'none';
+            modal.style.display = 'none';
+        }
+    </script>
+
+    <!-- ✅ Script para cerrar sesión tras inactividad -->
+  <script>
+    let timeoutInactivity;
+
+    function cerrarSesionPorInactividad() {
+        window.location.href = '../../models/logout.php';
+    }
+
+    function reiniciarTemporizador() {
+        clearTimeout(timeoutInactivity);
+        timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 5 minutos
+    }
+
+    window.onload = reiniciarTemporizador;
+    document.onmousemove = reiniciarTemporizador;
+    document.onkeydown = reiniciarTemporizador;
+    document.onclick = reiniciarTemporizador;
+  </script>
 
 </body>
 </html>

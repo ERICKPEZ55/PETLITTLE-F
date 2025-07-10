@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 class ConexionBD {
     private $host = "localhost";
     private $usuario = "root";
@@ -36,7 +37,7 @@ class RecuperarContrasena {
         $stmt->bind_param("ss", $nuevaHash, $correo);
 
         if ($stmt->execute()) {
-            return "ok";  // Devuelve un identificador para mostrar el botón
+            return "ok";
         } else {
             return "Error al actualizar: " . $stmt->error;
         }
@@ -44,6 +45,8 @@ class RecuperarContrasena {
 }
 
 $mensaje = "";
+$resultado = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_SESSION['correo_recuperacion'];
     $nueva = $_POST['nueva_contraseña'];
@@ -55,14 +58,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $db->cerrar();
 
     if ($resultado === "ok") {
-        $mensaje = "Contraseña actualizada correctamente. Ya puedes iniciar sesión.";
-        $mostrarBoton = true;
+        unset($_SESSION['correo_recuperacion']);
+        $mensaje = "Contraseña actualizada correctamente.";
     } else {
         $mensaje = $resultado;
-        $mostrarBoton = false;
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -70,6 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Restablecer Contraseña - PetLittle</title>
     <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
     <link rel="stylesheet" href="../assets/css/nuevaContraseña.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div class="card">
@@ -82,10 +86,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 
     <?php if (!empty($mensaje)) echo "<p class='mensaje'>$mensaje</p>"; ?>
-
-    <?php if (isset($mostrarBoton) && $mostrarBoton): ?>
-        <a href="login.php"><button>Inicia sesión</button></a>
-    <?php endif; ?>
 </div>
+
+<?php if (isset($resultado) && $resultado === "ok"): ?>
+<script>
+    Swal.fire({
+        title: '¡Contraseña actualizada!',
+        text: 'Tu contraseña fue actualizada correctamente. Serás redirigido al inicio de sesión.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+    }).then(() => {
+        window.location.href = "../models/login.php"; // Cambia si tu ruta es diferente
+    });
+</script>
+<?php endif; ?>
+
+
 </body>
 </html>

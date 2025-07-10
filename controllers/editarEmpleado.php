@@ -15,6 +15,7 @@ if (!$datos || !isset($datos['id'])) {
 $id = $datos['id'];
 $nombre = $datos['nombre'] ?? null;
 $apellido = $datos['apellido'] ?? null;
+$especialidad = $datos['especialidad'] ?? null;
 $telefono = $datos['telefono'] ?? null;
 $usuario = $datos['usuario'] ?? null;
 
@@ -30,6 +31,10 @@ try {
     if ($apellido !== null) {
         $campos[] = "apellido = ?";
         $valores[] = $apellido;
+    }
+    if ($especialidad !== null) {
+        $campos[] = "especialidad = ?";
+        $valores[] = $especialidad;
     }
     if ($telefono !== null) {
         $campos[] = "telefono = ?";

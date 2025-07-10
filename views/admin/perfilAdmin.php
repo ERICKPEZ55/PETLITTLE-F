@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-// ✅ Evitar que el navegador guarde en caché
+// Evitar que el navegador guarde en caché
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-// ✅ Verifica que haya sesión activa
+//Verifica que haya sesión activa
 if (!isset($_SESSION['usuario'])) {
     header("Location: ../login/login.php");
     exit;
@@ -22,7 +22,7 @@ $usuario = $_SESSION['usuario'];
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
   <title>Panel de Administrador</title>
-  <link rel="stylesheet" href="../../assets/css/estilosPerfilAdmin.css" />
+  <link rel="stylesheet" href="../../assets/css/vistaAdminDashboard.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -38,42 +38,63 @@ $usuario = $_SESSION['usuario'];
     <div class="perfil-sobre-menu">
         <p class="nombre"><?php echo htmlspecialchars($usuario['nombre']); ?></p>
         <p class="rol">Administrador</p>
+        <a href="../admin/editarPerfil.php">Editar información</a>
     </div>
 
     <aside class="menu-lateral">
         <nav class="menu">
             <a href="../admin/editarPerfil.php">Editar información</a>
+            <a href="../admin/editarEspecialidad.php">Especialidades</a>
             <a href="#" class="cerrar-sesion" id="cerrarSesion">Cerrar Sesión</a>
         </nav>
     </aside>
 
     <!-- Contenido principal -->
     <main class="contenido">
-      <h2>Bienvenido</h2>
+      <img src="../../assets/img/imgAdmin.png" alt="imagenAdmin" class="img2">
+      <h2>Bienvenido, <?php echo htmlspecialchars($usuario['nombre']); ?></h2>
       <p>Accede a las herramientas de gestión para organizar mejor la atención de los pacientes.</p>
 
       <div class="opciones">
-          <div class="opcion">
-              <h3>Gestión de Clientes</h3>
-              <button onclick="window.location.href='usuarios.php'">Ingresar</button>
-          </div>
-          <div class="opcion">
-              <h3>Gráficas</h3>
-              <button onclick="window.location.href='graficos.php'">Ingresar</button>
-          </div>
-          <div class="opcion">
-              <h3>Agenda</h3>
-              <button onclick="window.location.href='vista.php'">Ingresar</button>
-          </div>
-          <div class="opcion">
-              <h3>Trabajadores</h3>
-              <button onclick="window.location.href='trabajadores.php'">Ingresar</button>
-          </div>
+        <div class="opcion">
+            <h3>Gestión de Clientes</h3>
+            <button onclick="window.location.href='usuarios.php'">Ingresar</button>
+        </div>
+        <div class="opcion">
+            <h3>Gráficas</h3>
+            <button onclick="window.location.href='graficos.php'">Ingresar</button>
+        </div>
+        <div class="opcion">
+            <h3>Agenda</h3>
+            <button onclick="window.location.href='vista.php'">Ingresar</button>
+        </div>
+        <div class="opcion">
+            <h3>Trabajadores</h3>
+            <button onclick="window.location.href='trabajadores.php'">Ingresar</button>
+        </div>
       </div>
     </main>
   </div>
 
-  <!-- ✅ SweetAlert2 para confirmar cierre de sesión -->
+
+   <script>
+        let timeoutInactivity;
+
+        function cerrarSesionPorInactividad() {
+            window.location.href = '../../models/logout.php';
+        }
+
+        function reiniciarTemporizador() {
+            clearTimeout(timeoutInactivity);
+            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 10 minutos (ajustable)
+        }
+
+        window.onload = reiniciarTemporizador;
+        document.onmousemove = reiniciarTemporizador;
+        document.onkeydown = reiniciarTemporizador;
+        document.onclick = reiniciarTemporizador;
+    </script>
+  <!--  SweetAlert2 para confirmar cierre de sesión -->
   <script>
     document.getElementById("cerrarSesion").addEventListener("click", function (e) {
         e.preventDefault();
@@ -84,7 +105,7 @@ $usuario = $_SESSION['usuario'];
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, cerrar sesión',
+            confirmButtonText: 'Sí',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {

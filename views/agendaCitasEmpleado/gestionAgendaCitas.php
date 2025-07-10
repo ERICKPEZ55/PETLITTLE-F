@@ -32,6 +32,45 @@
             </div>
     </main>
 
-    <script src="../../assets/js/agendaCitas.js"></script>
+    <!-- ✅ Script para cerrar sesión tras inactividad -->
+    <script>
+        let timeoutInactivity;
+
+        function cerrarSesionPorInactividad() {
+            window.location.href = '../../models/logout.php';
+        }
+
+        function reiniciarTemporizador() {
+            clearTimeout(timeoutInactivity);
+            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 10 minutos (ajustable)
+        }
+
+        window.onload = reiniciarTemporizador;
+        document.onmousemove = reiniciarTemporizador;
+        document.onkeydown = reiniciarTemporizador;
+        document.onclick = reiniciarTemporizador;
+    </script>
+
+
+    <script src="../../assets/js/agendaCita.js"></script>
+
+    <!-- ✅ Script para cerrar sesión tras inactividad -->
+  <script>
+    let timeoutInactivity;
+
+    function cerrarSesionPorInactividad() {
+        window.location.href = '../../models/logout.php';
+    }
+
+    function reiniciarTemporizador() {
+        clearTimeout(timeoutInactivity);
+        timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 5 minutos
+    }
+
+    window.onload = reiniciarTemporizador;
+    document.onmousemove = reiniciarTemporizador;
+    document.onkeydown = reiniciarTemporizador;
+    document.onclick = reiniciarTemporizador;
+  </script>
 </body>
 </html>

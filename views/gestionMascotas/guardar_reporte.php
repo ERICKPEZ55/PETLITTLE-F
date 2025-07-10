@@ -1,15 +1,9 @@
 <?php
-
-// guardar_reporte.php
-// Este script guarda los datos de un nuevo reporte médico y actualiza la información de la mascota.
-
 // Habilitar reporte de errores para depuración (eliminar o comentar en producción)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Ajusta la ruta a tu archivo de configuración de base de datos
-// Debería ser: ../../configuracion/conexion.php
 require_once '../../configuracion/conexion.php';
 $pdo = conexion(); // Llama a tu función de conexión para obtener el objeto PDO
 
@@ -93,11 +87,6 @@ try {
         $archivo_adjunto_ruta
     ]);
 
-    // 2. Recibir y actualizar los datos de la mascota en la tabla `mascotas`
-    // Estos son los campos que se llenan automáticamente desde 'get_pet_data.php'
-    // y se envían de vuelta con el formulario.
-    // Solo se actualizarán si se envían.
-
     $raza                  = $_POST['raza'] ?? null;
     $sexo                  = $_POST['sexo'] ?? null;
     $especie               = $_POST['especie'] ?? null;
@@ -105,9 +94,7 @@ try {
     $color                 = $_POST['color'] ?? null;
     $microchip             = $_POST['microchip'] ?? null;
     $collar                = $_POST['collar'] ?? null;
-    
-    // Asumiendo que estos campos de contacto/referencia del dueño están en la tabla `mascotas`
-    // Si 'contactoEmergencia' es un campo real, asegúrate de cómo lo manejas en tu DB
+   
     $veterinario_habitual  = $_POST['veterinario'] ?? null;
     $clinica_emergencia    = $_POST['clinicaEmergencia'] ?? null;
     $seguro_mascotas       = $_POST['seguroMascotas'] ?? null;

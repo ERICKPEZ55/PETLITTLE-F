@@ -43,10 +43,10 @@
     <div class="flex-container">
       <!-- Sidebar -->
       <div class="sidebar">
-            <a href="../agendaCitasEmpleado/gestionAgendaCitas.html">Gestión de Agenda y Citas</a>
-            <a href="../ordenesLab/ordenes.html">Ordenes de Laboratorio</a>
-            <a href="../gestionMascotas/gestion.html">Gestión de Mascotas</a>
-            <a href="../gestionMascotas/reportes.html">Reportes Medicos</a>
+            <a href="../agendaCitasEmpleado/gestionAgendaCitas.php">Gestión de Agenda y Citas</a>
+            <a href="../ordenesLab/ordenesLaboratorio.php">Ordenes de Laboratorio</a>
+            <a href="../gestionMascotas/gestion.php">Gestión de Mascotas</a>
+            <a href="../gestionMascotas/reportes.php">Reportes Medicos</a>
       </div>
 
       <!-- Formulario -->
@@ -66,6 +66,25 @@
 
       </div>
     </div>
+
+    <!-- ✅ Script para cerrar sesión tras inactividad -->
+    <script>
+        let timeoutInactivity;
+
+        function cerrarSesionPorInactividad() {
+            window.location.href = '../../models/logout.php';
+        }
+
+        function reiniciarTemporizador() {
+            clearTimeout(timeoutInactivity);
+            timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 10 minutos (ajustable)
+        }
+
+        window.onload = reiniciarTemporizador;
+        document.onmousemove = reiniciarTemporizador;
+        document.onkeydown = reiniciarTemporizador;
+        document.onclick = reiniciarTemporizador;
+    </script>
 
   <script src="../../assets/js/editarPerfilEmpleados.js"></script>
 </body>

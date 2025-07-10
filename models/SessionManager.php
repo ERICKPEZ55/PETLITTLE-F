@@ -2,7 +2,7 @@
 class SessionManager {
     private $timeout;
 
-    public function __construct($timeout = 1000) { 
+    public function __construct($timeout = 300000) { 
         // Inicia la sesión si aún no ha iniciado
         if (session_status() === PHP_SESSION_NONE) {
             session_start();

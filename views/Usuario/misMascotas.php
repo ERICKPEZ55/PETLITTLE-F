@@ -68,10 +68,16 @@ $mascotas = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <h2>Registrar Nueva Mascota</h2>
       <form id="formularioRegistro" action="../../controllers/guardarMascota.php" method="POST" enctype="multipart/form-data">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
+        <input type="text" id="nombre" name="nombre" required
+        pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" 
+        maxlength="15"
+        title="Solo letras y espacios. Máximo 15 caracteres.">
 
         <label for="raza">Raza:</label>
-        <input type="text" id="raza" name="raza" required>
+        <input type="text" id="raza" name="raza" required
+        pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" 
+        maxlength="30"
+        title="Solo letras y espacios. Máximo 30 caracteres.">
 
         <label for="genero">Género:</label>
         <select id="sexo" name="sexo" required>
@@ -93,6 +99,44 @@ $mascotas = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <div style="text-align: center;">
     <button class="navigation back-button" onclick="window.location.href='agendamiento.php'">← Volver</button>
   </div>
+
+  <script>
+  document.getElementById('formularioRegistro').addEventListener('submit', function (e) {
+    const nombre = document.getElementById('nombre').value.trim();
+    const raza = document.getElementById('raza').value.trim();
+    const regexLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+
+    if (!regexLetras.test(nombre)) {
+      e.preventDefault();
+      Swal.fire('Error', 'El nombre solo debe contener letras y espacios.', 'error');
+      return;
+    }
+
+    if (!regexLetras.test(raza)) {
+      e.preventDefault();
+      Swal.fire('Error', 'La raza solo debe contener letras y espacios.', 'error');
+      return;
+    }
+
+    if (nombre.length > 30 || raza.length > 30) {
+      e.preventDefault();
+      Swal.fire('Error', 'Nombre y raza deben tener máximo 30 caracteres.', 'error');
+      return;
+    }
+
+    const imagen = document.getElementById('imagenArchivo');
+    const archivo = imagen.files[0];
+    const formatosValidos = ['image/jpeg', 'image/png', 'image/jpg'];
+
+    if (!formatosValidos.includes(archivo.type)) {
+      e.preventDefault();
+      Swal.fire('Error', 'La imagen debe ser JPG o PNG.', 'error');
+      return;
+    }
+
+  });
+</script>
+
 
   <script>
     const modal = document.getElementById("modalRegistro");
@@ -130,6 +174,25 @@ $mascotas = $stmt->fetchAll(PDO::FETCH_ASSOC);
       });
       <?php unset($_SESSION['alerta']); ?>
     <?php endif; ?>
+  </script>
+
+  <!-- Script para cerrar sesión tras inactividad -->
+  <script>
+    let timeoutInactivity;
+
+    function cerrarSesionPorInactividad() {
+        window.location.href = '../../models/logout.php';
+    }
+
+    function reiniciarTemporizador() {
+        clearTimeout(timeoutInactivity);
+        timeoutInactivity = setTimeout(cerrarSesionPorInactividad, 300000); // 5 minutos
+    }
+
+    window.onload = reiniciarTemporizador;
+    document.onmousemove = reiniciarTemporizador;
+    document.onkeydown = reiniciarTemporizador;
+    document.onclick = reiniciarTemporizador;
   </script>
 </body>
 </html>
